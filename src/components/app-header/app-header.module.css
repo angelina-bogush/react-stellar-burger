@@ -1,0 +1,10 @@
+.constructor{
+    display: flex;
+    
+}
+.header{
+    margin: 0 auto;
+    max-width: 1280px;
+    display: flex;
+    align-items: center;
+}
