@@ -1,10 +1,7 @@
 .container{
     width: 600px;
-
 }
-.ingredientsContainer{
-    padding-top: 40px;
-}
-.ingredientsLayout{
-    padding:24px 16px 0
+.containerScroll{
+    height: calc(100vh - 292px);
+    overflow-y: scroll;
 }
