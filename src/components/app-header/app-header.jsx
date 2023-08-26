@@ -8,29 +8,31 @@ function AppHeader(){
 
 return (
   <header className={`${styles.header} p-4`}>
-    <div className={styles.linkContainer}>
+    <div className={styles.container}>
+      <div className={styles.linkContainer}>
+        <HeaderLink>
+          <BurgerIcon type="primary" />
+          <p className="text text_type_main-default pl-2">Конструктор</p>
+        </HeaderLink>
+        <HeaderLink>
+          <ListIcon type="secondary" />
+          <p className="text text_type_main-default text_color_inactive pl-2">
+            Лента заказов
+          </p>
+        </HeaderLink>
+      </div>
+
+      <div className={styles.logo}>
+        <Logo />
+      </div>
+
       <HeaderLink>
-        <BurgerIcon type="primary" />
-        <p className="text text_type_main-default pl-2">Конструктор</p>
-      </HeaderLink>
-      <HeaderLink>
-        <ListIcon type="secondary" />
+        <ProfileIcon type="secondary" />
         <p className="text text_type_main-default text_color_inactive pl-2">
-          Лента заказов
+          Личный кабинет
         </p>
       </HeaderLink>
     </div>
-
-<div className={styles.logo}>
-    <Logo/>
-    </div>
-
-    <HeaderLink>
-      <ProfileIcon type="secondary" />
-      <p className="text text_type_main-default text_color_inactive pl-2">
-        Личный кабинет
-      </p>
-    </HeaderLink>
   </header>
 );
 }
