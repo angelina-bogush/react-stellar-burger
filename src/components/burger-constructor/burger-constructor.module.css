@@ -1,20 +1,19 @@
-.container{
+.container {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    padding: 60px 0;
-    max-height: calc(100vh - 288px - 56px);
+    padding: 60px 0 10px;
+    width: 600px;
 }
-.scroll{
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    max-height: 80%;
-    width: 100%;
-    padding-right: 5px;
-    overflow-y: scroll;
 
-}
-.elementIcon{
+.totalContainer {
     display: flex;
+    gap: 40px;
+    justify-content: end;
+    margin-left: auto;
+    padding-top: 40px
+}
+
+.total {
+    display: flex;
+    align-items: center;
 }

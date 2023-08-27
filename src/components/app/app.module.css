@@ -14,13 +14,3 @@
   display: flex;
   gap: 40px
 }
-.totalContainer{
-  display: flex;
-  gap: 40px;
-  justify-content: end;
-  margin-left: auto;
-}
-.total{
-  display: flex;
-  align-items: center;
-}
