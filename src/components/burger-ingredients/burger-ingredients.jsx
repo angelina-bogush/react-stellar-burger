@@ -20,6 +20,7 @@ function BurgerIngredients() {
           alt={"голубая булка"}
           price={20}
           description={"Краторная булка N-200i"}
+          count={1}
         />
         <BurgerCard
           img={pinkImgPath}
@@ -47,6 +48,7 @@ function BurgerIngredients() {
           alt={"Соус фирменный Space Sauce"}
           price={30}
           description={"Соус фирменный Space Sauce"}
+          count={1}
         />
         <BurgerCard
           img={pinkSaucePath}

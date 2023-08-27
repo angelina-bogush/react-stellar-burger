@@ -13,6 +13,9 @@ const BurgerCard = (props) => {
                 <CurrencyIcon></CurrencyIcon>
             </div>
             <p className={`text text_type_main-default ${styles.description}`}>{props.description}</p>
+            {props.count >= 1 &&
+            <Counter count={props.count} size="default" extraClass="m-1" />
+            }           
         </div>
 
     )
