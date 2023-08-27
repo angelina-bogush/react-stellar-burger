@@ -1,5 +1,4 @@
 import styles from './burger-ingredients.module.css';
-import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerTab from './burger-tab/burger-tab';
 import BurgerSection from './burger-section/burger-section';
 import BurgerCard from './burger-card/burger-card';

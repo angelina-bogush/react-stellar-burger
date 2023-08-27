@@ -1,4 +1,5 @@
 import styles from './burger-items.module.css';
+import PropTypes from 'prop-types';
 import blueImgPath from '../../../images/blue.png';
 import pinkImgPath from '../../../images/pink.png';
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -18,7 +19,7 @@ const BurgerItems = (props) => {
         </div>
         <div className={`${styles.scroll} custom-scroll`}>
           {props.data.map((ingred) => (
-            <div className={styles.elementIcon}>
+            <div className={styles.elementIcon} key={ingred._id}>
               <DragIcon type="primary" />
               <ConstructorElement
                 text={ingred.name}
@@ -39,5 +40,8 @@ const BurgerItems = (props) => {
         </div>
       </div>
     );
+}
+BurgerItems.propTypes = {
+  data: PropTypes.array
 }
 export default BurgerItems

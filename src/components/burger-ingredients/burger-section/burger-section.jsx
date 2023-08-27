@@ -1,4 +1,5 @@
-import styles from './burger-section.module.css'
+import styles from './burger-section.module.css';
+import PropTypes from 'prop-types';
 const BurgerSection = (props) => {
     return (
       <div className={styles.container}>
@@ -10,5 +11,9 @@ const BurgerSection = (props) => {
     );
 
 }
+BurgerSection.propTypes = {
+  title: PropTypes.string,
+  children: PropTypes.node
 
+}
 export default BurgerSection
