@@ -22,10 +22,10 @@ const BurgerCard = (props) => {
     )
 }
 BurgerCard.propTypes = {
-    img: PropTypes.string,
-    alt: PropTypes.string,
-    price: PropTypes.number,
-    description: PropTypes.string,
-    count: PropTypes.number
+    img: PropTypes.string.isRequired,
+    alt: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired
   };
 export default BurgerCard

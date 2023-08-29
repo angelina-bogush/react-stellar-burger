@@ -1,16 +1,16 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
 const BurgerTab = () => {
-  const [current, setCurrent] = React.useState("Булки");
+  const [current, setCurrent] = React.useState("Bun");
   return (
     <div style={{ display: "flex" }}>
-      <Tab value="Булки" active={current === "Булки"} onClick={setCurrent}>
+      <Tab value="Bun" active={current === "Bun"} onClick={setCurrent}>
         Булки
       </Tab>
-      <Tab value="Соусы" active={current === "Соусы"} onClick={setCurrent}>
+      <Tab value="Sauce" active={current === "Sauce"} onClick={setCurrent}>
         Соусы
       </Tab>
-      <Tab value="Начинки" active={current === "Начинки"} onClick={setCurrent}>
+      <Tab value="Main" active={current === "Main"} onClick={setCurrent}>
         Начинки
       </Tab>
     </div>
