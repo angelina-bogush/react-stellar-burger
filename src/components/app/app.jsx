@@ -10,7 +10,8 @@ function App() {
   useEffect(() => {
     getData()
     .then(data => {
-      setIngredients(data)});
+      setIngredients(data)})
+    .catch(err => console.log(err))
   }, [])
   return (
     <div className={styles.app}>

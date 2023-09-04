@@ -26,3 +26,6 @@
    right: 40px;
    cursor: pointer;
 }
+.title{
+    align-self: flex-start;
+}

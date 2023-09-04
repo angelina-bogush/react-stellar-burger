@@ -60,7 +60,7 @@ function BurgerIngredients({ingred}) {
         ))}
       </BurgerSection>
       </div>
-       {modalOpen && <Modal onClose={handleCloseModal}>
+       {modalOpen && <Modal title="Детали ингредиента" onClose={handleCloseModal}>
         <IngredientDetails data={selectedCard}></IngredientDetails>
         </Modal>}
     </div>

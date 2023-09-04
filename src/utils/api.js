@@ -3,5 +3,4 @@ export const getData = () => {
     return fetch(url)
     .then(res => res.json())
     .then(data => data.data)
-    .catch(err => console.log(err))
 } 
