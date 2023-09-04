@@ -10,7 +10,6 @@ function App() {
   useEffect(() => {
     getData()
     .then(data => {
-      console.log(data.filter(item => item.type === 'bun'))
       setIngredients(data)});
   }, [])
   return (
@@ -25,6 +24,7 @@ function App() {
          {ingredients.length > 0 && <BurgerConstructor ingred={ingredients}/>}
           </div>
         </div>
+
       </div>
   );
 }
