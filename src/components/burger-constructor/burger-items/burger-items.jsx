@@ -60,6 +60,8 @@ BurgerItems.propTypes = {
       image_large: PropTypes.string.isRequired,
       __v: PropTypes.number.isRequired,
     })
-  )
+  ),
+  topBunId: PropTypes.string.isRequired,
+  bottomBunId: PropTypes.string.isRequired
 };
 export default BurgerItems;

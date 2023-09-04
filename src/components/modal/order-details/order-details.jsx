@@ -2,7 +2,6 @@ import styles from './order-details.module.css';
 import doneImgPath from '../../../images/icons/done.svg'
 
 function OrderDetails(){
-
     return (
       <div className={styles.container}>
         <p className="text text_type_digits-large pb-4">034536</p>

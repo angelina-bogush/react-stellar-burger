@@ -3,18 +3,33 @@ import BurgerTab from './burger-tab/burger-tab';
 import BurgerSection from './burger-section/burger-section';
 import BurgerCard from './burger-card/burger-card';
 import PropTypes from "prop-types";
+import Modal from '../modal/modal';
+import IngredientDetails from '../modal/ingredient-details/ingredient-details';
+import { useState } from 'react';
 
 function BurgerIngredients({ingred}) {
   const buns = ingred.filter((item) => item.type === "bun");
   const sauces = ingred.filter((item) => item.type === "sauce");
-  const main = ingred.filter((item) => item.type === "main")
+  const main = ingred.filter((item) => item.type === "main");
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  const handleOpenModal = (item) => {
+    setSelectedCard(item)
+    setModalOpen(true)
+  }
+  const handleCloseModal = (value) => {
+    setModalOpen(value)
+  };
+  
   return (
     <div className={`${styles.container} pt-5`}>
       <BurgerTab />
       <div className={`${styles.containerScroll} custom-scroll`}>
       <BurgerSection title={"Булки"}>
         {buns.map((item) => (
-          <BurgerCard key={item._id}
+          <BurgerCard key={item._id} clickCard={() => handleOpenModal(item)}
           img={item.image}
           price={item.price}
           description={item.name}
@@ -25,7 +40,7 @@ function BurgerIngredients({ingred}) {
 
       <BurgerSection title={"Соусы"}>
       {sauces.map((item) => (
-          <BurgerCard key={item._id}
+          <BurgerCard key={item._id} clickCard={() => handleOpenModal(item)}
           img={item.image}
           price={item.price}
           description={item.name}
@@ -36,7 +51,7 @@ function BurgerIngredients({ingred}) {
 
       <BurgerSection title={"Начинки"}>
       {main.map((item) => (
-          <BurgerCard key={item._id}
+          <BurgerCard key={item._id} clickCard={() => handleOpenModal(item)}
           img={item.image}
           price={item.price}
           description={item.name}
@@ -45,6 +60,9 @@ function BurgerIngredients({ingred}) {
         ))}
       </BurgerSection>
       </div>
+       {modalOpen && <Modal onClose={handleCloseModal}>
+        <IngredientDetails data={selectedCard}></IngredientDetails>
+        </Modal>}
     </div>
   );
 }

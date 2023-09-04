@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 
-
 const BurgerCard = (props) => {
-
     return(
         <div className={`${styles.container}`} onClick={props.clickCard}>
             <img src={props.img} alt={props.description} className="pr-4 pl-4"></img>
@@ -18,13 +16,13 @@ const BurgerCard = (props) => {
             <Counter count={props.count} size="default" extraClass="m-1" />
             }           
         </div>
-
     )
 }
 BurgerCard.propTypes = {
     img: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
-    // count: PropTypes.number.isRequired
+    count: PropTypes.number,
+    clickCard: PropTypes.func.isRequired
   };
 export default BurgerCard
