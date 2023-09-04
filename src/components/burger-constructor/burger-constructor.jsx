@@ -7,7 +7,7 @@ import OrderDetails from '../modal/order-details/order-details';
 import { useState } from 'react';
 
 const BurgerConstructor = ({ingred}) => {
-  const [clickedModal, setClickedModal] = useState(true);
+  const [clickedModal, setClickedModal] = useState(false);
   const handleOpenModal = () => {
     setClickedModal(true)
   }

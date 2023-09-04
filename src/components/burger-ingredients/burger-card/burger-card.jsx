@@ -7,8 +7,8 @@ import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 const BurgerCard = (props) => {
 
     return(
-        <div className={`${styles.container}`}>
-            <img src={props.img} alt={props.alt} className="pr-4 pl-4"></img>
+        <div className={`${styles.container}`} onClick={props.clickCard}>
+            <img src={props.img} alt={props.description} className="pr-4 pl-4"></img>
             <div className={`${styles.price} pb-2 pt-1`}>
                 <p className="text text_type_digits-medium pr-2">{props.price}</p>
                 <CurrencyIcon></CurrencyIcon>
@@ -23,9 +23,8 @@ const BurgerCard = (props) => {
 }
 BurgerCard.propTypes = {
     img: PropTypes.string.isRequired,
-    alt: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
-    count: PropTypes.number.isRequired
+    // count: PropTypes.number.isRequired
   };
 export default BurgerCard

@@ -10,6 +10,7 @@ function App() {
   useEffect(() => {
     getData()
     .then(data => {
+      console.log(data)
       setIngredients(data)});
   }, [])
   return (
