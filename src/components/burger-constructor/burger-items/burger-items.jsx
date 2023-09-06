@@ -2,12 +2,15 @@ import styles from "./burger-items.module.css";
 import PropTypes from "prop-types";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-
+import { useMemo } from "react";
+const bun = 'bun';
+const main = 'main';
+const sauce = 'sauce'
 const BurgerItems = (props) => {
-  const buns = props.data.filter((item) => item.type === "bun");
-  const elseProducts = props.data.filter((item) => item.type !== "bun");
-  const topBun = buns.find((item) => item._id === props.topBunId);
-  const bottomBun = buns.find((item) => item._id === props.bottomBunId);
+  const buns = useMemo(() => props.data.filter((item) => item.type === bun), [props, bun]);
+  const elseProducts = useMemo(() => props.data.filter((item) => item.type !== bun), [props, bun]);
+  const topBun = useMemo(() => buns.find((item) => item._id === props.topBunId), [buns, props]);
+  const bottomBun = useMemo(() => buns.find((item) => item._id === props.bottomBunId), [buns, props]);
   return (
     <div className={styles.container}>
       <div className={styles.elementContainer}>
@@ -49,7 +52,7 @@ BurgerItems.propTypes = {
     PropTypes.shape({
       _id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      type: PropTypes.oneOf(["bun", "main", "sauce"]).isRequired,
+      type: PropTypes.oneOf([bun, main, sauce]).isRequired,
       proteins: PropTypes.number.isRequired,
       fat: PropTypes.number.isRequired,
       carbohydrates: PropTypes.number.isRequired,

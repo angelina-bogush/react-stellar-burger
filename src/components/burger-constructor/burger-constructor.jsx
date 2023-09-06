@@ -33,7 +33,7 @@ const BurgerConstructor = ({ingred}) => {
         </div>
        {clickedModal && 
        <Modal onClose={handleCloseModal}>
-          <OrderDetails></OrderDetails>
+          <OrderDetails/>
         </Modal>}
       </div>
     );
@@ -53,7 +53,7 @@ BurgerConstructor.propTypes = {
       image_mobile: PropTypes.string.isRequired,
       image_large: PropTypes.string.isRequired,
       __v: PropTypes.number.isRequired,
-    })
-  )
+    }).isRequired
+  ).isRequired
 }
 export default BurgerConstructor
