@@ -5,12 +5,13 @@ import BurgerCard from './burger-card/burger-card';
 import PropTypes from "prop-types";
 import Modal from '../modal/modal';
 import IngredientDetails from '../modal/ingredient-details/ingredient-details';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import { ingredient } from '../../utils/data';
 
 function BurgerIngredients({ingred}) {
-  const buns = ingred.filter((item) => item.type === "bun");
-  const sauces = ingred.filter((item) => item.type === "sauce");
-  const main = ingred.filter((item) => item.type === "main");
+  const buns = useMemo(() => ingred.filter((item) => item.type === ingredient.bun), [ingred]);
+  const sauces = useMemo(() => ingred.filter((item) => item.type === ingredient.sauce), [ingred]);
+  const main = useMemo(() => ingred.filter((item) => item.type === ingredient.main), [ingred]);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
@@ -29,7 +30,7 @@ function BurgerIngredients({ingred}) {
       <div className={`${styles.containerScroll} custom-scroll`}>
       <BurgerSection title={"Булки"}>
         {buns.map((item) => (
-          <BurgerCard key={item._id} clickCard={() => handleOpenModal(item)}
+          <BurgerCard key={item._id} onClick={() => handleOpenModal(item)}
           img={item.image}
           price={item.price}
           description={item.name}
@@ -40,7 +41,7 @@ function BurgerIngredients({ingred}) {
 
       <BurgerSection title={"Соусы"}>
       {sauces.map((item) => (
-          <BurgerCard key={item._id} clickCard={() => handleOpenModal(item)}
+          <BurgerCard key={item._id} onClick={() => handleOpenModal(item)}
           img={item.image}
           price={item.price}
           description={item.name}
@@ -51,7 +52,7 @@ function BurgerIngredients({ingred}) {
 
       <BurgerSection title={"Начинки"}>
       {main.map((item) => (
-          <BurgerCard key={item._id} clickCard={() => handleOpenModal(item)}
+          <BurgerCard key={item._id} onClick={() => handleOpenModal(item)}
           img={item.image}
           price={item.price}
           description={item.name}
