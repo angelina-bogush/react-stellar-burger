@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 60px 0 10px;
+    width: 600px;
+}
+
+.totalContainer {
+    display: flex;
+    gap: 40px;
+    justify-content: flex-end;
+    margin-left: auto;
+    padding-top: 40px
+}
+
+.total {
+    display: flex;
+    align-items: center;
+}
