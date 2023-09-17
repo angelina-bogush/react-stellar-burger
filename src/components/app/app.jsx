@@ -4,6 +4,7 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import { getData } from "../../utils/api";
 import { useEffect, useState } from "react";
+import { IngredientsContext } from "../../services/ingredientsContext";
 
 function App() {
   const [ingredients, setIngredients] = useState([])
@@ -17,6 +18,7 @@ function App() {
     <div className={styles.app}>
       <AppHeader />
       <div className={styles.container}>
+        <IngredientsContext.Provider value={{ingredients, setIngredients}}>
         <div>
           <h1 className="text text_type_main-large">Соберите бургер</h1>
           {ingredients.length > 0 &&  <BurgerIngredients ingred={ingredients}/>}
@@ -24,6 +26,7 @@ function App() {
         <div className="pl-4 pr-4">
          {ingredients.length > 0 && <BurgerConstructor ingred={ingredients}/>}
           </div>
+         </IngredientsContext.Provider>
         </div>
 
       </div>
