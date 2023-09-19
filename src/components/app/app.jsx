@@ -21,10 +21,10 @@ function App() {
         <IngredientsContext.Provider value={{ingredients, setIngredients}}>
         <div>
           <h1 className="text text_type_main-large">Соберите бургер</h1>
-          {ingredients.length > 0 &&  <BurgerIngredients ingred={ingredients}/>}
+          {ingredients.length > 0 &&  <BurgerIngredients/>}
         </div>
         <div className="pl-4 pr-4">
-         {ingredients.length > 0 && <BurgerConstructor ingred={ingredients}/>}
+         {ingredients.length > 0 && <BurgerConstructor/>}
           </div>
          </IngredientsContext.Provider>
         </div>

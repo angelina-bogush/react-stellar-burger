@@ -5,20 +5,22 @@ import BurgerCard from './burger-card/burger-card';
 import PropTypes from "prop-types";
 import Modal from '../modal/modal';
 import IngredientDetails from '../modal/ingredient-details/ingredient-details';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useContext } from 'react';
 import { ingredient } from '../../utils/data';
+import { IngredientsContext } from '../../services/ingredientsContext';
 
-function BurgerIngredients({ingred}) {
-  const buns = useMemo(() => ingred.filter((item) => item.type === ingredient.bun), [ingred]);
-  const sauces = useMemo(() => ingred.filter((item) => item.type === ingredient.sauce), [ingred]);
-  const main = useMemo(() => ingred.filter((item) => item.type === ingredient.main), [ingred]);
+function BurgerIngredients() {
+  const {ingredients, setIngredients} = useContext(IngredientsContext)
+  const buns = useMemo(() => ingredients.filter((item) => item.type === ingredient.bun), [ingredients]);
+  const sauces = useMemo(() => ingredients.filter((item) => item.type === ingredient.sauce), [ingredients]);
+  const main = useMemo(() => ingredients.filter((item) => item.type === ingredient.main), [ingredients]);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
-
   const handleOpenModal = (item) => {
     setSelectedCard(item)
     setModalOpen(true)
+
   }
   const handleCloseModal = (value) => {
     setModalOpen(value)
