@@ -6,6 +6,7 @@ import Modal from "../modal/modal";
 import OrderDetails from "../modal/order-details/order-details";
 import { useState, useContext, useReducer, useMemo, useEffect } from "react";
 import { ConstructorContext } from "../../services/ingredientsContext";
+import { createOrderApi } from "../../utils/api";
 
 const BurgerConstructor = () => {
   const { constructorIngred, setConstructorIngred } =
@@ -41,6 +42,11 @@ const BurgerConstructor = () => {
   }, [constructorIngred]);
 
   const handleOpenModal = () => {
+    const ingredId = constructorIngred.ingredients.map(item => item._id);
+    const bunId = constructorIngred.bun._id
+    const ingredientsId = [bunId, ...ingredId, bunId];
+
+    createOrderApi(ingredientsId)
     setClickedModal(true);
   };
   const handleCloseModal = (value) => {
