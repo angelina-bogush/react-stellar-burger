@@ -4,7 +4,6 @@ import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-comp
 import { useContext } from "react";
 import { ConstructorContext } from "../../../services/ingredientsContext";
 import { v4 as uuid } from 'uuid';
-import { ingredient } from "../../../utils/data";
 
 const BurgerItems = () => {
   const {constructorIngred, setConstructorIngred} = useContext(ConstructorContext)

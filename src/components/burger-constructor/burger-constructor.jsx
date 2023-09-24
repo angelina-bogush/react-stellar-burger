@@ -9,9 +9,9 @@ import { ConstructorContext } from "../../services/ingredientsContext";
 import { createOrderApi } from "../../utils/api";
 
 const BurgerConstructor = () => {
-  const { constructorIngred, setConstructorIngred } =
-    useContext(ConstructorContext);
+  const { constructorIngred, setConstructorIngred } = useContext(ConstructorContext);
   const [clickedModal, setClickedModal] = useState(false);
+  const [orderNumber, setOrderNumber] = useState('')
 
   const reducer = (state, action) => {
     switch (action.type) {
@@ -45,8 +45,11 @@ const BurgerConstructor = () => {
     const ingredId = constructorIngred.ingredients.map(item => item._id);
     const bunId = constructorIngred.bun._id
     const ingredientsId = [bunId, ...ingredId, bunId];
-
+    //запрос на получение номера заказа
     createOrderApi(ingredientsId)
+    .then(data => setOrderNumber(data.order.number))
+    .catch(err => console.log(err))
+
     setClickedModal(true);
   };
   const handleCloseModal = (value) => {
@@ -74,7 +77,7 @@ const BurgerConstructor = () => {
       </div>
       {clickedModal && (
         <Modal onClose={handleCloseModal}>
-          <OrderDetails />
+          <OrderDetails orderNumber={orderNumber}/>
         </Modal>
       )}
     </div>
