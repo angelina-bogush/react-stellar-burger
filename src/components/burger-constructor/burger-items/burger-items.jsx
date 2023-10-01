@@ -1,30 +1,30 @@
 import styles from "./burger-items.module.css";
-import PropTypes from "prop-types";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useMemo } from "react";
-import { ingredient } from "../../../utils/data";
+import { useContext } from "react";
+import { ConstructorContext } from "../../../services/ingredientsContext";
+import { v4 as uuid } from 'uuid';
 
-const BurgerItems = (props) => {
-  const buns = useMemo(() => props.data.filter((item) => item.type === ingredient.bun), [props]);
-  const elseProducts = useMemo(() => props.data.filter((item) => item.type !== ingredient.bun), [props]);
-  const topBun = useMemo(() => buns.find((item) => item._id === props.topBunId), [buns, props]);
-  const bottomBun = useMemo(() => buns.find((item) => item._id === props.bottomBunId), [buns, props]);
+const BurgerItems = () => {
+  const {constructorIngred, setConstructorIngred} = useContext(ConstructorContext)
+  const bun =  constructorIngred.bun;
+  const elseProducts = constructorIngred.ingredients;
+  
   return (
     <div className={styles.container}>
       <div className={styles.elementContainer}>
+        {bun !== null &&
         <ConstructorElement
-          type={topBun.type}
+          type={bun.type}
           isLocked
-          text={topBun.name}
-          price={topBun.price}
-          thumbnail={topBun.image_mobile}
-        />
+          text={bun.name}
+          price={bun.price}
+          thumbnail={bun.image_mobile}/>}
       </div>
 
       <div className={`${styles.scroll} custom-scroll`}>
         {elseProducts.map((ingred) => (
-          <div className={styles.elementIcon} key={ingred._id}>
+          <div className={styles.elementIcon} key={uuid()}>
             <DragIcon type="primary" />
             <ConstructorElement
               text={ingred.name}
@@ -35,35 +35,16 @@ const BurgerItems = (props) => {
         ))}
       </div>
       <div className={styles.elementContainer}>
+      {bun !== null &&
         <ConstructorElement
-          type={bottomBun.type}
+          type={bun.type}
           isLocked
-          text={bottomBun.name}
-          price={bottomBun.price}
-          thumbnail={bottomBun.image_mobile}
-        />
+          text={bun.name}
+          price={bun.price}
+          thumbnail={bun.image_mobile}
+        />}
       </div>
     </div>
   );
-};
-BurgerItems.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      type: PropTypes.oneOf([ingredient.bun, ingredient.main, ingredient.sauce]).isRequired,
-      proteins: PropTypes.number.isRequired,
-      fat: PropTypes.number.isRequired,
-      carbohydrates: PropTypes.number.isRequired,
-      calories: PropTypes.number.isRequired,
-      price: PropTypes.number.isRequired,
-      image: PropTypes.string.isRequired,
-      image_mobile: PropTypes.string.isRequired,
-      image_large: PropTypes.string.isRequired,
-      __v: PropTypes.number.isRequired,
-    })
-  ),
-  topBunId: PropTypes.string.isRequired,
-  bottomBunId: PropTypes.string.isRequired
 };
 export default BurgerItems;

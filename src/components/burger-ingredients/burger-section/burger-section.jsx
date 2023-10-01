@@ -1,11 +1,11 @@
 import styles from './burger-section.module.css';
 import PropTypes from 'prop-types';
-const BurgerSection = (props) => {
+const BurgerSection = ({title, children}) => {
     return (
       <div className={styles.container}>
-        <h2 className="text text_type_main-medium">{props.title}</h2>
+        <h2 className="text text_type_main-medium">{title}</h2>
         <div className={styles.layout}>
-            {props.children}
+            {children}
         </div>
       </div>
     );
