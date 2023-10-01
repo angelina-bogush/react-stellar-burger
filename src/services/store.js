@@ -1,2 +1,12 @@
-import { rootReducer } from "./reducers/rootReducer";
-import { createStoreHook } from "react-redux";
+import { legacy_createStore as createStore, compose, applyMiddleware } from 'redux'
+import { rootReducer } from './reducers/rootReducer';
+import { allIngredientsReducer } from './reducers/reducers';
+import thunk from "redux-thunk";
+
+const composeEnhancers =
+  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+    : compose;
+    
+const enhancer = composeEnhancers(applyMiddleware(thunk))
+export const store = createStore(allIngredientsReducer, enhancer)

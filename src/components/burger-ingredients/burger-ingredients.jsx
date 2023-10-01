@@ -4,12 +4,14 @@ import BurgerSection from './burger-section/burger-section';
 import BurgerCard from './burger-card/burger-card';
 import Modal from '../modal/modal';
 import IngredientDetails from '../modal/ingredient-details/ingredient-details';
-import { useState, useMemo, useContext } from 'react';
+import { useState, useMemo, useContext} from 'react';
+import { useSelector } from 'react-redux';
 import { ingredient } from '../../utils/data';
-import { IngredientsContext, ConstructorContext } from '../../services/ingredientsContext';
+import {  ConstructorContext } from '../../services/ingredientsContext';
 
 function BurgerIngredients() {
-  const {ingredients, setIngredients} = useContext(IngredientsContext);
+  // const {ingredients, setIngredients} = useContext(IngredientsContext);
+  const ingredients = useSelector(state => state.allIngredients)
   const {constructorIngred, setConstructorIngred} = useContext(ConstructorContext);
 
   const buns = useMemo(() => ingredients.filter((item) => item.type === ingredient.bun), [ingredients]);
