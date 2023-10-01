@@ -5,8 +5,8 @@ import { useContext } from "react";
 import { ConstructorContext } from "../../../services/ingredientsContext";
 import { v4 as uuid } from 'uuid';
 
-const BurgerItems = () => {
-  const {constructorIngred, setConstructorIngred} = useContext(ConstructorContext)
+const BurgerItems = ({constructorIngred}) => {
+  
   const bun =  constructorIngred.bun;
   const elseProducts = constructorIngred.ingredients;
   
@@ -17,7 +17,7 @@ const BurgerItems = () => {
         <ConstructorElement
           type={bun.type}
           isLocked
-          text={bun.name}
+          text={`${bun.name} (верх)`}
           price={bun.price}
           thumbnail={bun.image_mobile}/>}
       </div>
@@ -39,7 +39,7 @@ const BurgerItems = () => {
         <ConstructorElement
           type={bun.type}
           isLocked
-          text={bun.name}
+          text={`${bun.name} (низ)`}
           price={bun.price}
           thumbnail={bun.image_mobile}
         />}

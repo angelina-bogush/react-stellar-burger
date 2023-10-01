@@ -1,7 +1,10 @@
 import styles from './ingredient-details.module.css';
 import InfoItem from './info-item/info-item';
 import PropTypes from 'prop-types'
-function IngredientDetails({data}){
+import { useSelector } from 'react-redux';
+function IngredientDetails(){
+    const data = useSelector(state => state.modalReducer.currentIngredient)
+    console.log(data)
     return(
         <div className={styles.container}>
                 <img src={data.image_large} alt={data.name}></img>

@@ -4,28 +4,25 @@ import BurgerSection from './burger-section/burger-section';
 import BurgerCard from './burger-card/burger-card';
 import Modal from '../modal/modal';
 import IngredientDetails from '../modal/ingredient-details/ingredient-details';
-import { useState, useMemo, useContext} from 'react';
-import { useSelector } from 'react-redux';
+import { useState, useMemo} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { ingredient } from '../../utils/data';
-import {  ConstructorContext } from '../../services/ingredientsContext';
+import { SET_CURRENT_ITEM, SET_CONSTRUCTOR_INGREDIENTS, SET_CONSTRUCTOR_BUN } from '../../services/actions/actions';
 
 function BurgerIngredients() {
-  // const {ingredients, setIngredients} = useContext(IngredientsContext);
-  const ingredients = useSelector(state => state.allIngredients)
-  const {constructorIngred, setConstructorIngred} = useContext(ConstructorContext);
+  const dispatch = useDispatch()
+  const ingredients = useSelector(state => state.allIngredientsReducer.allIngredients)
 
   const buns = useMemo(() => ingredients.filter((item) => item.type === ingredient.bun), [ingredients]);
   const sauces = useMemo(() => ingredients.filter((item) => item.type === ingredient.sauce), [ingredients]);
   const main = useMemo(() => ingredients.filter((item) => item.type === ingredient.main), [ingredients]);
 
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState(null);
 
   const handleOpenModal = (item) => {
-    setSelectedCard(item);
+    dispatch({type: SET_CURRENT_ITEM, item: item})
     setModalOpen(true);
-    item.type === ingredient.bun ? setConstructorIngred({...constructorIngred, bun: item}) : setConstructorIngred({...constructorIngred, ingredients: [...constructorIngred.ingredients, item] })
-
+    item.type === ingredient.bun ? dispatch({type: SET_CONSTRUCTOR_BUN, payload: item}) : dispatch({type: SET_CONSTRUCTOR_INGREDIENTS, payload: item})
   }
   const handleCloseModal = (value) => {
     setModalOpen(value)
@@ -69,7 +66,7 @@ function BurgerIngredients() {
       </BurgerSection>
       </div>
        {modalOpen && <Modal title="Детали ингредиента" onClose={handleCloseModal}>
-        <IngredientDetails data={selectedCard}></IngredientDetails>
+        <IngredientDetails></IngredientDetails>
         </Modal>}
     </div>
   );

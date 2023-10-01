@@ -9,4 +9,4 @@ const composeEnhancers =
     : compose;
     
 const enhancer = composeEnhancers(applyMiddleware(thunk))
-export const store = createStore(allIngredientsReducer, enhancer)
+export const store = createStore(rootReducer, enhancer)

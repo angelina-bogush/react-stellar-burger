@@ -5,11 +5,12 @@ import BurgerItems from "./burger-items/burger-items";
 import Modal from "../modal/modal";
 import OrderDetails from "../modal/order-details/order-details";
 import { useState, useContext, useReducer, useMemo, useEffect } from "react";
-import { ConstructorContext } from "../../services/ingredientsContext";
+import { useSelector } from "react-redux";
 import { createOrderApi } from "../../utils/api";
 
 const BurgerConstructor = () => {
-  const { constructorIngred, setConstructorIngred } = useContext(ConstructorContext);
+  // const { constructorIngred, setConstructorIngred } = useContext(ConstructorContext);
+  const constructorIngred = useSelector(state => state.modalReducer.constructorIngredients)
   const [clickedModal, setClickedModal] = useState(false);
   const [orderNumber, setOrderNumber] = useState('')
 
@@ -59,7 +60,7 @@ const BurgerConstructor = () => {
   return (
     <div className={`${styles.container} pl-4 pr-4`}>
       {(constructorIngred.bun !== null ||
-        constructorIngred.ingredients !== []) && <BurgerItems />}
+        constructorIngred.ingredients !== []) && <BurgerItems constructorIngred={constructorIngred}/>}
       <div className={styles.totalContainer}>
         <div className={styles.total}>
           <p className="text text_type_digits-medium pr-2">{priceState}</p>
