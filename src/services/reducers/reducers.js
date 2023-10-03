@@ -1,5 +1,4 @@
-import { GET_INGREDIENTS_SUCCESS, SET_CURRENT_ITEM, SET_CONSTRUCTOR_INGREDIENTS, SET_CONSTRUCTOR_BUN } from "../actions/actions"
-import { ingredient } from "../../utils/data"
+import { GET_INGREDIENTS_SUCCESS, SET_CURRENT_ITEM, SET_CONSTRUCTOR_INGREDIENTS, SET_CONSTRUCTOR_BUN, SET_ORDER_NUMBER } from "../actions/actions"
 const initialState = {
     allIngredients: [],
     constructorIngredients: {bun: null, ingredients: []},
@@ -38,6 +37,19 @@ export const modalReducer = (state = initialState, action) => {
             return{
                 ...state,
                 constructorIngredients: {...state.constructorIngredients, bun: action.payload}
+            }
+        }
+        default:{
+            return {...state}
+        }
+    }
+}
+export const orderReducer = (state = initialState, action) => {
+    switch(action.type){
+        case SET_ORDER_NUMBER:{
+            return {
+                ...state,
+                order: action.orderNumber
             }
         }
         default:{

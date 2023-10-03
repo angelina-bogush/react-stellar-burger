@@ -1,8 +1,6 @@
 import styles from "./burger-items.module.css";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useContext } from "react";
-import { ConstructorContext } from "../../../services/ingredientsContext";
 import { v4 as uuid } from 'uuid';
 
 const BurgerItems = ({constructorIngred}) => {
