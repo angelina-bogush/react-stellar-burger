@@ -10,6 +10,46 @@ import { ingredient } from '../../utils/data';
 import { SET_CONSTRUCTOR_INGREDIENTS, SET_CONSTRUCTOR_BUN, setCurrentItem } from '../../services/actions/actions';
 
 function BurgerIngredients() {
+  сonst [activeTab, setActiveTab] = useState("Булки");
+  const [observer, setObserver] = useState(null);
+  const [sections, setSections] = useState([]);
+
+  // Создаем рефы для каждого заголовка
+  const bunsRef = useRef(null);
+  const saucesRef = useRef(null);
+  const mainRef = useRef(null);
+
+  useEffect(() => {
+    // Инициализируем Intersection Observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveTab(entry.target.dataset.title);
+          }
+        });
+      },
+      { rootMargin: "-50% 0px -50% 0px" }
+    );
+    setObserver(observer);
+    // Добавляем рефы заголовков в наблюдение
+    observer.observe(bunsRef.current);
+    observer.observe(saucesRef.current);
+    observer.observe(mainRef.current);
+    // Сохраняем массив секций для обновления состояния компонента
+    setSections([bunsRef.current, saucesRef.current, mainRef.current]);
+  }, []);
+  useEffect(() => {
+    setSections([bunsRef.current, saucesRef.current, mainRef.current]);
+  }, [bunsRef, saucesRef, mainRef]);
+
+  const handleTabClick = (title) => {
+    setActiveTab(title);
+    // Прокручиваем к соответствующей секции
+    const section = sections.find((ref) => ref.dataset.title === title);
+    section.scrollIntoView({ behavior: "smooth" });
+  };
+
   const dispatch = useDispatch()
   const [modalOpen, setModalOpen] = useState(false);
   
@@ -32,9 +72,9 @@ function BurgerIngredients() {
   
   return (
     <div className={`${styles.container} pt-5`}>
-      <BurgerTab />
+      <BurgerTab activeTab={activeTab} onClick={handleTabClick}/>
       <div className={`${styles.containerScroll} custom-scroll`}>
-      <BurgerSection title={"Булки"}>
+      <BurgerSection title={"Булки"} ref={bunsRef}>
         {buns.map((item) => (
           <BurgerCard key={item._id} onClick={() => handleOpenModal(item)}
           img={item.image}
@@ -45,7 +85,7 @@ function BurgerIngredients() {
         ))}
       </BurgerSection>
 
-      <BurgerSection title={"Соусы"}>
+      <BurgerSection title={"Соусы"} ref={saucesRef}>
       {sauces.map((item) => (
           <BurgerCard key={item._id} onClick={() => handleOpenModal(item)}
           img={item.image}
@@ -56,7 +96,7 @@ function BurgerIngredients() {
         ))}
       </BurgerSection>
 
-      <BurgerSection title={"Начинки"}>
+      <BurgerSection title={"Начинки"} ref={mainRef}>
       {main.map((item) => (
           <BurgerCard key={item._id} onClick={() => handleOpenModal(item)}
           img={item.image}
