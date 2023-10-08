@@ -3,10 +3,10 @@ import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { v4 as uuid } from 'uuid';
 
-const BurgerItems = ({constructorIngred}) => {
+const BurgerItems = ({constructorIngredients, constructorBun}) => {
   
-  const bun =  constructorIngred.bun;
-  const elseProducts = constructorIngred.ingredients;
+  const bun =  constructorBun;
+  const elseProducts = constructorIngredients;
   
   return (
     <div className={styles.container}>
@@ -21,16 +21,15 @@ const BurgerItems = ({constructorIngred}) => {
       </div>
 
       <div className={`${styles.scroll} custom-scroll`}>
-        {elseProducts.map((ingred) => (
+        {[...new Map(elseProducts.map(ingred => [ingred.id, ingred])).values()].map(ingred => (
           <div className={styles.elementIcon} key={uuid()}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text={ingred.name}
-              price={ingred.price}
-              thumbnail={ingred.image_mobile}
-            />
-          </div>
-        ))}
+          <DragIcon type="primary" />
+          <ConstructorElement
+            text={ingred.name}
+            price={ingred.price}
+            thumbnail={ingred.image_mobile}
+          />
+        </div> ))}
       </div>
       <div className={styles.elementContainer}>
       {bun !== null &&

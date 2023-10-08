@@ -4,15 +4,34 @@ import BurgerSection from './burger-section/burger-section';
 import BurgerCard from './burger-card/burger-card';
 import Modal from '../modal/modal';
 import IngredientDetails from '../modal/ingredient-details/ingredient-details';
-import { useState, useMemo, useRef, useEffect} from 'react';
+import { useState, useMemo, useRef, useCallback} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ingredient } from '../../utils/data';
 import { SET_CONSTRUCTOR_INGREDIENTS, SET_CONSTRUCTOR_BUN, setCurrentItem } from '../../services/actions/actions';
 import { useDrag } from 'react-dnd';
 
 function BurgerIngredients() {
-  const [activeTab, setActiveTab] = useState('Bun')
+  const dispatch = useDispatch()
+  const [modalOpen, setModalOpen] = useState(false);
+  const ingredients = useSelector(state => state.allIngredientsReducer.allIngredients)
+  //выбранные ингредиенты
+  const selectedBun = useSelector(state => state.burgerConstructorReducer.bun)
+  const selectedIngredients = useSelector(state => state.burgerConstructorReducer.ingredients)
 
+  const buns = useMemo(() => ingredients.filter((item) => item.type === ingredient.bun), [ingredients]);
+  const sauces = useMemo(() => ingredients.filter((item) => item.type === ingredient.sauce), [ingredients]);
+  const main = useMemo(() => ingredients.filter((item) => item.type === ingredient.main), [ingredients]);
+
+  const handleOpenModal = (item) => {
+    item.type === ingredient.bun ? dispatch({type: SET_CONSTRUCTOR_BUN, payload: item}) : dispatch({type: SET_CONSTRUCTOR_INGREDIENTS, payload: item})
+    dispatch(setCurrentItem(item))
+    setModalOpen(true);
+  }
+  const handleCloseModal = (value) => {
+    setModalOpen(value)
+    dispatch(setCurrentItem(null))
+  };
+  const [activeTab, setActiveTab] = useState('Bun')
   const bunsRef = useRef();
   const saucesRef = useRef();
   const mainRef = useRef();
@@ -31,27 +50,19 @@ function BurgerIngredients() {
       setActiveTab(newTab)
      }
   }
+  //логика счетчика
 
+const totalCount = useCallback((item) => {
 
-  const dispatch = useDispatch()
-  const [modalOpen, setModalOpen] = useState(false);
-  
-  const ingredients = useSelector(state => state.allIngredientsReducer.allIngredients)
-
-  const buns = useMemo(() => ingredients.filter((item) => item.type === ingredient.bun), [ingredients]);
-  const sauces = useMemo(() => ingredients.filter((item) => item.type === ingredient.sauce), [ingredients]);
-  const main = useMemo(() => ingredients.filter((item) => item.type === ingredient.main), [ingredients]);
-
-
-  const handleOpenModal = (item) => {
-    dispatch(setCurrentItem(item))
-    setModalOpen(true);
-    item.type === ingredient.bun ? dispatch({type: SET_CONSTRUCTOR_BUN, payload: item}) : dispatch({type: SET_CONSTRUCTOR_INGREDIENTS, payload: item})
+  if(item.type === ingredient.bun){
+    console.log(selectedBun)
+    return 1
   }
-  const handleCloseModal = (value) => {
-    setModalOpen(value)
-    dispatch(setCurrentItem(null))
-  };
+  if(item.type === ingredient.main || item.type === ingredient.sauce){
+    return selectedIngredients.filter(ingred => ingred._id === item._id).length
+  }
+}, [ingredient, selectedIngredients]
+)
   
   return (
     <div className={`${styles.container} pt-5`}>
@@ -73,7 +84,7 @@ function BurgerIngredients() {
           img={item.image}
           price={item.price}
           description={item.name}
-          count={1}
+          count={totalCount(item)}
         />
         ))}
       </BurgerSection>
@@ -84,7 +95,7 @@ function BurgerIngredients() {
           img={item.image}
           price={item.price}
           description={item.name}
-          count={1}
+          count={totalCount(item)}
         />
         ))}
       </BurgerSection>
@@ -95,7 +106,7 @@ function BurgerIngredients() {
           img={item.image}
           price={item.price}
           description={item.name}
-          count={1}
+          count={totalCount(item)}
         />
         ))}
       </BurgerSection>
