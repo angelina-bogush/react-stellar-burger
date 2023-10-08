@@ -23,7 +23,6 @@ function BurgerIngredients() {
   const main = useMemo(() => ingredients.filter((item) => item.type === ingredient.main), [ingredients]);
 
   const handleOpenModal = (item) => {
-    item.type === ingredient.bun ? dispatch({type: SET_CONSTRUCTOR_BUN, payload: item}) : dispatch({type: SET_CONSTRUCTOR_INGREDIENTS, payload: item})
     dispatch(setCurrentItem(item))
     setModalOpen(true);
   }
@@ -55,7 +54,6 @@ function BurgerIngredients() {
 const totalCount = useCallback((item) => {
 
   if(item.type === ingredient.bun){
-    console.log(selectedBun)
     return 1
   }
   if(item.type === ingredient.main || item.type === ingredient.sauce){
@@ -84,7 +82,8 @@ const totalCount = useCallback((item) => {
           img={item.image}
           price={item.price}
           description={item.name}
-          count={totalCount(item)}
+          count={selectedBun === null ? 0 : totalCount(item)}
+          item={item}
         />
         ))}
       </BurgerSection>
@@ -96,6 +95,7 @@ const totalCount = useCallback((item) => {
           price={item.price}
           description={item.name}
           count={totalCount(item)}
+          item={item}
         />
         ))}
       </BurgerSection>
@@ -106,7 +106,8 @@ const totalCount = useCallback((item) => {
           img={item.image}
           price={item.price}
           description={item.name}
-          count={totalCount(item)}
+          count={selectedBun === null ? 0 : totalCount(item)}
+          item={item}
         />
         ))}
       </BurgerSection>

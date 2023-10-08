@@ -6,8 +6,9 @@ import { v4 as uuid } from 'uuid';
 const BurgerItems = ({constructorIngredients, constructorBun}) => {
   
   const bun =  constructorBun;
+  console.log(bun)
   const elseProducts = constructorIngredients;
-  
+  console.log(elseProducts)
   return (
     <div className={styles.container}>
       <div className={styles.elementContainer}>
@@ -21,7 +22,7 @@ const BurgerItems = ({constructorIngredients, constructorBun}) => {
       </div>
 
       <div className={`${styles.scroll} custom-scroll`}>
-        {[...new Map(elseProducts.map(ingred => [ingred.id, ingred])).values()].map(ingred => (
+        {/* {[...new Map(elseProducts.map(ingred => [ingred.id, ingred])).values()].map(ingred => (
           <div className={styles.elementIcon} key={uuid()}>
           <DragIcon type="primary" />
           <ConstructorElement
@@ -29,8 +30,19 @@ const BurgerItems = ({constructorIngredients, constructorBun}) => {
             price={ingred.price}
             thumbnail={ingred.image_mobile}
           />
-        </div> ))}
+        </div> ))} */}
+        {elseProducts.map(ingred => (
+          <div className={styles.elementIcon} key={uuid()}>
+          <DragIcon type="primary" />
+          <ConstructorElement
+            text={ingred.name}
+            price={ingred.price}
+            thumbnail={ingred.image_mobile}
+          />
+        </div> 
+        ))}
       </div>
+
       <div className={styles.elementContainer}>
       {bun !== null &&
         <ConstructorElement

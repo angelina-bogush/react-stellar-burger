@@ -4,11 +4,16 @@ import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from 'react-dnd';
 
-const BurgerCard = ({onClick, description, price, count, img, key}) => {
+const BurgerCard = ({onClick, description, price, count, img, item}) => {
     const [, dragRef] = useDrag({
         type: 'ingredient',
-        item: key
+        item: item,
+        collect: monitor => ({
+            isDrag: monitor.isDragging()
+        })
     })
+    // const counter = 0
+    // const canDraggabble = (item?.type !== "bun") ? true : !(counter)
     return(
         <div className={`${styles.container}`} onClick={onClick} ref={dragRef}>
             <img src={img} alt={description} className="pr-4 pl-4"></img>

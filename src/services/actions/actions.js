@@ -38,4 +38,10 @@ export function setOrderNumber(orderNumber){
         orderNumber: orderNumber
     }
 }
+
+export function addIngredients(item){
+    return{
+        type: SET_CONSTRUCTOR_INGREDIENTS, payload: item
+    }
+}
   

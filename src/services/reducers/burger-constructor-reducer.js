@@ -7,29 +7,29 @@ const initialState = {
 
 export const burgerConstructorReducer = (state = initialState, action) => {
     switch(action.type){
-        case  SET_CONSTRUCTOR_INGREDIENTS:{
+        case SET_CONSTRUCTOR_INGREDIENTS:
             return{
                 ...state,
-                ingredients: [...state.ingredients,  action.payload]
+                ingredients: [...state.ingredients, action.payload]
             }
-        }
-        case SET_CONSTRUCTOR_BUN:{
+        
+        case SET_CONSTRUCTOR_BUN:
             return{
                 ...state,
                 bun: action.payload
             }
-        }
-        case  DELETE_INGREDIENT:{
+        
+        case  DELETE_INGREDIENT:
             return{
                 ...state,
                 ingredients: [...state.ingredients].filter(item => item._id !== action.payload)
             }
-        }
-        case CLEAR_BURGER_CONSTRUCTOR:{
+        
+        case CLEAR_BURGER_CONSTRUCTOR:
             return initialState
-        }
-        default:{
+        
+        default:
             return {...state}
-        }
+        
     }
 }
