@@ -5,6 +5,7 @@ export const getData = () => {
     .then(data => data.data)
 } 
 
+
 export const createOrderApi = (ingredients) => {
     return fetch(`${url}/orders`,{
        method: "POST",

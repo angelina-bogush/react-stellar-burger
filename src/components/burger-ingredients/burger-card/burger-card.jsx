@@ -2,11 +2,15 @@ import styles from './burger-card.module.css';
 import PropTypes from 'prop-types';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-
+import { useDrag } from 'react-dnd';
 
 const BurgerCard = (props) => {
+    const [, dragRef] = useDrag({
+        type: 'ingredient',
+        item: props.key
+    })
     return(
-        <div className={`${styles.container}`} onClick={props.onClick}>
+        <div className={`${styles.container}`} onClick={props.onClick} ref={dragRef}>
             <img src={props.img} alt={props.description} className="pr-4 pl-4"></img>
             <div className={`${styles.price} pb-2 pt-1`}>
                 <p className="text text_type_digits-medium pr-2">{props.price}</p>
