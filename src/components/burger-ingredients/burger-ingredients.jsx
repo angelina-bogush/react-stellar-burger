@@ -8,6 +8,7 @@ import { useState, useMemo} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ingredient } from '../../utils/data';
 import { SET_CONSTRUCTOR_INGREDIENTS, SET_CONSTRUCTOR_BUN, setCurrentItem } from '../../services/actions/actions';
+import { useDrag } from 'react-dnd';
 
 function BurgerIngredients() {
   const dispatch = useDispatch()

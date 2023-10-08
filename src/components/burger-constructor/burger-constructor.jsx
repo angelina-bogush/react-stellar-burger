@@ -8,10 +8,13 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createOrderApi } from "../../utils/api";
 import { setOrderNumber } from "../../services/actions/actions";
+import { useDrop } from "react-dnd";
+import { ingredient } from "../../utils/data";
+import { SET_CONSTRUCTOR_BUN, SET_CONSTRUCTOR_INGREDIENTS } from "../../services/actions/actions";
 
-const BurgerConstructor = () => {
+const BurgerConstructor = ({onDrop}) => {
   const dispatch = useDispatch()
-
+  const item = useSelector(state => state.modalReducer.currentIngredient)
   const orderNumber = useSelector(state => state.orderReducer.order)
   const constructorIngred = useSelector(state => state.modalReducer.constructorIngredients)
   const [clickedModal, setClickedModal] = useState(false);
@@ -30,6 +33,13 @@ const BurgerConstructor = () => {
     }
     setTotalPrice(price);
   }, [constructorIngred]);
+
+  const [, dropRef] = useDrop({
+    accept: 'ingredient',
+    drop(item){
+      item.type === ingredient.bun ? dispatch({type: SET_CONSTRUCTOR_BUN, payload: item}) : dispatch({type: SET_CONSTRUCTOR_INGREDIENTS, payload: item})
+    }
+  })
   
 
   const handleOpenModal = () => {
@@ -48,7 +58,7 @@ const BurgerConstructor = () => {
   };
 
   return (
-    <div className={`${styles.container} pl-4 pr-4`}>
+    <div className={`${styles.container} pl-4 pr-4`} ref={dropRef} onDrop={onDrop}>
       {(constructorIngred.bun !== null || constructorIngred.ingredients.length !== 0)  && <BurgerItems constructorIngred={constructorIngred}/>}
       <div className={styles.totalContainer}>
         <div className={styles.total}>
