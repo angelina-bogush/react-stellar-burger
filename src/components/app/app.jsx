@@ -17,11 +17,11 @@ function App() {
   useEffect(() => {
     dispatch(getIngredients())
   }, [dispatch])
-  const handleDrop = (item) => {
-    item.type === ingredient.bun ? dispatch({type: SET_CONSTRUCTOR_BUN, payload: item}) : dispatch({type: SET_CONSTRUCTOR_INGREDIENTS, payload: item})
-    dispatch({type: ADD_CURRENT_ITEM, payload: item})
-    setConstructorIngred(item);
-  }  
+  // const handleDrop = (item) => {
+  //   item.type === ingredient.bun ? dispatch({type: SET_CONSTRUCTOR_BUN, payload: item}) : dispatch({type: SET_CONSTRUCTOR_INGREDIENTS, payload: item})
+  //   dispatch({type: ADD_CURRENT_ITEM, payload: item})
+  //   setConstructorIngred(item);
+  // }  
 
   const contentBurgerIngredients = useMemo(() => {
     if(!ingredients){
@@ -42,7 +42,7 @@ function App() {
           {contentBurgerIngredients}
         </div>
         <div className="pl-4 pr-4">
-         {ingredients && <BurgerConstructor onDrop={(item) => handleDrop(item)}/>}
+         {ingredients && <BurgerConstructor/>}
           </div>
         </DndProvider>
          </ConstructorContext.Provider>

@@ -1,55 +1,78 @@
 import styles from './burger-ingredients.module.css';
-import BurgerTab from './burger-tab/burger-tab';
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerSection from './burger-section/burger-section';
 import BurgerCard from './burger-card/burger-card';
 import Modal from '../modal/modal';
 import IngredientDetails from '../modal/ingredient-details/ingredient-details';
-import { useState, useMemo} from 'react';
+import { useState, useMemo, useRef, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ingredient } from '../../utils/data';
 import { SET_CONSTRUCTOR_INGREDIENTS, SET_CONSTRUCTOR_BUN, setCurrentItem } from '../../services/actions/actions';
 import { useDrag } from 'react-dnd';
 
 function BurgerIngredients() {
-  сonst [activeTab, setActiveTab] = useState("Булки");
-  const [observer, setObserver] = useState(null);
-  const [sections, setSections] = useState([]);
+  const [activeTab, setActiveTab] = useState('Bun')
+  // const [observer, setObserver] = useState(null);
+  // const [sections, setSections] = useState([]);
 
   // Создаем рефы для каждого заголовка
-  const bunsRef = useRef(null);
-  const saucesRef = useRef(null);
-  const mainRef = useRef(null);
+  const bunsRef = useRef();
+  const saucesRef = useRef();
+  const mainRef = useRef();
+  const tabsRef = useRef()
 
-  useEffect(() => {
-    // Инициализируем Intersection Observer
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveTab(entry.target.dataset.title);
-          }
-        });
-      },
-      { rootMargin: "-50% 0px -50% 0px" }
-    );
-    setObserver(observer);
-    // Добавляем рефы заголовков в наблюдение
-    observer.observe(bunsRef.current);
-    observer.observe(saucesRef.current);
-    observer.observe(mainRef.current);
-    // Сохраняем массив секций для обновления состояния компонента
-    setSections([bunsRef.current, saucesRef.current, mainRef.current]);
-  }, []);
-  useEffect(() => {
-    setSections([bunsRef.current, saucesRef.current, mainRef.current]);
-  }, [bunsRef, saucesRef, mainRef]);
+  function handleScrollList() {
+    const tabsBottom = tabsRef.current?.getBoundingClientRect().bottom;
+    const bunsTop = bunsRef.current?.getBoundingClientRect().top;
+    const saucesTop = saucesRef.current?.getBoundingClientRect().top;
+    const mainsTop = mainRef.current?.getBoundingClientRect().top;
 
-  const handleTabClick = (title) => {
-    setActiveTab(title);
-    // Прокручиваем к соответствующей секции
-    const section = sections.find((ref) => ref.dataset.title === title);
-    section.scrollIntoView({ behavior: "smooth" });
-  };
+    if (!tabsBottom || !bunsTop || !saucesTop || !mainsTop) {
+      return
+    }
+
+    const TabsWithBottomPadding = (tabsBottom + 40)
+    const bunsDelta = Math.abs(bunsTop - TabsWithBottomPadding);
+    const saucesDelta = Math.abs(saucesTop - TabsWithBottomPadding);
+    const mainsDelta = Math.abs(mainsTop - TabsWithBottomPadding);
+    const min = Math.min(bunsDelta, saucesDelta, mainsDelta);
+    const newTab = min === bunsDelta ? "Bun" : min === saucesDelta ? "Sauce" : "Main";
+    if (newTab !== activeTab) {
+      setActiveTab(newTab)
+    }
+  }
+
+  // useEffect(() => {
+  //   // Инициализируем Intersection Observer
+  //   const observer = new IntersectionObserver(
+  //     (entries) => {
+  //       entries.forEach((entry) => {
+  //         if (entry.isIntersecting) {
+  //           setActiveTab(entry.target.dataset.title);
+  //         }
+  //       });
+  //     },
+  //     { rootMargin: "-50% 0px -50% 0px" }
+  //   );
+  //   setObserver(observer);
+  //   // Добавляем рефы заголовков в наблюдение
+  //   observer.observe(bunsRef.current);
+  //   observer.observe(saucesRef.current);
+  //   observer.observe(mainRef.current);
+  //   // Сохраняем массив секций для обновления состояния компонента
+  //   setSections([bunsRef.current, saucesRef.current, mainRef.current]);
+  // }, []);
+  // console.log(activeTab)
+  // // useEffect(() => {
+  // //   setSections([bunsRef.current, saucesRef.current, mainRef.current]);
+  // // }, [bunsRef, saucesRef, mainRef]);
+
+  // const handleTabClick = (title) => {
+  //   setActiveTab(title);
+  //   // Прокручиваем к соответствующей секции
+  //   const section = sections.find((ref) => ref.dataset.title === title);
+  //   section.scrollIntoView({ behavior: "smooth" });
+  // };
 
   const dispatch = useDispatch()
   const [modalOpen, setModalOpen] = useState(false);
@@ -73,8 +96,18 @@ function BurgerIngredients() {
   
   return (
     <div className={`${styles.container} pt-5`}>
-      <BurgerTab activeTab={activeTab} onClick={handleTabClick}/>
-      <div className={`${styles.containerScroll} custom-scroll`}>
+      <div className={styles.tab} ref={tabsRef}>
+      <Tab value="Bun" active={activeTab === "Bun"} onClick={setActiveTab}>
+        Булки
+      </Tab>
+      <Tab value="Sauce" active={activeTab === "Sauce"} onClick={setActiveTab}>
+        Соусы
+      </Tab>
+      <Tab value="Main" active={activeTab === "Main"} onClick={setActiveTab}>
+        Начинки
+      </Tab>
+    </div>
+      <div className={`${styles.containerScroll} custom-scroll`} onScroll={handleScrollList}>
       <BurgerSection title={"Булки"} ref={bunsRef}>
         {buns.map((item) => (
           <BurgerCard key={item._id} onClick={() => handleOpenModal(item)}
