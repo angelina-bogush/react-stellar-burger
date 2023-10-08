@@ -12,67 +12,26 @@ import { useDrag } from 'react-dnd';
 
 function BurgerIngredients() {
   const [activeTab, setActiveTab] = useState('Bun')
-  // const [observer, setObserver] = useState(null);
-  // const [sections, setSections] = useState([]);
 
-  // Создаем рефы для каждого заголовка
   const bunsRef = useRef();
   const saucesRef = useRef();
   const mainRef = useRef();
   const tabsRef = useRef()
 
-  function handleScrollList() {
+  function handleScrollIngredients() {
     const tabsBottom = tabsRef.current?.getBoundingClientRect().bottom;
-    const bunsTop = bunsRef.current?.getBoundingClientRect().top;
-    const saucesTop = saucesRef.current?.getBoundingClientRect().top;
-    const mainsTop = mainRef.current?.getBoundingClientRect().top;
+    const bunTop = bunsRef.current?.getBoundingClientRect().top;
+    const sauceTop = saucesRef.current?.getBoundingClientRect().top;
+    const mainTop = mainRef.current?.getBoundingClientRect().top;
 
-    if (!tabsBottom || !bunsTop || !saucesTop || !mainsTop) {
-      return
-    }
-
-    const TabsWithBottomPadding = (tabsBottom + 40)
-    const bunsDelta = Math.abs(bunsTop - TabsWithBottomPadding);
-    const saucesDelta = Math.abs(saucesTop - TabsWithBottomPadding);
-    const mainsDelta = Math.abs(mainsTop - TabsWithBottomPadding);
-    const min = Math.min(bunsDelta, saucesDelta, mainsDelta);
-    const newTab = min === bunsDelta ? "Bun" : min === saucesDelta ? "Sauce" : "Main";
-    if (newTab !== activeTab) {
+    const TabsBottomPadding = (tabsBottom - 50)
+     const min = Math.min( Math.abs(bunTop - TabsBottomPadding),  Math.abs(sauceTop - TabsBottomPadding),  Math.abs(mainTop - TabsBottomPadding))
+     const newTab = min === Math.abs(bunTop - TabsBottomPadding) ? "Bun" : min === Math.abs(sauceTop - TabsBottomPadding) ? "Sauce" : "Main"
+     if(newTab !== activeTab){
       setActiveTab(newTab)
-    }
+     }
   }
 
-  // useEffect(() => {
-  //   // Инициализируем Intersection Observer
-  //   const observer = new IntersectionObserver(
-  //     (entries) => {
-  //       entries.forEach((entry) => {
-  //         if (entry.isIntersecting) {
-  //           setActiveTab(entry.target.dataset.title);
-  //         }
-  //       });
-  //     },
-  //     { rootMargin: "-50% 0px -50% 0px" }
-  //   );
-  //   setObserver(observer);
-  //   // Добавляем рефы заголовков в наблюдение
-  //   observer.observe(bunsRef.current);
-  //   observer.observe(saucesRef.current);
-  //   observer.observe(mainRef.current);
-  //   // Сохраняем массив секций для обновления состояния компонента
-  //   setSections([bunsRef.current, saucesRef.current, mainRef.current]);
-  // }, []);
-  // console.log(activeTab)
-  // // useEffect(() => {
-  // //   setSections([bunsRef.current, saucesRef.current, mainRef.current]);
-  // // }, [bunsRef, saucesRef, mainRef]);
-
-  // const handleTabClick = (title) => {
-  //   setActiveTab(title);
-  //   // Прокручиваем к соответствующей секции
-  //   const section = sections.find((ref) => ref.dataset.title === title);
-  //   section.scrollIntoView({ behavior: "smooth" });
-  // };
 
   const dispatch = useDispatch()
   const [modalOpen, setModalOpen] = useState(false);
@@ -107,7 +66,7 @@ function BurgerIngredients() {
         Начинки
       </Tab>
     </div>
-      <div className={`${styles.containerScroll} custom-scroll`} onScroll={handleScrollList}>
+      <div className={`${styles.containerScroll} custom-scroll`} onScroll={handleScrollIngredients}>
       <BurgerSection title={"Булки"} ref={bunsRef}>
         {buns.map((item) => (
           <BurgerCard key={item._id} onClick={() => handleOpenModal(item)}
