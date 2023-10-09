@@ -7,7 +7,7 @@ import IngredientDetails from '../modal/ingredient-details/ingredient-details';
 import { useState, useMemo, useRef, useCallback} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ingredient } from '../../utils/data';
-import { SET_CONSTRUCTOR_INGREDIENTS, SET_CONSTRUCTOR_BUN, setCurrentItem } from '../../services/actions/actions';
+import { setCurrentItem } from '../../services/actions/current-item';
 import { useDrag } from 'react-dnd';
 
 function BurgerIngredients() {

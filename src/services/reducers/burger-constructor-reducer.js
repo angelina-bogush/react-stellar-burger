@@ -1,4 +1,4 @@
-import { SET_CONSTRUCTOR_BUN, SET_CONSTRUCTOR_INGREDIENTS, DELETE_INGREDIENT, CLEAR_BURGER_CONSTRUCTOR } from "../actions/actions";
+import { SET_CONSTRUCTOR_BUN, SET_CONSTRUCTOR_INGREDIENTS, DELETE_INGREDIENT, CLEAR_BURGER_CONSTRUCTOR } from "../actions/burger-constructor";
 
 const initialState = {
     bun: null,

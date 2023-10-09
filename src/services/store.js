@@ -1,6 +1,6 @@
 import { legacy_createStore as createStore, compose, applyMiddleware } from 'redux'
 import { rootReducer } from './reducers/rootReducer';
-import { allIngredientsReducer } from './reducers/reducers';
+import { allIngredientsReducer } from './reducers/ingredients-reducer';
 import thunk from "redux-thunk";
 
 const composeEnhancers =

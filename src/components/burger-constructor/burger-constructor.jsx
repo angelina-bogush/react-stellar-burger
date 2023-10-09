@@ -7,9 +7,9 @@ import OrderDetails from "../modal/order-details/order-details";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createOrderApi } from "../../utils/api";
-import { setOrderNumber } from "../../services/actions/actions";
+import { setOrderNumber } from "../../services/actions/order-number";
 import { useDrop } from "react-dnd";
-import { SET_CONSTRUCTOR_BUN, SET_CONSTRUCTOR_INGREDIENTS} from "../../services/actions/actions";
+import { SET_CONSTRUCTOR_BUN, SET_CONSTRUCTOR_INGREDIENTS} from "../../services/actions/burger-constructor";
 import { ingredient } from "../../utils/data";
 
 const BurgerConstructor = ({onDropHandler}) => {

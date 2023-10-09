@@ -2,7 +2,7 @@ import styles from "./burger-items.module.css";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { v4 as uuid } from 'uuid';
-import { deleteIngredient } from "../../../services/actions/actions";
+import { deleteIngredient } from "../../../services/actions/burger-constructor";
 import { useDispatch } from "react-redux";
 
 const BurgerItems = ({constructorIngredients, constructorBun}) => {
