@@ -2,13 +2,14 @@ import styles from "./burger-items.module.css";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { v4 as uuid } from 'uuid';
+import { deleteIngredient } from "../../../services/actions/actions";
+import { useDispatch } from "react-redux";
 
 const BurgerItems = ({constructorIngredients, constructorBun}) => {
-  
+  const dispatch = useDispatch()
   const bun =  constructorBun;
-  console.log(bun)
   const elseProducts = constructorIngredients;
-  console.log(elseProducts)
+
   return (
     <div className={styles.container}>
       <div className={styles.elementContainer}>
@@ -38,6 +39,7 @@ const BurgerItems = ({constructorIngredients, constructorBun}) => {
             text={ingred.name}
             price={ingred.price}
             thumbnail={ingred.image_mobile}
+            handleClose={() => dispatch(deleteIngredient(ingred))}
           />
         </div> 
         ))}

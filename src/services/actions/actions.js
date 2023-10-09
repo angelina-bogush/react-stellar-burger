@@ -45,3 +45,9 @@ export function addIngredients(item){
     }
 }
   
+export function deleteIngredient(item){
+    return{
+        type: DELETE_INGREDIENT,
+        payload: item
+    }
+}

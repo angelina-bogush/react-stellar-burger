@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { createOrderApi } from "../../utils/api";
 import { setOrderNumber } from "../../services/actions/actions";
 import { useDrop } from "react-dnd";
-import { SET_CONSTRUCTOR_BUN, SET_CONSTRUCTOR_INGREDIENTS } from "../../services/actions/actions";
+import { SET_CONSTRUCTOR_BUN, SET_CONSTRUCTOR_INGREDIENTS} from "../../services/actions/actions";
 import { ingredient } from "../../utils/data";
 
 const BurgerConstructor = ({onDropHandler}) => {
@@ -38,7 +38,6 @@ const BurgerConstructor = ({onDropHandler}) => {
   const [{isHover, isCanD}, dropRef] = useDrop({
     accept: 'ingredient',
     drop(item){
-      console.log(item)
       item.type === ingredient.bun ? dispatch({type: SET_CONSTRUCTOR_BUN, payload: item}) : dispatch({type: SET_CONSTRUCTOR_INGREDIENTS, payload: item})
       // onDropHandler(item)
     },
