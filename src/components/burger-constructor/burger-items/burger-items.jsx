@@ -23,15 +23,6 @@ const BurgerItems = ({constructorIngredients, constructorBun}) => {
       </div>
 
       <div className={`${styles.scroll} custom-scroll`}>
-        {/* {[...new Map(elseProducts.map(ingred => [ingred.id, ingred])).values()].map(ingred => (
-          <div className={styles.elementIcon} key={uuid()}>
-          <DragIcon type="primary" />
-          <ConstructorElement
-            text={ingred.name}
-            price={ingred.price}
-            thumbnail={ingred.image_mobile}
-          />
-        </div> ))} */}
         {elseProducts.map(ingred => (
           <div className={styles.elementIcon} key={uuid()}>
           <DragIcon type="primary" />

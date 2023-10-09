@@ -7,9 +7,6 @@ import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-// import { ingredient } from "../../utils/data";
-// import { addIngredients } from "../../services/actions/burger-constructor";
-// import { SET_CONSTRUCTOR_BUN } from "../../services/actions/burger-constructor";
 
 function App() {
   const dispatch = useDispatch()
