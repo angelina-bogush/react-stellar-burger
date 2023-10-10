@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { createOrderApi } from "../../utils/api";
 import { setOrderNumber } from "../../services/actions/order-number";
 import { useDrop } from "react-dnd";
-import { SET_CONSTRUCTOR_BUN, SET_CONSTRUCTOR_INGREDIENTS} from "../../services/actions/burger-constructor";
+import { addIngredients, addBun} from "../../services/actions/burger-constructor";
 import { ingredient } from "../../utils/data";
 
 const BurgerConstructor = ({onDropHandler}) => {
@@ -28,7 +28,7 @@ const BurgerConstructor = ({onDropHandler}) => {
     }
     if (constructorIngredients.length !== 0) {
       price += constructorIngredients.reduce(
-        (acc, curr) => acc + curr.price,
+        (acc, curr) => acc + curr.ingredient.price,
         0
       );
     }
@@ -38,8 +38,8 @@ const BurgerConstructor = ({onDropHandler}) => {
   const [{isHover, isCanD}, dropRef] = useDrop({
     accept: 'ingredient',
     drop(item){
-      item.type === ingredient.bun ? dispatch({type: SET_CONSTRUCTOR_BUN, payload: item}) : dispatch({type: SET_CONSTRUCTOR_INGREDIENTS, payload: item})
-      // onDropHandler(item)
+      item.type === ingredient.bun ? dispatch(addBun(item)) 
+      :dispatch(addIngredients(item))
     },
     collect: monitor => ({
       isHover: monitor.isOver(),

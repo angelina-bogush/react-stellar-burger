@@ -8,7 +8,7 @@ import { useState, useMemo, useRef, useCallback} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ingredient } from '../../utils/data';
 import { setCurrentItem } from '../../services/actions/current-item';
-import { useDrag } from 'react-dnd';
+import { selectCount } from '../../services/selectors/selector';
 
 function BurgerIngredients() {
   const dispatch = useDispatch()
@@ -52,15 +52,19 @@ function BurgerIngredients() {
   //логика счетчика
 
 const totalCount = useCallback((item) => {
-
   if(item.type === ingredient.bun){
-    return 1
+    return 2
   }
   if(item.type === ingredient.main || item.type === ingredient.sauce){
     return selectedIngredients.filter(ingred => ingred._id === item._id).length
   }
 }, [ingredient, selectedIngredients]
 )
+
+// const totalCount = useCallback((item) => {
+//  return  item.type === ingredient.bun ? (selectedBun && item._id === selectedBun._id ? 2 : 0) : selectedIngredients.filter(ingred => ingred._id === item._id).length
+// }, [ingredient, selectedIngredients]
+// )
   
   return (
     <div className={`${styles.container} pt-5`}>
@@ -82,7 +86,7 @@ const totalCount = useCallback((item) => {
           img={item.image}
           price={item.price}
           description={item.name}
-          count={selectedBun === null ? 0 : totalCount(item)}
+          count={selectedBun !== null ? totalCount(item) : 0}
           item={item}
         />
         ))}
@@ -94,7 +98,7 @@ const totalCount = useCallback((item) => {
           img={item.image}
           price={item.price}
           description={item.name}
-          count={totalCount(item)}
+          count={selectedIngredients.length !== 0 ? totalCount(item) : 0}
           item={item}
         />
         ))}

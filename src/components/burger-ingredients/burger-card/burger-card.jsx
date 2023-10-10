@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from 'react-dnd';
+import { selectCount } from '../../../services/selectors/selector';
+import { useSelector } from 'react-redux';
 
-const BurgerCard = ({onClick, description, price, count, img, item}) => {
+const BurgerCard = ({onClick, description, price, img,count, item}) => {
     const [, dragRef] = useDrag({
         type: 'ingredient',
         item: item,
@@ -12,8 +14,7 @@ const BurgerCard = ({onClick, description, price, count, img, item}) => {
             isDrag: monitor.isDragging()
         })
     })
-    // const counter = 0
-    // const canDraggabble = (item?.type !== "bun") ? true : !(counter)
+
     return(
         <div className={`${styles.container}`} onClick={onClick} ref={dragRef}>
             <img src={img} alt={description} className="pr-4 pl-4"></img>
