@@ -8,7 +8,6 @@ import { useState, useMemo, useRef, useCallback} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ingredient } from '../../utils/data';
 import { setCurrentItem } from '../../services/actions/current-item';
-import { selectCount } from '../../services/selectors/selector';
 
 function BurgerIngredients() {
   const dispatch = useDispatch()
@@ -17,6 +16,7 @@ function BurgerIngredients() {
   //выбранные ингредиенты
   const selectedBun = useSelector(state => state.burgerConstructorReducer.bun)
   const selectedIngredients = useSelector(state => state.burgerConstructorReducer.ingredients)
+  console.log(selectedIngredients)
 
   const buns = useMemo(() => ingredients.filter((item) => item.type === ingredient.bun), [ingredients]);
   const sauces = useMemo(() => ingredients.filter((item) => item.type === ingredient.sauce), [ingredients]);
@@ -52,19 +52,14 @@ function BurgerIngredients() {
   //логика счетчика
 
 const totalCount = useCallback((item) => {
-  if(item.type === ingredient.bun){
-    return 2
-  }
-  if(item.type === ingredient.main || item.type === ingredient.sauce){
-    return selectedIngredients.filter(ingred => ingred._id === item._id).length
+  if(selectedBun && item.type === ingredient.bun){
+    return selectedBun._id === item._id ? 2 : 0
+    } else {
+    return selectedIngredients.filter(ingred => ingred.ingredient._id === item._id).length
   }
 }, [ingredient, selectedIngredients]
 )
 
-// const totalCount = useCallback((item) => {
-//  return  item.type === ingredient.bun ? (selectedBun && item._id === selectedBun._id ? 2 : 0) : selectedIngredients.filter(ingred => ingred._id === item._id).length
-// }, [ingredient, selectedIngredients]
-// )
   
   return (
     <div className={`${styles.container} pt-5`}>
