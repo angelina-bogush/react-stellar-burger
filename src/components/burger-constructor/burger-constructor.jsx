@@ -7,7 +7,7 @@ import OrderDetails from "../modal/order-details/order-details";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createOrderApi } from "../../utils/api";
-import { setOrderNumber } from "../../services/actions/order-number";
+import { setOrderNumberSuccess } from "../../services/actions/order-number";
 import { useDrop } from "react-dnd";
 import {
   addIngredients,
@@ -61,21 +61,22 @@ const BurgerConstructor = () => {
     : styles.borderNone;
 
   const getIngredientsId = () => {
-    const ingredId = constructorIngredients.map((item) => item._id);
+    const ingredId = constructorIngredients.map((item) => item.ingredient._id);
     const bunId = constructorBun._id;
     return [bunId, ...ingredId, bunId];
   };
   const handleCreateOrder = () => {
     //запрос на получение номера заказа
     const ingredId = getIngredientsId();
+    console.log(ingredId)
     createOrderApi(ingredId)
-      .then((data) => dispatch(setOrderNumber(data.order.number)))
+      .then((data) => dispatch(setOrderNumberSuccess(data.order.number)))
       .catch((err) => console.log(err));
     setClickedModal(true);
   };
   const handleCloseModal = (value) => {
     setClickedModal(value);
-    dispatch(setOrderNumber(null));
+    dispatch(setOrderNumberSuccess(null));
   };
 
   return (
@@ -101,6 +102,7 @@ const BurgerConstructor = () => {
             type="primary"
             size="medium"
             onClick={handleCreateOrder}
+            disabled={constructorBun === null}
           >
             Нажми на меня
           </Button>

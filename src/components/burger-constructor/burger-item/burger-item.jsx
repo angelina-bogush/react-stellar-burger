@@ -69,7 +69,7 @@ export const BurgerItem = ({moveItem, id, item, index, elseProducts}) => {
 }
 BurgerItem.propTypes = {
   moveItem: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   item: ingredientTypes,
   index: PropTypes.number,
   elseProducts: selectedIngredientsTypes
