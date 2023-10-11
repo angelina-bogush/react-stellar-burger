@@ -20,7 +20,7 @@ const BurgerItems = ({ constructorIngredients, constructorBun }) => {
       ],
     });
     dispatch(moveProduct(newProduct));
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={styles.container}>

@@ -57,7 +57,7 @@ const totalCount = useCallback((item) => {
     } else {
     return selectedIngredients.filter(ingred => ingred.ingredient._id === item._id).length
   }
-}, [ingredient, selectedIngredients]
+}, [selectedIngredients, selectedBun]
 )
 
   

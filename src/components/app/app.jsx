@@ -24,7 +24,7 @@ function App() {
     } else {
       return <BurgerIngredients />;
     }
-  }, []);
+  }, [ingredients]);
 
   return (
     <div className={styles.app}>
