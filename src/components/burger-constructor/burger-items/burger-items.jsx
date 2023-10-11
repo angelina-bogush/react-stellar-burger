@@ -5,6 +5,7 @@ import { moveProduct } from "../../../services/actions/burger-constructor";
 import { useCallback } from "react";
 import update from "immutability-helper";
 import { BurgerItem } from "../burger-item/burger-item";
+import { selectedIngredientsTypes, ingredientTypes } from "../../../utils/proptypes";
 
 const BurgerItems = ({ constructorIngredients, constructorBun }) => {
   const dispatch = useDispatch();
@@ -62,4 +63,9 @@ const BurgerItems = ({ constructorIngredients, constructorBun }) => {
     </div>
   );
 };
+BurgerItems.propTypes = {
+  constructorBun: ingredientTypes,
+  constructorIngredients: selectedIngredientsTypes
+}
 export default BurgerItems;
+

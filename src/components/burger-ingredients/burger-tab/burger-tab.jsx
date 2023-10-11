@@ -1,5 +1,4 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import React from "react";
 import styles from './burger-tab.module.css'
 const BurgerTab = ({activeTab, setActiveTab}) => {
   return (

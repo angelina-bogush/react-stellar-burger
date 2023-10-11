@@ -5,6 +5,8 @@ import {useDispatch} from 'react-redux';
 import { useRef } from 'react';
 import { deleteIngredient } from '../../../services/actions/burger-constructor';
 import {useDrag, useDrop} from "react-dnd";
+import { selectedIngredientsTypes, ingredientTypes } from '../../../utils/proptypes';
+import PropTypes from "prop-types";
 
 export const BurgerItem = ({moveItem, id, item, index, elseProducts}) => {
     const dispatch = useDispatch();
@@ -65,4 +67,10 @@ export const BurgerItem = ({moveItem, id, item, index, elseProducts}) => {
       </div> 
     )
 }
-
+BurgerItem.propTypes = {
+  moveItem: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  item: ingredientTypes,
+  index: PropTypes.number,
+  elseProducts: selectedIngredientsTypes
+}

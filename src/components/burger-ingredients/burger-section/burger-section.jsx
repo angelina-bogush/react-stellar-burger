@@ -15,6 +15,5 @@ const BurgerSection = forwardRef(({title, children}, ref) => {
 BurgerSection.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired
-
 }
 export default BurgerSection
