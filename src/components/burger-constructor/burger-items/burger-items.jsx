@@ -1,16 +1,14 @@
 import styles from "./burger-items.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import { v4 as uuid } from 'uuid';
 import { useDispatch } from "react-redux";
 import { moveProduct } from "../../../services/actions/burger-constructor";
 import { useCallback } from "react";
-import update from 'immutability-helper'
+import update from "immutability-helper";
 import { BurgerItem } from "../burger-item/burger-item";
 
-
-const BurgerItems = ({constructorIngredients, constructorBun}) => {
-  const dispatch = useDispatch()
-  const bun =  constructorBun;
+const BurgerItems = ({ constructorIngredients, constructorBun }) => {
+  const dispatch = useDispatch();
+  const bun = constructorBun;
   const elseProducts = constructorIngredients;
 
   const moveItem = useCallback((dragIndex, hoverIndex, elseProducts) => {
@@ -19,39 +17,47 @@ const BurgerItems = ({constructorIngredients, constructorBun}) => {
         [dragIndex, 1],
         [hoverIndex, 0, elseProducts[dragIndex]],
       ],
-    })
-    dispatch(moveProduct(newProduct)
-    )
-  }, [])
- 
+    });
+    dispatch(moveProduct(newProduct));
+  }, []);
 
   return (
     <div className={styles.container}>
       <div className={styles.elementContainer}>
-        {bun !== null &&
-        <ConstructorElement
-          type={bun.type}
-          isLocked
-          text={`${bun.name} (верх)`}
-          price={bun.price}
-          thumbnail={bun.image_mobile}/>}
+        {bun !== null && (
+          <ConstructorElement
+            type={bun.type}
+            isLocked
+            text={`${bun.name} (верх)`}
+            price={bun.price}
+            thumbnail={bun.image_mobile}
+          />
+        )}
       </div>
 
       <div className={`${styles.scroll} custom-scroll`}>
         {elseProducts.map((ingred, index) => (
-          <BurgerItem moveItem={moveItem} index={index} key={ingred.key} id={ingred.ingredient._id} item={ingred.ingredient} elseProducts={elseProducts}/>
+          <BurgerItem
+            moveItem={moveItem}
+            index={index}
+            key={ingred.key}
+            id={ingred.ingredient._id}
+            item={ingred.ingredient}
+            elseProducts={elseProducts}
+          />
         ))}
       </div>
 
       <div className={styles.elementContainer}>
-      {bun !== null &&
-        <ConstructorElement
-          type={bun.type}
-          isLocked
-          text={`${bun.name} (низ)`}
-          price={bun.price}
-          thumbnail={bun.image_mobile}
-        />}
+        {bun !== null && (
+          <ConstructorElement
+            type={bun.type}
+            isLocked
+            text={`${bun.name} (низ)`}
+            price={bun.price}
+            thumbnail={bun.image_mobile}
+          />
+        )}
       </div>
     </div>
   );

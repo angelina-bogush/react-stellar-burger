@@ -8,41 +8,39 @@ import { useDispatch, useSelector } from "react-redux";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-
 function App() {
-  const dispatch = useDispatch()
-  const ingredients = useSelector(state => 
-    state.allIngredientsReducer.allIngredients)
-    console.log(ingredients)
+  const dispatch = useDispatch();
+  const ingredients = useSelector(
+    (state) => state.allIngredientsReducer.allIngredients
+  );
+  console.log(ingredients);
   useEffect(() => {
-    dispatch(getIngredients())
-  }, [dispatch])
-
+    dispatch(getIngredients());
+  }, [dispatch]);
 
   const contentBurgerIngredients = useMemo(() => {
-    if(!ingredients){
-      return <div>Loading...</div>
+    if (!ingredients) {
+      return <div>Loading...</div>;
     } else {
-      return <BurgerIngredients/>
+      return <BurgerIngredients />;
     }
-  },[])
+  }, []);
 
   return (
     <div className={styles.app}>
       <AppHeader />
       <div className={styles.container}>
         <DndProvider backend={HTML5Backend}>
-        <div>
-          <h1 className="text text_type_main-large">Соберите бургер</h1>
-          {contentBurgerIngredients}
-        </div>
-        <div className="pl-4 pr-4">
-         {ingredients && <BurgerConstructor />}
+          <div>
+            <h1 className="text text_type_main-large">Соберите бургер</h1>
+            {contentBurgerIngredients}
+          </div>
+          <div className="pl-4 pr-4">
+            {ingredients && <BurgerConstructor />}
           </div>
         </DndProvider>
-        </div>
-
       </div>
+    </div>
   );
 }
 

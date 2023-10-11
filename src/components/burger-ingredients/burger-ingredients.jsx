@@ -16,7 +16,6 @@ function BurgerIngredients() {
   //выбранные ингредиенты
   const selectedBun = useSelector(state => state.burgerConstructorReducer.bun)
   const selectedIngredients = useSelector(state => state.burgerConstructorReducer.ingredients)
-  console.log(selectedIngredients)
 
   const buns = useMemo(() => ingredients.filter((item) => item.type === ingredient.bun), [ingredients]);
   const sauces = useMemo(() => ingredients.filter((item) => item.type === ingredient.sauce), [ingredients]);
@@ -49,6 +48,7 @@ function BurgerIngredients() {
       setActiveTab(newTab)
      }
   }
+  
   //логика счетчика
 
 const totalCount = useCallback((item) => {

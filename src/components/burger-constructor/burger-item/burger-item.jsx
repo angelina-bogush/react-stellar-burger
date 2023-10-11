@@ -1,12 +1,12 @@
 import styles from './burger-item.module.css'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import { useRef } from 'react';
 import { deleteIngredient } from '../../../services/actions/burger-constructor';
 import {useDrag, useDrop} from "react-dnd";
 
-export const BurgerItem = ({moveItem, id, item, index, elseProducts, key}) => {
+export const BurgerItem = ({moveItem, id, item, index, elseProducts}) => {
     const dispatch = useDispatch();
     const ref = useRef(null)
     const [{handlerId}, drop] = useDrop({
@@ -50,11 +50,11 @@ export const BurgerItem = ({moveItem, id, item, index, elseProducts, key}) => {
           cursor: monitor.isDragging() ? 'grabbing' : 'grab'
         }),
       })
-      const opacity = isDragging ? styles.hidden : styles.show
+      const opacity = isDragging ? styles.hidden : styles.visible
       drag(drop(ref))
 
     return(
-        <div className={styles.elementIcon} ref={ref} data-handler-id={handlerId} style={{cursor}}>
+        <div className={`${opacity}`} ref={ref} data-handler-id={handlerId} style={{cursor}}>
         <DragIcon type="primary" />
         <ConstructorElement
           text={item.name}

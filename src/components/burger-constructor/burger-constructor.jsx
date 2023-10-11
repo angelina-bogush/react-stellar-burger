@@ -9,17 +9,24 @@ import { useSelector, useDispatch } from "react-redux";
 import { createOrderApi } from "../../utils/api";
 import { setOrderNumber } from "../../services/actions/order-number";
 import { useDrop } from "react-dnd";
-import { addIngredients, addBun} from "../../services/actions/burger-constructor";
+import {
+  addIngredients,
+  addBun,
+} from "../../services/actions/burger-constructor";
 import { ingredient } from "../../utils/data";
 
-const BurgerConstructor = ({onDropHandler}) => {
-  const dispatch = useDispatch()
+const BurgerConstructor = () => {
+  const dispatch = useDispatch();
 
-  const orderNumber = useSelector(state => state.orderReducer.order)
-  const constructorIngredients = useSelector(state => state.burgerConstructorReducer.ingredients)
-  const constructorBun = useSelector(state => state.burgerConstructorReducer.bun)
+  const orderNumber = useSelector((state) => state.orderReducer.order);
+  const constructorIngredients = useSelector(
+    (state) => state.burgerConstructorReducer.ingredients
+  );
+  const constructorBun = useSelector(
+    (state) => state.burgerConstructorReducer.bun
+  );
   const [clickedModal, setClickedModal] = useState(false);
-  const [totalPrice, setTotalPrice] = useState(0)
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     let price = 0;
@@ -35,60 +42,74 @@ const BurgerConstructor = ({onDropHandler}) => {
     setTotalPrice(price);
   }, [constructorBun, constructorIngredients]);
 
-  const [{isHover, isCanD}, dropRef] = useDrop({
-    accept: 'ingredient',
-    drop(item){
-      item.type === ingredient.bun ? dispatch(addBun(item)) 
-      :dispatch(addIngredients(item))
+  const [{ isHover, isCanD }, dropRef] = useDrop({
+    accept: "ingredient",
+    drop(item) {
+      item.type === ingredient.bun
+        ? dispatch(addBun(item))
+        : dispatch(addIngredients(item));
     },
-    collect: monitor => ({
+    collect: (monitor) => ({
       isHover: monitor.isOver(),
-      isCanD: monitor.canDrop()
-    })
-  })
-  
+      isCanD: monitor.canDrop(),
+    }),
+  });
+  const borderStyle = isHover
+    ? styles.borderIn
+    : isCanD
+    ? styles.borderOut
+    : styles.borderNone;
+
   const getIngredientsId = () => {
-    const ingredId = constructorIngredients.map(item => item._id);
-    const bunId = constructorBun._id
-   return  [bunId, ...ingredId, bunId];
-  }
+    const ingredId = constructorIngredients.map((item) => item._id);
+    const bunId = constructorBun._id;
+    return [bunId, ...ingredId, bunId];
+  };
   const handleCreateOrder = () => {
     //запрос на получение номера заказа
-    const ingredId = getIngredientsId()
+    const ingredId = getIngredientsId();
     createOrderApi(ingredId)
-    .then(data => dispatch(setOrderNumber(data.order.number)))
-    .catch(err => console.log(err))
+      .then((data) => dispatch(setOrderNumber(data.order.number)))
+      .catch((err) => console.log(err));
     setClickedModal(true);
   };
   const handleCloseModal = (value) => {
     setClickedModal(value);
-    dispatch(setOrderNumber(null))
+    dispatch(setOrderNumber(null));
   };
 
   return (
     <div className={`${styles.container} pl-4 pr-4`}>
-      <div ref={dropRef} className={`pt-5 pb-5 ${styles.dropContainer}`}>
-      {(constructorBun !== null || constructorIngredients.length !== 0)  && <BurgerItems constructorIngredients={constructorIngredients} constructorBun={constructorBun}/>}
-      <div className={styles.totalContainer}> 
-        <div className={styles.total}>
-          <p className="text text_type_digits-medium pr-2">{totalPrice}</p>
-          <CurrencyIcon />
-        </div>
+      <div
+        ref={dropRef}
+        className={`pt-5 pb-5 ${styles.dropContainer} ${borderStyle}`}
+      >
+        {(constructorBun !== null || constructorIngredients.length !== 0) && (
+          <BurgerItems
+            constructorIngredients={constructorIngredients}
+            constructorBun={constructorBun}
+          />
+        )}
+        <div className={styles.totalContainer}>
+          <div className={styles.total}>
+            <p className="text text_type_digits-medium pr-2">{totalPrice}</p>
+            <CurrencyIcon />
+          </div>
 
-        <Button
-          htmlType="button"
-          type="primary"
-          size="medium"
-          onClick={handleCreateOrder}
-        >
-          Нажми на меня
-        </Button>
-      </div>
-      {clickedModal && (
-        <Modal onClose={handleCloseModal}>
-          <OrderDetails orderNumber={orderNumber}/>
-        </Modal>
-      )}
+          <Button
+            htmlType="button"
+            type="primary"
+            size="medium"
+            onClick={handleCreateOrder}
+          >
+            Нажми на меня
+          </Button>
+        </div>
+        {clickedModal && (
+          <Modal onClose={handleCloseModal}>
+            <OrderDetails orderNumber={orderNumber} />
+          </Modal>
+        )}
       </div>
     </div>
   );
