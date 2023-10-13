@@ -13,7 +13,7 @@ function App() {
   const ingredients = useSelector(
     (state) => state.allIngredientsReducer.allIngredients
   );
-  console.log(ingredients);
+ 
   useEffect(() => {
     dispatch(getIngredients());
   }, [dispatch]);

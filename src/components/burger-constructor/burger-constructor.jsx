@@ -7,7 +7,7 @@ import OrderDetails from "../modal/order-details/order-details";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createOrderApi } from "../../utils/api";
-import { setOrderNumberSuccess } from "../../services/actions/order-number";
+import { setOrderNumberSuccess, setOrderNumberFailed, setOrderNumberRequest } from "../../services/actions/order-number";
 import { useDrop } from "react-dnd";
 import {
   addIngredients,
@@ -66,12 +66,15 @@ const BurgerConstructor = () => {
     return [bunId, ...ingredId, bunId];
   };
   const handleCreateOrder = () => {
-    //запрос на получение номера заказа
     const ingredId = getIngredientsId();
-    console.log(ingredId)
+    dispatch(setOrderNumberRequest())
     createOrderApi(ingredId)
       .then((data) => dispatch(setOrderNumberSuccess(data.order.number)))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        dispatch(setOrderNumberFailed())
+        console.log(err)
+      }
+      );
     setClickedModal(true);
   };
   const handleCloseModal = (value) => {
