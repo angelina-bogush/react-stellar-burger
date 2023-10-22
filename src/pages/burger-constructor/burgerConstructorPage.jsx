@@ -1,14 +1,14 @@
-import styles from "./app.module.css";
-import AppHeader from "../app-header/app-header";
-import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import BurgerConstructor from "../burger-constructor/burger-constructor";
+import styles from "./burger-constructor.module.css";
+import AppHeader from "../../components/app-header/app-header";
+import BurgerIngredients from "../../components/burger-ingredients/burger-ingredients";
+import BurgerConstructor from "../../components/burger-constructor/burger-constructor";
 import { getIngredients } from "../../services/actions/ingredients";
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-function App() {
+export function BurgerConstructorPage() {
   const dispatch = useDispatch();
   const ingredients = useSelector(
     (state) => state.allIngredientsReducer.allIngredients
@@ -44,4 +44,3 @@ function App() {
   );
 }
 
-export default App;
