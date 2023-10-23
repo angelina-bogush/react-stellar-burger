@@ -1,15 +1,15 @@
 
 import { LoginPage, RegistrationPage, BurgerConstructorPage } from "./pages";
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
 export const App = () =>  {
     return ( 
         <Router>
-            <Switch>
-                <Route path="/" component={BurgerConstructorPage} />
-                <Route path="/login" component={LoginPage} />
-                <Route path="/register" component={RegistrationPage} />
-            </Switch>
+            <Routes>
+                <Route path="/" element={<BurgerConstructorPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegistrationPage />} />
+            </Routes>
         </Router>
      );
 }
