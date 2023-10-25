@@ -1,5 +1,4 @@
 import styles from "./burger-constructor.module.css";
-import AppHeader from "../../components/app-header/app-header";
 import BurgerIngredients from "../../components/burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../../components/burger-constructor/burger-constructor";
 import { getIngredients } from "../../services/actions/ingredients";
@@ -27,8 +26,6 @@ export function BurgerConstructorPage() {
   }, [ingredients]);
 
   return (
-    <div className={styles.app}>
-      <AppHeader />
       <div className={styles.container}>
         <DndProvider backend={HTML5Backend}>
           <div>
@@ -40,7 +37,6 @@ export function BurgerConstructorPage() {
           </div>
         </DndProvider>
       </div>
-    </div>
   );
 }
 
