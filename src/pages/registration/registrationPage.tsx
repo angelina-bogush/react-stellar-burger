@@ -1,14 +1,16 @@
 import { RegistrationForm } from "../../components/registration/registrationForm/RegistrationForm";
-import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from './registrationPage.module.css'
+import { LOGIN_PATH } from "../../app/router/config/routes";
+import styles from './RegistrationPage.module.css'
+import { TextWithLink } from "../../components/form/textWithLink/TextWithLink";
 export const RegistrationPage =  () => {
     return (
       <div className={styles.container}>
-      <RegistrationForm/>
-      <div className={styles.text}>
-      <p className="text text_type_main-default text_color_inactive">Уже зарегистрированы?</p>
-      <Button htmlType="button" type="secondary" size="medium">Войти</Button>
+        <RegistrationForm />
+        <TextWithLink
+          text="Уже зарегистрированы?"
+          textLink="Войти"
+          path={LOGIN_PATH}
+        />
       </div>
-      </div>
-      );
+    );
 }

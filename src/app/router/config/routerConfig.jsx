@@ -1,5 +1,5 @@
-import { BurgerConstructorPage, LoginPage, RegistrationPage, Layout} from "../../../pages";
-import { LOGIN_PATH, REGISTRATION_PATH } from "./routes";
+import { BurgerConstructorPage, LoginPage, RegistrationPage, Layout, ForgotPasswordPage} from "../../../pages";
+import { LOGIN_PATH, REGISTRATION_PATH, FORGOT_PASSWORD } from "./routes";
 
 export const routerConfig = [
  
@@ -20,6 +20,10 @@ export const routerConfig = [
         path: REGISTRATION_PATH,
         element: <RegistrationPage />,
       },
+      {
+        path: FORGOT_PASSWORD,
+        element: <ForgotPasswordPage/>
+      }
     ],
   },
 ];
