@@ -1,21 +1,48 @@
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
+import { EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
+import { PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState, useRef } from "react";
 
-export const MyInput = ({value, setValue, icon, placeholder, type}) => {
+export const MyInput = ({value, setValue, icon, placeholder, type, input}) => {
  
-return(
-<Input
-      type={type}
-      placeholder={placeholder}
-      onChange={e => setValue(e.target.value)}
-      icon={icon}
-      value={value}
-      name={'name'}
-      error={false}
-      errorText={'Ошибка'}
-      size={'default'}
-      extraClass="ml-1"
-    />
-)
-
+  switch (input) {
+    case 'email':
+      return (
+      <EmailInput
+        onChange={e => setValue(e.target.value)}
+        value={value}
+        name={'email'}
+        placeholder="Логин"
+        isIcon={true}
+        extraClass="mb-2"
+      />
+      );
+    case 'password':
+      return (
+        <PasswordInput
+          placeholder={placeholder}
+          onChange={e => setValue(e.target.value)}
+          value={value}
+          name={'name'}
+          size={'default'}
+          icon={icon}
+          extraClass="ml-1"
+        />
+      );
+    default:
+      return (
+        <Input
+          type={type}
+          placeholder={placeholder}
+          onChange={e => setValue(e.target.value)}
+          icon={icon}
+          value={value}
+          name={'name'}
+          error={false}
+          errorText={'Ошибка'}
+          size={'default'}
+          extraClass="ml-1"
+        />
+      );
+      }
 }
