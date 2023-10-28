@@ -5,7 +5,7 @@ import { TextWithLink } from "../../components/form/textWithLink/TextWithLink";
 export const RegistrationPage =  () => {
     return (
       <div className={styles.container}>
-        <RegistrationForm />
+        <RegistrationForm/>
         <TextWithLink
           text="Уже зарегистрированы?"
           textLink="Войти"
