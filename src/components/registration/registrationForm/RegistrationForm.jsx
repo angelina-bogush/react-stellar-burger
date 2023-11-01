@@ -15,6 +15,7 @@ export const RegistrationForm = () => {
   }
   const email = useSelector(state => state.registrationReducer.email)
   console.log(localStorage.getItem('refresh'))
+  console.log(email)
   return (
     <Form title='Регистрация' buttonText='Зарегистрироваться' onClick={(e) => handleRegister(e)}>
       <MyInput type="text" placeholder={"Имя"} value={nameValue} setValue={setNameValue}/>

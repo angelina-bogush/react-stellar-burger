@@ -4,10 +4,12 @@ import { burgerConstructorReducer } from "./burger-constructor-reducer";
 import { orderReducer } from "./order-reducer";
 import { modalReducer } from "./current-item-reduser";
 import { registrationReducer } from "./register-reducer";
+import { loginReducer } from "./login-reducer";
 export const rootReducer = combineReducers({
  allIngredientsReducer,
  modalReducer,
  orderReducer,
  burgerConstructorReducer,
- registrationReducer
+ registrationReducer,
+ loginReducer
 })

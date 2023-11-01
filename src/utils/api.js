@@ -24,21 +24,42 @@ export const createOrderApi = (ingredients) => {
 
 export const createUser = async (email, password, name) => {
   try{
-  const {data} = await axios.post(`${url}/auth/register`, {email: email, password: password, name: name})
+  const {data} = await axios.post(`${url}/auth/register`, {email, password, name})
   console.log(data)
   return data
   } catch(error){
-    console.log(error);
     throw error
   }
 }
 
 export const forgotPassword = async (email) => {
-  const res = await axios.post(`${url}/password-reset`, {email: email})
+ try{
+  const res = await axios.post(`${url}/password-reset`, {email})
   return res
+ } catch(error){
+  throw error
+ }
 }
 
 export const resetPassword = async (password, token) => {
   const res = await axios.post(`${url}/password-reset/reset`, {password: password, token: token})
   return res
+}
+
+export const authUser = async (email, password) => {
+  try{
+    const {data} = await axios.post(`${url}/auth/login`, {email, password})
+    console.log(data)
+    return data
+  } catch (error){
+    throw error
+  }
+}
+export const refreshToken = async (token) => {
+  try{
+    const {data} = await axios.post(`${url}/auth/token`, {token})
+    return data
+  } catch (error){
+    throw error
+  }
 }
