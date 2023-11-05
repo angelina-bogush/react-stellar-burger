@@ -4,5 +4,6 @@ import { BurgerConstructorPage } from "./burger-constructor/BurgerConstructorPag
 import { Layout } from "./layout/Layout";
 import { ForgotPasswordPage } from "./forgot-password/ForgotPasswordPage";
 import { ProfilePage } from "./profile/ProfilePage";
+import { ResetPasswordPage } from "./reset-password/ResetPasswordPage";
 
-export { RegistrationPage, LoginPage, BurgerConstructorPage, Layout, ForgotPasswordPage, ProfilePage }
+export { RegistrationPage, LoginPage, BurgerConstructorPage, Layout, ForgotPasswordPage, ProfilePage, ResetPasswordPage }

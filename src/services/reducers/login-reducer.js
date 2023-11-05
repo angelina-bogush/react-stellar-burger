@@ -1,5 +1,6 @@
 import { LOGIN_SUCCESS, LOGIN_REQUEST, LOGIN_FAILED } from "../actions/login"
 import { REFRESH_TOKEN_FAILED, REFRESH_TOKEN_SUCCESS, REFRESH_TOKEN_REQUEST } from "../actions/token"
+import { LOGOUT_FAILED, LOGOUT_REQUEST, LOGOUT_SUCCESS } from "../actions/logout"
 const initialState = {
     email: '',
     name: '',
@@ -57,4 +58,36 @@ export const loginReducer = (state = initialState, action) => {
               }
     }
 
+};
+
+export const logoutReducer = (state = initialState, action) => {
+    switch(action.type){
+        case LOGOUT_REQUEST:{
+            return{
+                ...state,
+                isLoading: true,
+                error: null
+            }
+        }
+        case LOGOUT_SUCCESS:{
+            return{
+                email: '',
+                name: '',
+                isLoading: false,
+                error: null,
+                accessToken: ''
+            }
+        }
+        case LOGOUT_FAILED:{
+            return{
+                    ...state,
+                    isLoading: true,
+                    error: null
+            }
+        }
+        default: {
+                return state;
+              }
+
+    }
 }

@@ -2,6 +2,7 @@ import { RegistrationForm } from "../../components/registration/registrationForm
 import { LOGIN_PATH } from "../../app/router/config/routes";
 import styles from './RegistrationPage.module.css'
 import { TextWithLink } from "../../components/form/textWithLink/TextWithLink";
+
 export const RegistrationPage =  () => {
     return (
       <div className={styles.container}>

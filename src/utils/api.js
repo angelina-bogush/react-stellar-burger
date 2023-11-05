@@ -42,7 +42,8 @@ export const forgotPassword = async (email) => {
 }
 
 export const resetPassword = async (password, token) => {
-  const res = await axios.post(`${url}/password-reset/reset`, {password: password, token: token})
+  const res = await axios.post(`${url}/password-reset/reset`, {password, token})
+  console.log(res)
   return res
 }
 
@@ -60,6 +61,24 @@ export const refreshToken = async (token) => {
     const {data} = await axios.post(`${url}/auth/token`, {token})
     return data
   } catch (error){
+    throw error
+  }
+}
+export const logout = async (token ) => {
+  try{
+    const {data} = await axios.post(`${url}/auth/logout`, {token})
+    return data
+  } catch (error){
+    throw error
+  }
+}
+
+export const getUserInfo = async () => {
+  try{
+    const {data} = await axios.get(`${url}/auth/user`)
+    console.log(data)
+    return data
+  } catch(error){
     throw error
   }
 }

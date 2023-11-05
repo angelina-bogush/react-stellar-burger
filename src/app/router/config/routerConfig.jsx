@@ -1,5 +1,5 @@
-import { BurgerConstructorPage, LoginPage, RegistrationPage, Layout, ForgotPasswordPage, ProfilePage} from "../../../pages";
-import { LOGIN_PATH, REGISTRATION_PATH, FORGOT_PASSWORD, PROFILE } from "./routes";
+import { BurgerConstructorPage, LoginPage, RegistrationPage, Layout, ForgotPasswordPage, ProfilePage, ResetPasswordPage} from "../../../pages";
+import { LOGIN_PATH, REGISTRATION_PATH, FORGOT_PASSWORD, PROFILE, RESET_PASSWORD } from "./routes";
 
 export const routerConfig = [
   {
@@ -26,6 +26,10 @@ export const routerConfig = [
       {
         path: PROFILE,
         element: <ProfilePage/>
+      },
+      {
+        path: RESET_PASSWORD,
+        element: <ResetPasswordPage/>
       }
     ],
   },
