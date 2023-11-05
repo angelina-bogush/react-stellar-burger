@@ -53,41 +53,32 @@ export const loginReducer = (state = initialState, action) => {
                     error: null,
                     isLoading: true
                 }
+                case LOGOUT_REQUEST:{
+                    return{
+                        ...state,
+                        isLoading: true,
+                        error: null
+                    }
+                }
+                case LOGOUT_SUCCESS:{
+                    return{
+                        email: '',
+                        name: '',
+                        isLoading: false,
+                        error: null,
+                        accessToken: ''
+                    }
+                }
+                case LOGOUT_FAILED:{
+                    return{
+                            ...state,
+                            isLoading: true,
+                            error: null
+                    }
+                }
         default: {
                 return state;
               }
     }
 
 };
-
-export const logoutReducer = (state = initialState, action) => {
-    switch(action.type){
-        case LOGOUT_REQUEST:{
-            return{
-                ...state,
-                isLoading: true,
-                error: null
-            }
-        }
-        case LOGOUT_SUCCESS:{
-            return{
-                email: '',
-                name: '',
-                isLoading: false,
-                error: null,
-                accessToken: ''
-            }
-        }
-        case LOGOUT_FAILED:{
-            return{
-                    ...state,
-                    isLoading: true,
-                    error: null
-            }
-        }
-        default: {
-                return state;
-              }
-
-    }
-}

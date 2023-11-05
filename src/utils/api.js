@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
+import { LOGIN_PATH } from '../app/router/config/routes';
 const url = "https://norma.nomoreparties.space/api";
 export const getData = () => {
   return fetch(`${url}/ingredients`)
@@ -67,6 +69,7 @@ export const refreshToken = async (token) => {
 export const logout = async (token ) => {
   try{
     const {data} = await axios.post(`${url}/auth/logout`, {token})
+    console.log(data)
     return data
   } catch (error){
     throw error

@@ -11,5 +11,5 @@ export const rootReducer = combineReducers({
  orderReducer,
  burgerConstructorReducer,
  registrationReducer,
- loginReducer
+ loginReducer,
 })
