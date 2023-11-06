@@ -12,7 +12,7 @@ export const MyInput = ({value, setValue, icon, placeholder, type, input}) => {
         onChange={e => setValue(e.target.value)}
         value={value}
         name={'email'}
-        placeholder="Логин"
+        placeholder={placeholder}
         isIcon={true}
         extraClass="mb-2"
       />

@@ -1,10 +1,9 @@
-import { LOGIN_SUCCESS, LOGIN_REQUEST, LOGIN_FAILED } from "../actions/login"
+import { LOGIN_SUCCESS, LOGIN_REQUEST, LOGIN_FAILED, PROFILE_FAILED, PROFILE_SUCCESS, PROFILE_REQUEST} from "../actions/login"
 import { REFRESH_TOKEN_FAILED, REFRESH_TOKEN_SUCCESS, REFRESH_TOKEN_REQUEST } from "../actions/token"
 import { LOGOUT_FAILED, LOGOUT_REQUEST, LOGOUT_SUCCESS } from "../actions/logout"
 const initialState = {
     email: '',
     name: '',
-    accessToken: '',
     isLoading: false,
     error: null
 }
@@ -14,7 +13,6 @@ export const loginReducer = (state = initialState, action) => {
             return{
                 email: action.payload.user.email,
                 name: action.payload.user.name,
-                accessToken: action.payload.accessToken,
                 isLoading: false,
                 error: null
 
@@ -23,7 +21,6 @@ export const loginReducer = (state = initialState, action) => {
             return{
                 email: '',
                 name: '',
-                accessToken: '',
                 isLoading: false,
                 error: action.error
             }
@@ -36,20 +33,17 @@ export const loginReducer = (state = initialState, action) => {
         case REFRESH_TOKEN_SUCCESS:
                 return {
                   ...state,
-                  accessToken: action.payload.accessToken,
                   isLoading: false,
                   error: null
                 };
         case REFRESH_TOKEN_FAILED:
                 return {
                     ...state,
-                    accessToken: '',
                     error: action.error
                 }
         case REFRESH_TOKEN_REQUEST:
                 return{
                     ...state,
-                    accessToken: '',
                     error: null,
                     isLoading: true
                 }
@@ -72,10 +66,31 @@ export const loginReducer = (state = initialState, action) => {
                 case LOGOUT_FAILED:{
                     return{
                             ...state,
-                            isLoading: true,
-                            error: null
+                            isLoading: false,
+                            error: action.error
                     }
                 }
+                case PROFILE_FAILED:{
+                    return{
+                            ...state,
+                            isLoading: false,
+                            error: action.error
+                    }
+                }
+                case PROFILE_REQUEST:
+                    return{
+                        ...state,
+                        isLoading: true,
+                        error: null
+                    }
+               case PROFILE_SUCCESS:
+                     return{
+                email: action.payload.user.email,
+                name: action.payload.user.name,
+                isLoading: false,
+                error: null
+
+            }
         default: {
                 return state;
               }

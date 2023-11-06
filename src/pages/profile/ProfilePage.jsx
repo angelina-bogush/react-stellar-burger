@@ -2,9 +2,14 @@ import styles from './ProfilePage.module.css'
 import { createUser } from '../../utils/api'
 import { ProfileForm } from '../../components/profile/profileForm/ProfileForm'
 import { logoutAction } from '../../services/actions/logout'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { LOGIN_PATH } from '../../app/router/config/routes'
+import { useEffect } from 'react'
+import { getUsetInfoAction } from '../../services/actions/login'
+import { getUserInfo } from '../../utils/api'
+import { getCookie } from '../../utils/cookie'
+
 export const ProfilePage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -20,6 +25,16 @@ export const ProfilePage = () => {
           console.error(error);
         }
       }
+    // useEffect(() => {
+    //     dispatch(getUsetInfoAction())
+    // }, [dispatch])
+
+    const userName = useSelector(state => state.loginReducer.name)
+    const userEmail = useSelector(state => state.loginReducer.email)
+    // useEffect(() => {
+    //  const token = getCookie('accessToken')
+    //  getUserInfo(token)
+    // }, [])
     
     return(
         <div className={styles.pageContainer}>

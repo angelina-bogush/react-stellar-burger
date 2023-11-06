@@ -76,9 +76,9 @@ export const logout = async (token ) => {
   }
 }
 
-export const getUserInfo = async () => {
+export const getUserInfo = async (token) => {
   try{
-    const {data} = await axios.get(`${url}/auth/user`)
+    const {data} = await axios.get(`${url}/auth/user`, {headers: { authorization: token }})
     console.log(data)
     return data
   } catch(error){
