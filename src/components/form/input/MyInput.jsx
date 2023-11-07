@@ -15,12 +15,14 @@ export const MyInput = ({value, setValue, icon, placeholder, type, input}) => {
         placeholder={placeholder}
         isIcon={true}
         extraClass="mb-2"
+        error={false}
       />
       );
     case 'password':
       return (
         <PasswordInput
           placeholder={placeholder}
+          error={false}
           onChange={e => setValue(e.target.value)}
           value={value}
           name={'name'}

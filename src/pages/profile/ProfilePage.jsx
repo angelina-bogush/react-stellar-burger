@@ -5,10 +5,6 @@ import { logoutAction } from '../../services/actions/logout'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { LOGIN_PATH } from '../../app/router/config/routes'
-import { useEffect } from 'react'
-import { getUsetInfoAction } from '../../services/actions/login'
-import { getUserInfo } from '../../utils/api'
-import { getCookie } from '../../utils/cookie'
 
 export const ProfilePage = () => {
     const dispatch = useDispatch()
@@ -25,17 +21,6 @@ export const ProfilePage = () => {
           console.error(error);
         }
       }
-    // useEffect(() => {
-    //     dispatch(getUsetInfoAction())
-    // }, [dispatch])
-
-    const userName = useSelector(state => state.loginReducer.name)
-    const userEmail = useSelector(state => state.loginReducer.email)
-    // useEffect(() => {
-    //  const token = getCookie('accessToken')
-    //  getUserInfo(token)
-    // }, [])
-    
     return(
         <div className={styles.pageContainer}>
         <div className={styles.navigation}>

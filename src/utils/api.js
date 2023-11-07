@@ -85,3 +85,12 @@ export const getUserInfo = async (token) => {
     throw error
   }
 }
+export const changeUserInfo = async (token, form) => {
+  try{
+    const {data} = await axios.patch(`${url}/auth/user`, form, {headers: {authorization: token}})
+    console.log(data)
+    return data
+  } catch(error){
+    throw error
+  }
+}
