@@ -1,13 +1,33 @@
 import { BurgerConstructorPage, LoginPage, RegistrationPage, Layout, ForgotPasswordPage, ProfilePage, ResetPasswordPage} from "../../../pages";
-import { LOGIN_PATH, REGISTRATION_PATH, FORGOT_PASSWORD, PROFILE, RESET_PASSWORD } from "./routes";
+import { LOGIN_PATH, REGISTRATION_PATH, FORGOT_PASSWORD, PROFILE, RESET_PASSWORD, CONSTRUCTOR_PATH } from "./routes";
+import { PrivateRoute } from "../providers/PrivateRoute";
+import { PublicRoute } from "../providers/PublicRoute";
 
 export const routerConfig = [
   {
     path: "/",
-    element: <Layout />,
+    element: (
+    <PrivateRoute>
+    <Layout />
+    </PrivateRoute>
+    ),
     children: [
       {
-        path: "/",
+        path: PROFILE,
+        element: <ProfilePage/>
+      },
+    ],
+  },
+  {
+    path: '/',
+    element:(
+      <PublicRoute>
+    <Layout />
+    </PublicRoute>
+    ),
+    children: [
+      {
+        path: CONSTRUCTOR_PATH,
         element: <BurgerConstructorPage />,
       },
       {
@@ -24,13 +44,9 @@ export const routerConfig = [
         element: <ForgotPasswordPage />,
       },
       {
-        path: PROFILE,
-        element: <ProfilePage/>
-      },
-      {
         path: RESET_PASSWORD,
         element: <ResetPasswordPage/>
-      }
-    ],
-  },
+      },
+    ]
+  }
 ];

@@ -1,15 +1,18 @@
 import styles from './ProfileForm.module.css'
 import { MyInput } from "../../form/input/MyInput";
+import { LOGIN_PATH } from '../../../app/router/config/routes';
 import { getUserInfo } from '../../../utils/api';
 import { changeUserInfoAction } from '../../../services/actions/login';
 import { getUserInfoAction } from '../../../services/actions/login';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getCookie } from '../../../utils/cookie';
 
 export const ProfileForm = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const [valueEmail, setValueEmail] = useState("");
   const [valuePassword, setValuePassword] = useState("123456789");
@@ -20,12 +23,18 @@ export const ProfileForm = () => {
 
   useEffect(() => {
     const setValues = async () => {
+      try{
       const token = getCookie("accessToken");
       const data = await getUserInfo(token);
       setValueEmail(data.user.email);
       setValueName(data.user.name);
       setOriginalEmail(data.user.email);
       setOriginalName(data.user.name);
+      } catch(error){
+        if(error.response.status === 401){
+          navigate(LOGIN_PATH)
+        }
+      }
     };
     setValues();
   }, []);
@@ -37,7 +46,8 @@ export const ProfileForm = () => {
     };
     dispatch(changeUserInfoAction(form));
   };
-  const cancelUpdate = () => {
+  const cancelUpdate = async(e) => {
+    e.preventDefault();
     setValueEmail(originalEmail);
     setValueName(originalName);
   };
@@ -67,7 +77,7 @@ export const ProfileForm = () => {
         setValue={setValuePassword}
       />
       <div className={styles.buttons}>
-        <Button type="secondary" size="medium" onClick={cancelUpdate}>
+        <Button type="secondary" size="medium" onClick={(e) => cancelUpdate(e)}>
           Отмена
         </Button>
         <Button type="primary" onClick={updateUserInfoClick}>

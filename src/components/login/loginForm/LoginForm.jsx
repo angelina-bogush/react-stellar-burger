@@ -1,6 +1,6 @@
 import { Form } from "../../form/Form";
 import { MyInput } from "../../form/input/MyInput";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { loginUserAction } from "../../../services/actions/login";
 import { useNavigate } from "react-router-dom";
@@ -13,15 +13,11 @@ export const LoginForm = () => {
   const handleLogin = (e) => {
     try{
     e.preventDefault();
-    dispatch(loginUserAction(emailValue, passwordValue))
-    navigate('/')
+    dispatch(loginUserAction(emailValue, passwordValue, navigate))
     } catch(error){
       console.log(error)
     }
   }
-  const accessToken = useSelector(state => state.loginReducer.accessToken)
-  console.log(accessToken)
-  console.log(emailValue)
     return(
 
      <Form title='Вход' buttonText='Войти' onClick={(e) => handleLogin(e)}>

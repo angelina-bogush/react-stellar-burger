@@ -61,6 +61,8 @@ export const authUser = async (email, password) => {
 export const refreshToken = async (token) => {
   try{
     const {data} = await axios.post(`${url}/auth/token`, {token})
+    console.log(data)
+    console.log('Токен обновлен')
     return data
   } catch (error){
     throw error
@@ -69,7 +71,6 @@ export const refreshToken = async (token) => {
 export const logout = async (token ) => {
   try{
     const {data} = await axios.post(`${url}/auth/logout`, {token})
-    console.log(data)
     return data
   } catch (error){
     throw error

@@ -3,6 +3,7 @@ import { setCookie } from "../../utils/cookie"
 import { getCookie } from "../../utils/cookie"
 import { getUserInfo } from "../../utils/api"
 import { changeUserInfo } from "../../utils/api"
+import { CONSTRUCTOR_PATH } from "../../app/router/config/routes"
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
@@ -16,7 +17,7 @@ export const CHANGE_PROFILE_SUCCESS = 'СHANGE_PROFILE_SUCCESS'
 export const CHANGE_PROFILE_REQUEST = 'СHANGE_PROFILE_REQUEST'
 export const CHANGE_PROFILE_FAILED = 'СHANGE_PROFILE_FAILED'
 
-export  const loginUserAction = (email, password) => {
+export  const loginUserAction = (email, password, navigate) => {
     return async (dispatch) => {
         dispatch({type: LOGIN_REQUEST});
         try {
@@ -25,6 +26,7 @@ export  const loginUserAction = (email, password) => {
         dispatch({type: LOGIN_SUCCESS, payload: data});
         setCookie('accessToken', data.accessToken)
         localStorage.setItem('refresh', data.refreshToken)
+        navigate(CONSTRUCTOR_PATH)
         }
         } catch (error) {
          dispatch({type: LOGIN_FAILED, error})
