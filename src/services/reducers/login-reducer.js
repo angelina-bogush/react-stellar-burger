@@ -1,5 +1,4 @@
 import { LOGIN_SUCCESS, LOGIN_REQUEST, LOGIN_FAILED, PROFILE_FAILED, PROFILE_SUCCESS, PROFILE_REQUEST, CHANGE_PROFILE_FAILED, CHANGE_PROFILE_REQUEST, CHANGE_PROFILE_SUCCESS} from "../actions/login"
-import { REFRESH_TOKEN_FAILED, REFRESH_TOKEN_SUCCESS, REFRESH_TOKEN_REQUEST } from "../actions/token"
 import { LOGOUT_FAILED, LOGOUT_REQUEST, LOGOUT_SUCCESS } from "../actions/logout"
 const initialState = {
     email: '',
@@ -29,23 +28,7 @@ export const loginReducer = (state = initialState, action) => {
         isLoading: true,
         error: null,
       };
-    case REFRESH_TOKEN_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        error: null,
-      };
-    case REFRESH_TOKEN_FAILED:
-      return {
-        ...state,
-        error: action.error,
-      };
-    case REFRESH_TOKEN_REQUEST:
-      return {
-        ...state,
-        error: null,
-        isLoading: true,
-      };
+
     case LOGOUT_REQUEST: {
       return {
         ...state,

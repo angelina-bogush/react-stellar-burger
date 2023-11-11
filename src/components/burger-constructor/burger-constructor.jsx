@@ -6,7 +6,7 @@ import Modal from "../modal/modal";
 import OrderDetails from "../modal/order-details/order-details";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { createOrderApi } from "../../utils/api";
+import { createOrderApi } from "../../utils/api/order";
 import { setOrderNumberSuccess, setOrderNumberFailed, setOrderNumberRequest } from "../../services/actions/order-number";
 import { useDrop } from "react-dnd";
 import {

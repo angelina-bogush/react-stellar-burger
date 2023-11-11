@@ -3,7 +3,7 @@ import { Form } from '../../components/form/Form';
 import { MyInput } from '../../components/form/input/MyInput';
 import { LOGIN_PATH } from '../../app/router/config/routes';
 import { TextWithLink } from '../../components/form/textWithLink/TextWithLink';
-import { forgotPassword } from '../../utils/api';
+import { forgotPassword } from '../../utils/api/api';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RESET_PASSWORD } from '../../app/router/config/routes';

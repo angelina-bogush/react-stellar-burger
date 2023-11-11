@@ -1,7 +1,7 @@
 import styles from './ProfileForm.module.css'
 import { MyInput } from "../../form/input/MyInput";
 import { LOGIN_PATH } from '../../../app/router/config/routes';
-import { getUserInfo } from '../../../utils/api';
+import { getUserInfo } from '../../../utils/api/userInfo';
 import { changeUserInfoAction } from '../../../services/actions/login';
 import { getUserInfoAction } from '../../../services/actions/login';
 import { useState } from 'react';

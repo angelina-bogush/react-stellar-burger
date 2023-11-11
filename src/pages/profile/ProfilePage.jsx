@@ -1,5 +1,5 @@
 import styles from './ProfilePage.module.css'
-import { createUser } from '../../utils/api'
+import { createUser } from '../../utils/api/api'
 import { ProfileForm } from '../../components/profile/profileForm/ProfileForm'
 import { logoutAction } from '../../services/actions/logout'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,9 +10,6 @@ export const ProfilePage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const refresh = localStorage.getItem('refresh')
-    const handleClick = () => {
-        createUser()
-    }
     const handleLogout = async () => {
         try {
           await dispatch(logoutAction(refresh));
@@ -24,7 +21,7 @@ export const ProfilePage = () => {
     return(
         <div className={styles.pageContainer}>
         <div className={styles.navigation}>
-            <a className={styles.link}><p className='text text_type_main-medium' onClick={handleClick}>Профиль</p></a>
+            <a className={styles.link}><p className='text text_type_main-medium'>Профиль</p></a>
            <a className={styles.link}> <p className='text text_type_main-medium text_color_inactive'>История заказов</p></a>
             <a className={styles.link} onClick={handleLogout}><p className='text text_type_main-medium text_color_inactive'>Выход</p></a>
             <p className={`${styles.description} text text_type_main-small`}>В этом разделе вы можете

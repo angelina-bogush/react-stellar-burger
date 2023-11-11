@@ -1,8 +1,7 @@
-import { authUser } from "../../utils/api"
+import { authUser } from "../../utils/api/api"
 import { setCookie } from "../../utils/cookie"
 import { getCookie } from "../../utils/cookie"
-import { getUserInfo } from "../../utils/api"
-import { changeUserInfo } from "../../utils/api"
+import { getUserInfo, changeUserInfo } from "../../utils/api/userInfo"
 import { CONSTRUCTOR_PATH } from "../../app/router/config/routes"
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'

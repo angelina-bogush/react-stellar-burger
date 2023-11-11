@@ -4,7 +4,7 @@ import { TextWithLink } from '../../components/form/textWithLink/TextWithLink';
 import { LOGIN_PATH } from '../../app/router/config/routes';
 import { Form } from '../../components/form/Form';
 import styles from './ResetPasswordPage.module.css'
-import { resetPassword } from '../../utils/api';
+import { resetPassword } from '../../utils/api/api';
 import { useNavigate } from 'react-router-dom';
 
 export const ResetPasswordPage = () => {

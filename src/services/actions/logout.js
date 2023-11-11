@@ -1,4 +1,4 @@
-import { logout } from "../../utils/api"
+import { logout } from "../../utils/api/api"
 import { deleteCookie } from "../../utils/cookie"
 import { useNavigate } from "react-router-dom"
 import { LOGIN_PATH } from "../../app/router/config/routes"
