@@ -7,7 +7,7 @@ export const PublicRoute = ({children}) => {
     const navigate = useNavigate()
     useEffect(() => {
       if (accessToken) {
-        navigate('main')
+        navigate('/main')
       }
     }, [accessToken])
   

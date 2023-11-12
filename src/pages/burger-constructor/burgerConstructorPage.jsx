@@ -6,17 +6,13 @@ import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { refreshTokenAction } from "../../services/actions/token";
-import { getCookie } from "../../utils/cookie";
 
 export function BurgerConstructorPage() {
-  console.log(getCookie('accessToken'))
   // localStorage.removeItem('refresh')
   const dispatch = useDispatch();
   const ingredients = useSelector(
     (state) => state.allIngredientsReducer.allIngredients
   );
- 
   useEffect(() => {
     dispatch(getIngredients());
   }, [dispatch]);

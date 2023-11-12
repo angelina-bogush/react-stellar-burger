@@ -5,5 +5,6 @@ import { Layout } from "./layout/Layout";
 import { ForgotPasswordPage } from "./forgot-password/ForgotPasswordPage";
 import { ProfilePage } from "./profile/ProfilePage";
 import { ResetPasswordPage } from "./reset-password/ResetPasswordPage";
+import { IngredientDetailsPage } from "./ingredient-details/IngredientDetailsPage";
 
-export { RegistrationPage, LoginPage, BurgerConstructorPage, Layout, ForgotPasswordPage, ProfilePage, ResetPasswordPage }
+export { RegistrationPage, LoginPage, BurgerConstructorPage, Layout, ForgotPasswordPage, ProfilePage, ResetPasswordPage, IngredientDetailsPage }

@@ -2,7 +2,7 @@ import { authUser } from "../../utils/api/api"
 import { setCookie } from "../../utils/cookie"
 import { getCookie } from "../../utils/cookie"
 import { getUserInfo, changeUserInfo } from "../../utils/api/userInfo"
-import { CONSTRUCTOR_PATH } from "../../app/router/config/routes"
+import { HOME } from "../../app/router/config/routes"
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
@@ -25,7 +25,7 @@ export  const loginUserAction = (email, password, navigate) => {
         dispatch({type: LOGIN_SUCCESS, payload: data});
         setCookie('accessToken', data.accessToken)
         localStorage.setItem('refresh', data.refreshToken)
-        navigate(CONSTRUCTOR_PATH)
+        navigate(HOME)
         }
         } catch (error) {
          dispatch({type: LOGIN_FAILED, error})
