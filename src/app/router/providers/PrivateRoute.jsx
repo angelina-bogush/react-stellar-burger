@@ -15,17 +15,5 @@ export const PrivateRoute = ({children}) => {
   }, [accessToken])
 
   return <>{children}</>
-// }
-// export const PrivateRoute = ({component: Component, ...rest}) => {
-//   const accessToken = getCookie('accessToken')
-//   const navigate = useNavigate()
-
-//   useEffect(() => {
-//     if (!accessToken) {
-//       navigate(LOGIN_PATH)
-//     }
-//   }, [accessToken])
-
-//   return <Route {...rest} element={<Component/>} />;
 
 }

@@ -9,7 +9,7 @@ const modal = document.getElementById("modal");
 
 function Modal({ onClose, title, children, orderNumber }) {
   const handleCloseModal = useCallback(() => {
-    onClose(false);
+    onClose();
   }, [onClose]);
 
   useEffect(() => {

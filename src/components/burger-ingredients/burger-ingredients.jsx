@@ -10,13 +10,14 @@ import { ingredient } from "../../utils/data";
 import { setCurrentItem } from "../../services/actions/current-item";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { getCurrentItem } from "../../utils/func";
+import { HOME } from "../../app/router/config/routes";
 
 function BurgerIngredients() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const [modalOpen, setModalOpen] = useState(false);
+  // const [modalOpen, setModalOpen] = useState(false);
   const ingredients = useSelector(
     (state) => state.allIngredientsReducer.allIngredients
   );
@@ -43,17 +44,17 @@ function BurgerIngredients() {
   );
   // let {id} = useParams()
   const handleOpenModal = (item) => {
-    localStorage.setItem('isCardClicked', true)
+    // localStorage.setItem('isCardClicked', true)
     localStorage.setItem("currentIngredient", JSON.stringify(item));
     dispatch(setCurrentItem(item));
-    setModalOpen(true);
+    // setModalOpen(true);
     navigate(`/ingredients/${item._id}`, { state: { from: "click" } });
   };
   const handleCloseModal = (value) => {
-    navigate("/main");
+    navigate(HOME);
     localStorage.removeItem('currentIngredient')
     localStorage.setItem('isCardClicked', false)
-    setModalOpen(value);
+    // setModalOpen(value);
     dispatch(setCurrentItem(null))
   };
   const [activeTab, setActiveTab] = useState("Bun");
@@ -88,11 +89,8 @@ function BurgerIngredients() {
     const savedIngredient = JSON.parse(
     localStorage.getItem("currentIngredient"));
     dispatch(setCurrentItem(savedIngredient));
-   if(savedIngredient) setModalOpen(true)
+  //  if(savedIngredient) setModalOpen(true)
     // navigate(`/ingredients/${savedIngredient._id}`);
-  return () => {
-    localStorage.removeItem('isCardClicked')
-  }
   }, [dispatch]);
 
   //логика счетчика
@@ -173,11 +171,11 @@ function BurgerIngredients() {
           ))}
         </BurgerSection>
       </div>
-      {modalOpen && (
+      {/* {modalOpen && (
         <Modal title="Детали ингредиента" onClose={handleCloseModal}>
           <IngredientDetails></IngredientDetails>
         </Modal>
-      )}
+      )} */}
     </div>
   );
 }

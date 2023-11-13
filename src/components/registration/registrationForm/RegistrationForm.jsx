@@ -12,14 +12,12 @@ export const RegistrationForm = () => {
   const [nameValue, setNameValue] = useState('')
   const [emailValue, setEmailValue] = useState('')
   const [passwordValue, setPasswordValue] = useState('')
-  const email = useSelector(state => state.registrationReducer.email)
   const handleRegister = async(e) => {
     e.preventDefault()
    dispatch(registerUser(emailValue, passwordValue, nameValue))
       navigate(LOGIN_PATH)
   }
-  console.log(localStorage.getItem('refresh'))
-  console.log(email)
+
   return (
     <Form title='Регистрация' buttonText='Зарегистрироваться' onClick={(e) => handleRegister(e)}>
       <MyInput type="text" placeholder={"Имя"} value={nameValue} setValue={setNameValue}/>
