@@ -7,7 +7,7 @@ import { ingredientTypes } from "../../../utils/proptypes";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-const BurgerCard = ({ onClick, description, price, img, count, item }) => {
+const BurgerCard = ({  description, price, img, count, item }) => {
   const [, dragRef] = useDrag({
     type: "ingredient",
     item: item,
@@ -24,7 +24,7 @@ const BurgerCard = ({ onClick, description, price, img, count, item }) => {
     to={`ingredients/${ingredientId}`}
     state={{background: location}}
     >
-    <div className={styles.container} onClick={onClick} ref={dragRef}>
+    <div className={styles.container} ref={dragRef}>
       <img src={img} alt={description} className="pr-4 pl-4"></img>
       <div className={`${styles.price} pb-2 pt-1`}>
         <p className="text text_type_digits-medium pr-2">{price}</p>
@@ -43,7 +43,6 @@ BurgerCard.propTypes = {
   price: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
   count: PropTypes.number,
-  onClick: PropTypes.func.isRequired,
   item: ingredientTypes,
 };
 export default BurgerCard;

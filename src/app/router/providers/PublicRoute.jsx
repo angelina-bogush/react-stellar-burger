@@ -1,17 +1,15 @@
 import { useNavigate } from "react-router-dom"
-import { deleteCookie, getCookie } from "../../../utils/cookie"
 import { useEffect } from "react"
 import { HOME } from "../config/routes"
-
+import { isUserAuth } from "../../../utils/func"
 
 export const PublicRoute = ({children}) => {
-    const accessToken = getCookie('accessToken')
-    const navigate = useNavigate()
+  const navigate = useNavigate()
     useEffect(() => {
-      if (accessToken) {
+      if (!isUserAuth) {
         navigate(HOME)
       }
-    }, [accessToken])
+    }, [])
   
     return <>{children}</>
   }

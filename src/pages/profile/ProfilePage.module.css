@@ -1,20 +1,7 @@
-.navigation{
-    display: flex;
-    flex-direction: column;
-    gap: 40px
-}
+
 .pageContainer{
     display: flex;
     gap: 60px;
     padding-top: 120px;
     width: 1240px
-}
-.description{
-    color: #8585AD;
-    padding-top: 80px;
-    max-width: 320px;
-    opacity: .4;
-}
-.link{
-    cursor: pointer;
 }

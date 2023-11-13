@@ -8,13 +8,23 @@ import AppHeader from '../components/app-header/app-header';
 import { PublicRoute } from './router/providers/PublicRoute';
 import IngredientDetails from '../components/modal/ingredient-details/ingredient-details';
 import Modal from '../components/modal/modal';
+import { useDispatch } from 'react-redux';
+import { getIngredients } from '../services/actions/ingredients';
+import { useEffect } from 'react';
+import { isUserAuth } from '../utils/func';
 
 export const App = () =>  {
+    const dispatch = useDispatch()
     const location = useLocation()
     const navigate = useNavigate()
     const handleCloseModal = () => {
         navigate(-1);
     };
+    localStorage.removeItem('accessToken')
+    useEffect(() => {
+        dispatch(getIngredients())
+    }, [])
+    console.log(isUserAuth())
     const background = location.state && location.state.background;
     return ( 
         <div className={styles.container}>

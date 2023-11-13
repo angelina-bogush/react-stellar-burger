@@ -43,20 +43,20 @@ function BurgerIngredients() {
     [ingredients]
   );
   // let {id} = useParams()
-  const handleOpenModal = (item) => {
-    // localStorage.setItem('isCardClicked', true)
-    localStorage.setItem("currentIngredient", JSON.stringify(item));
-    dispatch(setCurrentItem(item));
-    // setModalOpen(true);
-    navigate(`/ingredients/${item._id}`, { state: { from: "click" } });
-  };
-  const handleCloseModal = (value) => {
-    navigate(HOME);
-    localStorage.removeItem('currentIngredient')
-    localStorage.setItem('isCardClicked', false)
-    // setModalOpen(value);
-    dispatch(setCurrentItem(null))
-  };
+  // const handleOpenModal = (item) => {
+  //   // localStorage.setItem('isCardClicked', true)
+  //   localStorage.setItem("currentIngredient", JSON.stringify(item));
+  //   dispatch(setCurrentItem(item));
+  //   // setModalOpen(true);
+  //   navigate(`/ingredients/${item._id}`, { state: { from: "click" } });
+  // };
+  // const handleCloseModal = (value) => {
+  //   navigate(HOME);
+  //   localStorage.removeItem('currentIngredient')
+  //   localStorage.setItem('isCardClicked', false)
+  //   // setModalOpen(value);
+  //   dispatch(setCurrentItem(null))
+  // };
   const [activeTab, setActiveTab] = useState("Bun");
   const bunsRef = useRef();
   const saucesRef = useRef();
@@ -133,7 +133,6 @@ function BurgerIngredients() {
           {buns.map((item) => (
             <BurgerCard
               key={item._id}
-              onClick={() => handleOpenModal(item)}
               img={item.image}
               price={item.price}
               description={item.name}
@@ -147,7 +146,6 @@ function BurgerIngredients() {
           {sauces.map((item) => (
             <BurgerCard
               key={item._id}
-              onClick={() => handleOpenModal(item)}
               img={item.image}
               price={item.price}
               description={item.name}
@@ -161,7 +159,6 @@ function BurgerIngredients() {
           {main.map((item) => (
             <BurgerCard
               key={item._id}
-              onClick={() => handleOpenModal(item)}
               img={item.image}
               price={item.price}
               description={item.name}

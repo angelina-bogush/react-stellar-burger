@@ -3,6 +3,7 @@ import { LOGOUT_FAILED, LOGOUT_REQUEST, LOGOUT_SUCCESS } from "../actions/logout
 const initialState = {
     email: '',
     name: '',
+    isAuthChecked: false,
     isLoading: false,
     error: null
 }

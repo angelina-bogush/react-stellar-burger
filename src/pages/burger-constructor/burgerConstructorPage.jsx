@@ -8,14 +8,14 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
 export function BurgerConstructorPage() {
-  // localStorage.removeItem('refresh')
+
   const dispatch = useDispatch();
   const ingredients = useSelector(
     (state) => state.allIngredientsReducer.allIngredients
   );
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getIngredients());
+  // }, [dispatch]);
 
   const contentBurgerIngredients = useMemo(() => {
     if (!ingredients) {

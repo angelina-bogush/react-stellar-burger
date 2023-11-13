@@ -2,23 +2,12 @@ import styles from './ingredient-details.module.css';
 import InfoItem from './info-item/info-item';
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux';
-import { useMemo } from 'react';
-import { getCurrentItem } from '../../../utils/func';
 import { useLocation, useParams } from 'react-router-dom';
-import { allIngredients } from '../../../services/selectors/ingredientsSelectors';
 import { selectIngredientById } from '../../../services/selectors/ingredientsSelectors';
 
 function IngredientDetails(){
     const {id} = useParams()
-    console.log(id)
-    const location = useLocation()
-    const background = location.state && location.state.background;
-
-    // const data = useSelector(getCurrentItem)
-    const ingredients = useSelector(allIngredients)
     const data = useSelector(selectIngredientById(id))
-    console.log(ingredients)
-    console.log(data)
     if (!data) return null
 
     return(
