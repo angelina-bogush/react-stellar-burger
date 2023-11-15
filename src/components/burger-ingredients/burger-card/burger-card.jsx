@@ -24,6 +24,7 @@ const BurgerCard = ({  description, price, img, count, item }) => {
     to={`ingredients/${ingredientId}`}
     state={{background: location}}
     >
+   
     <div className={styles.container} ref={dragRef}>
       <img src={img} alt={description} className="pr-4 pl-4"></img>
       <div className={`${styles.price} pb-2 pt-1`}>
