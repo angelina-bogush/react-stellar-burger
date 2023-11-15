@@ -6,6 +6,10 @@
     display: flex;
     gap: 8px
 }
+.linkActive{
+    color: #F2F2F3;
+    text-decoration: none;
+}
 .logo{
     padding-left: 112px;
     padding-right: 288px;
@@ -18,8 +22,5 @@
 }
 .link{
     text-decoration: none;
-}
-.linkContainer{
-    text-decoration: none;
-    color: #F2F2F3
+    color:#8585AD
 }

@@ -5,6 +5,11 @@
 }
 .link{
     cursor: pointer;
+    text-decoration: none;
+    color: #8585AD
+}
+.linkActive{
+    color: #F2F2F3
 }
 .description{
     color: #8585AD;

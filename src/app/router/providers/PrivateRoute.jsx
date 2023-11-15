@@ -8,7 +8,7 @@ export const PrivateRoute = ({children}) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!isUserAuth) {
+    if (!isUserAuth()) {
       navigate(LOGIN_PATH)
     }
   }, [])

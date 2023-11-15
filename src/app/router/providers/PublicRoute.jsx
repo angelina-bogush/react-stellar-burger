@@ -6,7 +6,7 @@ import { isUserAuth } from "../../../utils/func"
 export const PublicRoute = ({children}) => {
   const navigate = useNavigate()
     useEffect(() => {
-      if (!isUserAuth) {
+      if (isUserAuth()) {
         navigate(HOME)
       }
     }, [])

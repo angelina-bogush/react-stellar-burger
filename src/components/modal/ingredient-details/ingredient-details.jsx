@@ -2,7 +2,7 @@ import styles from './ingredient-details.module.css';
 import InfoItem from './info-item/info-item';
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux';
-import { useLocation, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import { selectIngredientById } from '../../../services/selectors/ingredientsSelectors';
 
 function IngredientDetails(){

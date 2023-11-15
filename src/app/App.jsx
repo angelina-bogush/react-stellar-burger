@@ -1,8 +1,8 @@
 import styles from './App.module.css'
 import { Routes, Route, useNavigate} from 'react-router-dom'
 import { useLocation } from 'react-router-dom';
-import { BurgerConstructorPage, ForgotPasswordPage, IngredientDetailsPage, Layout, LoginPage, ProfilePage, RegistrationPage, ResetPasswordPage } from '../pages';
-import { FORGOT_PASSWORD, HOME, INGREDIENT_INFO_PATH, LOGIN_PATH, PROFILE, REGISTRATION_PATH, RESET_PASSWORD } from './router/config/routes';
+import { BurgerConstructorPage, ForgotPasswordPage, IngredientDetailsPage, Layout, LoginPage, OrdersPage, ProfilePage, RegistrationPage, ResetPasswordPage } from '../pages';
+import { FORGOT_PASSWORD, HOME, INGREDIENT_INFO_PATH, LOGIN_PATH, ORDERS_PATH, PROFILE, REGISTRATION_PATH, RESET_PASSWORD } from './router/config/routes';
 import { PrivateRoute } from './router/providers/PrivateRoute';
 import AppHeader from '../components/app-header/app-header';
 import { PublicRoute } from './router/providers/PublicRoute';
@@ -20,16 +20,14 @@ export const App = () =>  {
     const handleCloseModal = () => {
         navigate(-1);
     };
-    localStorage.removeItem('accessToken')
     useEffect(() => {
         dispatch(getIngredients())
     }, [])
-    console.log(isUserAuth())
     const background = location.state && location.state.background;
     return ( 
         <div className={styles.container}>
         <AppHeader/>
-        <Routes locations={background || location}>
+        <Routes locations={ background || location}>
         <Route path={HOME} element={ <BurgerConstructorPage/>}/>
         <Route path={PROFILE} element={ <PrivateRoute><ProfilePage/> </PrivateRoute>} />
         <Route path={INGREDIENT_INFO_PATH} element={<IngredientDetailsPage/>}/>
@@ -37,6 +35,7 @@ export const App = () =>  {
         <Route path={LOGIN_PATH} element={<PublicRoute><LoginPage/></PublicRoute>}/>
         <Route path={FORGOT_PASSWORD} element={<PublicRoute><ForgotPasswordPage/></PublicRoute>}/>
         <Route path={RESET_PASSWORD} element={<PublicRoute><ResetPasswordPage/></PublicRoute>}/>
+        <Route path={ORDERS_PATH} element={<PrivateRoute><OrdersPage/></PrivateRoute>} />
 
         </Routes>
 

@@ -1,2 +1,2 @@
 
-export const selectIsAuthChecked = store => store.userReducer.isAuthChecked;
+// export const selectIsAuthChecked = store => store.userReducer.isAuthChecked;

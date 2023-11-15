@@ -14,10 +14,15 @@ import {
   addBun,
 } from "../../services/actions/burger-constructor";
 import { ingredient } from "../../utils/data";
+import { isUserAuth } from "../../utils/func";
+import { useNavigate } from "react-router-dom";
+import { LOGIN_PATH } from "../../app/router/config/routes";
 
 const BurgerConstructor = () => {
+  console.log(isUserAuth())
+  console.log(localStorage.getItem('accessToken'))
   const dispatch = useDispatch();
-
+  const navigate = useNavigate()
   const orderNumber = useSelector((state) => state.orderReducer.order);
   const constructorIngredients = useSelector(
     (state) => state.burgerConstructorReducer.ingredients
@@ -66,6 +71,8 @@ const BurgerConstructor = () => {
     return [bunId, ...ingredId, bunId];
   };
   const handleCreateOrder = () => {
+    if(!isUserAuth()) {navigate(LOGIN_PATH)}
+    console.log(isUserAuth)
     const ingredId = getIngredientsId();
     dispatch(setOrderNumberRequest())
     createOrderApi(ingredId)

@@ -1,7 +1,8 @@
-import { useSelector } from "react-redux"
+
+import { getCookie } from "./cookie";
 
 export const isUserAuth = () => {
-   const auth = localStorage.getItem('accessToken');
+   const auth = getCookie('accessToken');
    return auth ? true : false
 }
 

@@ -5,3 +5,5 @@ export const FORGOT_PASSWORD = `/forgot-password`
 export const RESET_PASSWORD = `/reset-password`
 export const PROFILE = `/profile`
 export const INGREDIENT_INFO_PATH = '/ingredients/:id'
+export const ORDERS_PATH = '/profile/orders'
+export const FEED_PATH = '/feed'

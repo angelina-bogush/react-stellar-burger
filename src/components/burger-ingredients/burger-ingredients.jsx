@@ -2,22 +2,13 @@ import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerSection from "./burger-section/burger-section";
 import BurgerCard from "./burger-card/burger-card";
-import Modal from "../modal/modal";
-import IngredientDetails from "../modal/ingredient-details/ingredient-details";
 import { useState, useMemo, useRef, useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ingredient } from "../../utils/data";
-import { setCurrentItem } from "../../services/actions/current-item";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
-import { getCurrentItem } from "../../utils/func";
-import { HOME } from "../../app/router/config/routes";
+
 
 function BurgerIngredients() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const location = useLocation();
 
-  // const [modalOpen, setModalOpen] = useState(false);
   const ingredients = useSelector(
     (state) => state.allIngredientsReducer.allIngredients
   );
@@ -42,21 +33,7 @@ function BurgerIngredients() {
     () => ingredients.filter((item) => item.type === ingredient.main),
     [ingredients]
   );
-  // let {id} = useParams()
-  // const handleOpenModal = (item) => {
-  //   // localStorage.setItem('isCardClicked', true)
-  //   localStorage.setItem("currentIngredient", JSON.stringify(item));
-  //   dispatch(setCurrentItem(item));
-  //   // setModalOpen(true);
-  //   navigate(`/ingredients/${item._id}`, { state: { from: "click" } });
-  // };
-  // const handleCloseModal = (value) => {
-  //   navigate(HOME);
-  //   localStorage.removeItem('currentIngredient')
-  //   localStorage.setItem('isCardClicked', false)
-  //   // setModalOpen(value);
-  //   dispatch(setCurrentItem(null))
-  // };
+
   const [activeTab, setActiveTab] = useState("Bun");
   const bunsRef = useRef();
   const saucesRef = useRef();
@@ -85,14 +62,6 @@ function BurgerIngredients() {
       setActiveTab(newTab);
     }
   }
-  useEffect(() => {
-    const savedIngredient = JSON.parse(
-    localStorage.getItem("currentIngredient"));
-    dispatch(setCurrentItem(savedIngredient));
-  //  if(savedIngredient) setModalOpen(true)
-    // navigate(`/ingredients/${savedIngredient._id}`);
-  }, [dispatch]);
-
   //логика счетчика
 
   const totalCount = useCallback(
@@ -168,11 +137,7 @@ function BurgerIngredients() {
           ))}
         </BurgerSection>
       </div>
-      {/* {modalOpen && (
-        <Modal title="Детали ингредиента" onClose={handleCloseModal}>
-          <IngredientDetails></IngredientDetails>
-        </Modal>
-      )} */}
+
     </div>
   );
 }
