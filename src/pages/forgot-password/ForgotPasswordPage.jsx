@@ -22,7 +22,7 @@ export const ForgotPasswordPage =  () => {
 
     return (
         <div className={styles.container}>
-      <Form title='Восстановление пароля' buttonText='Восстановить' onClick={(e) => forgotPasswordClick(e)}>
+      <Form title='Восстановление пароля' buttonText='Восстановить' onSubmit={(e) => forgotPasswordClick(e)}>
         <MyInput type="email" placeholder={"Укажите e-mail"} value={emailValue} setValue={setEmailValue}/>
       </Form>
       <TextWithLink text='Вспомнили пароль?' textLink='Войти' path={LOGIN_PATH}/>

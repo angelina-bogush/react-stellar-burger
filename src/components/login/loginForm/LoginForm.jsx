@@ -21,7 +21,7 @@ export const LoginForm = () => {
   }
     return(
 
-     <Form title='Вход' buttonText='Войти' onClick={(e) => handleLogin(e)}>
+     <Form title='Вход' buttonText='Войти' onSubmit={(e) => handleLogin(e)}>
       <MyInput type="email" placeholder={"E-mail"} value={emailValue} setValue={setEmailValue}/>
       <MyInput type="password" placeholder={"Пароль"} icon={"ProfileIcon"} value={passwordValue} setValue={setPasswordValue}/>
     </Form>

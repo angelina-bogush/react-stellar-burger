@@ -19,7 +19,7 @@ export const RegistrationForm = () => {
   }
 
   return (
-    <Form title='Регистрация' buttonText='Зарегистрироваться' onClick={(e) => handleRegister(e)}>
+    <Form title='Регистрация' buttonText='Зарегистрироваться' onSubmit={(e) => handleRegister(e)}>
       <MyInput type="text" placeholder={"Имя"} value={nameValue} setValue={setNameValue}/>
       <MyInput type="email" placeholder={"E-mail"} value={emailValue} setValue={setEmailValue}/>
       <MyInput type="password" placeholder={"Пароль"} icon={"ProfileIcon"} value={passwordValue} setValue={setPasswordValue}/>

@@ -19,8 +19,6 @@ import { useNavigate } from "react-router-dom";
 import { LOGIN_PATH } from "../../app/router/config/routes";
 
 const BurgerConstructor = () => {
-  console.log(isUserAuth())
-  console.log(localStorage.getItem('accessToken'))
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const orderNumber = useSelector((state) => state.orderReducer.order);

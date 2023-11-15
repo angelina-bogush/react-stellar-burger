@@ -53,7 +53,7 @@ export const ProfileForm = () => {
   };
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={updateUserInfoClick}>
       <MyInput
         type="text"
         placeholder={"Имя"}
@@ -80,7 +80,7 @@ export const ProfileForm = () => {
         <Button type="secondary" size="medium" onClick={(e) => cancelUpdate(e)}>
           Отмена
         </Button>
-        <Button type="primary" onClick={updateUserInfoClick}>
+        <Button type="primary" htmlType='submit'>
           Сохранить
         </Button>
       </div>

@@ -1,15 +1,12 @@
-import { useNavigate } from "react-router-dom"
-import { useEffect } from "react"
-import { HOME } from "../config/routes"
+import { useNavigate, Navigate, useLocation } from "react-router-dom"
 import { isUserAuth } from "../../../utils/func"
 
 export const PublicRoute = ({children}) => {
-  const navigate = useNavigate()
-    useEffect(() => {
-      if (isUserAuth()) {
-        navigate(HOME)
-      }
-    }, [])
+  const location = useLocation();
+  const from = location.state?.from || "/";
+    if (isUserAuth()) {
+      return <Navigate to={from} />;
+    }
   
     return <>{children}</>
   }

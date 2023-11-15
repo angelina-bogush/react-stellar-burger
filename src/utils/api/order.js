@@ -1,15 +1,11 @@
-import axios from "axios";
-import { url } from "./api";
+import { request } from "../func";
+
 export const getData = () => {
-    return fetch(`${url}/ingredients`)
-      .then((res) =>
-        res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-      )
-      .then((data) => data.data);
-  };
-  
-  export const createOrderApi = (ingredients) => {
-    return fetch(`${url}/orders`, {
+  return request({}, "ingredients").then((data) => data.data);
+};
+export const createOrderApi = (ingredients) => {
+  return request(
+    {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -17,7 +13,7 @@ export const getData = () => {
       body: JSON.stringify({
         ingredients: ingredients,
       }),
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-    );
-  };
+    },
+    "orders"
+  );
+};

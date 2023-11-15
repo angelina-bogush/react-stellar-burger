@@ -21,7 +21,7 @@ export const ResetPasswordPage = () => {
     }
     return (
         <div className={styles.container}>
-      <Form title='Восстановление пароля' buttonText='Войти' onClick={(e) => resetPasswordClick(e)}>
+      <Form title='Восстановление пароля' buttonText='Войти' onSubmit={(e) => resetPasswordClick(e)}>
         <MyInput input="password" placeholder={"Введите новый пароль"} value={passwordValue} setValue={setPasswordValue}/>
         <MyInput type="text" placeholder={"Введите код из письма"} value={codeValue} setValue={setCodeValue}/>
       </Form>
