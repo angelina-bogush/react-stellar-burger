@@ -24,7 +24,6 @@ export const ResetPasswordPage = () => {
     if (!forgotPasswordVisited || forgotPasswordVisited === 'false') {
       navigate(LOGIN_PATH);
     }
-    console.log(forgotPasswordVisited)
     return () => {
       localStorage.removeItem("forgotPasswordVisited");
     }

@@ -13,7 +13,6 @@ export const logoutAction = (token) => {
         dispatch({ type: LOGOUT_SUCCESS });
         deleteCookie("accessToken");
         localStorage.deleteItem("refresh");
-        localStorage.deleteItem("")
       })
       .catch((err) => dispatch({ type: LOGOUT_FAILED, err }));
   };
