@@ -6,8 +6,8 @@ import Modal from "../modal/modal";
 import OrderDetails from "../modal/order-details/order-details";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { createOrderApi } from "../../utils/api/order";
-import { setOrderNumberSuccess, setOrderNumberFailed, setOrderNumberRequest } from "../../services/actions/order-number";
+import { createOrder } from "../../services/actions/order-number";
+import { setOrderNumberSuccess } from "../../services/actions/order-number";
 import { useDrop } from "react-dnd";
 import {
   addIngredients,
@@ -20,7 +20,7 @@ import { LOGIN_PATH } from "../../app/router/config/routes";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const orderNumber = useSelector((state) => state.orderReducer.order);
   const constructorIngredients = useSelector(
     (state) => state.burgerConstructorReducer.ingredients
@@ -69,17 +69,11 @@ const BurgerConstructor = () => {
     return [bunId, ...ingredId, bunId];
   };
   const handleCreateOrder = () => {
-    if(!isUserAuth()) {navigate(LOGIN_PATH)}
-    console.log(isUserAuth)
+    if (!isUserAuth()) {
+      navigate(LOGIN_PATH);
+    }
     const ingredId = getIngredientsId();
-    dispatch(setOrderNumberRequest())
-    createOrderApi(ingredId)
-      .then((data) => dispatch(setOrderNumberSuccess(data.order.number)))
-      .catch((err) => {
-        dispatch(setOrderNumberFailed())
-        console.log(err)
-      }
-      );
+    dispatch(createOrder(ingredId));
     setClickedModal(true);
   };
   const handleCloseModal = (value) => {

@@ -1,4 +1,8 @@
-import { SET_ORDER_NUMBER_SUCCESS, SET_ORDER_NUMBER_REQUEST, SET_ORDER_NUMBER_FAILED } from "../actions/order-number";
+import {
+  SET_ORDER_NUMBER_SUCCESS,
+  SET_ORDER_NUMBER_REQUEST,
+  SET_ORDER_NUMBER_FAILED,
+} from "../actions/order-number";
 
 const initialState = {
   order: null,

@@ -6,13 +6,11 @@ import { useState, useMemo, useRef, useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ingredient } from "../../utils/data";
 
-
 function BurgerIngredients() {
-
   const ingredients = useSelector(
     (state) => state.allIngredientsReducer.allIngredients
   );
-  localStorage.setItem('ingredients', JSON.stringify(ingredients))
+  localStorage.setItem("ingredients", JSON.stringify(ingredients));
   //выбранные ингредиенты
   const selectedBun = useSelector(
     (state) => state.burgerConstructorReducer.bun
@@ -137,7 +135,6 @@ function BurgerIngredients() {
           ))}
         </BurgerSection>
       </div>
-
     </div>
   );
 }

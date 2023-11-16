@@ -1,12 +1,14 @@
-.container{
+.container {
     width: 600px;
 }
-.containerScroll{
+
+.containerScroll {
     width: 600px;
     height: calc(100vh - 292px);
     overflow-y: scroll;
     overflow-x: hidden;
 }
-.tab{
+
+.tab {
     display: flex;
 }

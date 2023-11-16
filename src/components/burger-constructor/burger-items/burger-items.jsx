@@ -5,29 +5,36 @@ import { moveProduct } from "../../../services/actions/burger-constructor";
 import { useCallback } from "react";
 import update from "immutability-helper";
 import { BurgerItem } from "../burger-item/burger-item";
-import { selectedIngredientsTypes, ingredientTypes } from "../../../utils/proptypes";
+import {
+  selectedIngredientsTypes,
+  ingredientTypes,
+} from "../../../utils/proptypes";
 
 const BurgerItems = ({ constructorIngredients, constructorBun }) => {
   const dispatch = useDispatch();
   const bun = constructorBun;
   const elseProducts = constructorIngredients;
+  console.log(bun);
 
-  const moveItem = useCallback((dragIndex, hoverIndex, elseProducts) => {
-    const newProduct = update(elseProducts, {
-      $splice: [
-        [dragIndex, 1],
-        [hoverIndex, 0, elseProducts[dragIndex]],
-      ],
-    });
-    dispatch(moveProduct(newProduct));
-  }, [dispatch]);
+  const moveItem = useCallback(
+    (dragIndex, hoverIndex, elseProducts) => {
+      const newProduct = update(elseProducts, {
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, elseProducts[dragIndex]],
+        ],
+      });
+      dispatch(moveProduct(newProduct));
+    },
+    [dispatch]
+  );
 
   return (
     <div className={styles.container}>
       <div className={styles.elementContainer}>
         {bun !== null && (
           <ConstructorElement
-            type={bun.type}
+            type={"top"}
             isLocked
             text={`${bun.name} (верх)`}
             price={bun.price}
@@ -52,7 +59,7 @@ const BurgerItems = ({ constructorIngredients, constructorBun }) => {
       <div className={styles.elementContainer}>
         {bun !== null && (
           <ConstructorElement
-            type={bun.type}
+            type={"bottom"}
             isLocked
             text={`${bun.name} (низ)`}
             price={bun.price}
@@ -65,7 +72,6 @@ const BurgerItems = ({ constructorIngredients, constructorBun }) => {
 };
 BurgerItems.propTypes = {
   constructorBun: ingredientTypes,
-  constructorIngredients: selectedIngredientsTypes
-}
+  constructorIngredients: selectedIngredientsTypes,
+};
 export default BurgerItems;
-

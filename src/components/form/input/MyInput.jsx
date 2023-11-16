@@ -3,30 +3,36 @@ import { EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState, useRef } from "react";
 
-export const MyInput = ({value, setValue, icon, placeholder, type, input}) => {
- 
+export const MyInput = ({
+  value,
+  setValue,
+  icon,
+  placeholder,
+  type,
+  input,
+}) => {
   switch (input) {
-    case 'email':
+    case "email":
       return (
-      <EmailInput
-        onChange={e => setValue(e.target.value)}
-        value={value}
-        name={'email'}
-        placeholder={placeholder}
-        isIcon={true}
-        extraClass="mb-2"
-        error={false}
-      />
+        <EmailInput
+          onChange={(e) => setValue(e.target.value)}
+          value={value}
+          name={"email"}
+          placeholder={placeholder}
+          isIcon={true}
+          extraClass="mb-2"
+          error={false}
+        />
       );
-    case 'password':
+    case "password":
       return (
         <PasswordInput
           placeholder={placeholder}
           error={false}
-          onChange={e => setValue(e.target.value)}
+          onChange={(e) => setValue(e.target.value)}
           value={value}
-          name={'name'}
-          size={'default'}
+          name={"name"}
+          size={"default"}
           icon={icon}
           extraClass="ml-1"
         />
@@ -36,15 +42,15 @@ export const MyInput = ({value, setValue, icon, placeholder, type, input}) => {
         <Input
           type={type}
           placeholder={placeholder}
-          onChange={e => setValue(e.target.value)}
+          onChange={(e) => setValue(e.target.value)}
           icon={icon}
           value={value}
-          name={'name'}
+          name={"name"}
           error={false}
-          errorText={'Ошибка'}
-          size={'default'}
+          errorText={"Ошибка"}
+          size={"default"}
           extraClass="ml-1"
         />
       );
-      }
-}
+  }
+};

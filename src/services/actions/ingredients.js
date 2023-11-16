@@ -5,7 +5,7 @@ export const GET_INGREDIENTS_FAILED = "GET_INGREDIENTS_FAILED";
 
 export function getIngredients() {
   return function (dispatch) {
-    dispatch({ type: GET_INGREDIENTS_REQUEST })
+    dispatch({ type: GET_INGREDIENTS_REQUEST });
     getData()
       .then((data) => {
         dispatch({
@@ -17,7 +17,7 @@ export function getIngredients() {
         dispatch({
           type: GET_INGREDIENTS_FAILED,
           error: err,
-        })
+        });
       });
   };
 }

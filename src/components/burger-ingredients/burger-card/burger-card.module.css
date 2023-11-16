@@ -1,4 +1,4 @@
-.container{
+.container {
     display: flex;
     flex-direction: column;
     max-width: 272px;
@@ -7,15 +7,18 @@
     position: relative;
     cursor: pointer;
 }
-.price{
+
+.price {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.description{
+
+.description {
     text-align: center;
 }
-.link{
+
+.link {
     color: #F2F2F3;
     text-decoration: none;
 }
