@@ -10,7 +10,6 @@ export function BurgerConstructorPage() {
   const ingredients = useSelector(
     (state) => state.allIngredientsReducer.allIngredients
   );
-
   const contentBurgerIngredients = useMemo(() => {
     if (!ingredients) {
       return <div>Loading...</div>;

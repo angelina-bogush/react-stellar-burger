@@ -34,3 +34,8 @@ export function moveProduct(item) {
     payload: item,
   };
 }
+export function clearProducts(){
+  return{
+    type: CLEAR_BURGER_CONSTRUCTOR
+  }
+}

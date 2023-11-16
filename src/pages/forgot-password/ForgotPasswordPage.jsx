@@ -5,7 +5,8 @@ import { LOGIN_PATH } from "../../app/router/config/routes";
 import { TextWithLink } from "../../components/form/textWithLink/TextWithLink";
 import { forgotPassword } from "../../utils/api/api";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
+
 import { RESET_PASSWORD } from "../../app/router/config/routes";
 
 export const ForgotPasswordPage = () => {
@@ -17,6 +18,7 @@ export const ForgotPasswordPage = () => {
     const res = await forgotPassword(emailValue);
     if (res?.status === 200) {
       navigate(RESET_PASSWORD);
+      localStorage.setItem("forgotPasswordVisited", true);
     }
   };
 

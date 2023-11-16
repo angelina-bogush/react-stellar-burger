@@ -45,7 +45,6 @@ export const createUser = async (email, password, name) => {
     password,
     name,
   });
-  console.log(data);
   return data;
 };
 
@@ -64,7 +63,6 @@ export const resetPassword = async (password, token) => {
 
 export const authUser = async (email, password) => {
   const { data } = await api.post(`${url}/auth/login`, { email, password });
-  console.log(data);
   return data;
 };
 

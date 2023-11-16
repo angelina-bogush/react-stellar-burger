@@ -35,9 +35,9 @@ function AppHeader() {
           </Link>
         </div>
 
-        <div className={styles.logo}>
+        <Link to={HOME} className={styles.logo}>
           <Logo />
-        </div>
+        </Link>
 
         <Link
           to={PROFILE}

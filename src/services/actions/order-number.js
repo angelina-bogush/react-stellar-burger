@@ -1,4 +1,5 @@
 import { createOrderApi } from "../../utils/api/order";
+import { clearProducts } from "./burger-constructor";
 export const SET_ORDER_NUMBER_REQUEST = "SET_ORDER_NUMBER";
 export const SET_ORDER_NUMBER_SUCCESS = "SET_ORDER_NUMBER_SUCCESS";
 export const SET_ORDER_NUMBER_FAILED = "SET_ORDER_NUMBER_FAILED";
@@ -21,7 +22,10 @@ export const createOrder = (ingredId) => {
   return async (dispatch) => {
     dispatch(setOrderNumberRequest());
     createOrderApi(ingredId)
-      .then((data) => dispatch(setOrderNumberSuccess(data.order.number)))
+      .then((data) => {
+        dispatch(setOrderNumberSuccess(data.order.number))
+        dispatch(clearProducts())
+      })
       .catch((err) => dispatch(setOrderNumberFailed(err)));
   };
 };

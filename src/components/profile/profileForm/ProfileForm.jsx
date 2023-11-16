@@ -81,7 +81,7 @@ export const ProfileForm = () => {
           type="secondary"
           htmlType="button"
           size="medium"
-          onClick={(e) => cancelUpdate(e)}
+          onClick={cancelUpdate}
         >
           Отмена
         </Button>

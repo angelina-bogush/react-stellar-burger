@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MyInput } from "../../components/form/input/MyInput";
 import { TextWithLink } from "../../components/form/textWithLink/TextWithLink";
 import { LOGIN_PATH } from "../../app/router/config/routes";
@@ -19,6 +19,17 @@ export const ResetPasswordPage = () => {
       navigate(LOGIN_PATH);
     }
   };
+  useEffect(() => {
+    const forgotPasswordVisited = localStorage.getItem("forgotPasswordVisited");
+    if (!forgotPasswordVisited || forgotPasswordVisited === 'false') {
+      navigate(LOGIN_PATH);
+    }
+    console.log(forgotPasswordVisited)
+    return () => {
+      localStorage.removeItem("forgotPasswordVisited");
+    }
+  }, []);
+  
   return (
     <div className={styles.container}>
       <Form

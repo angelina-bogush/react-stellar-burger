@@ -22,7 +22,7 @@ export const RegistrationForm = () => {
     <Form
       title="Регистрация"
       buttonText="Зарегистрироваться"
-      onSubmit={(e) => handleRegister(e)}
+      onSubmit={handleRegister}
     >
       <MyInput
         type="text"

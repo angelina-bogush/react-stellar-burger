@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { loginUserAction } from "../../../services/actions/login";
 import { useNavigate } from "react-router-dom";
-import { isUserAuth } from "../../../utils/func";
 
 export const LoginForm = () => {
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ export const LoginForm = () => {
     }
   };
   return (
-    <Form title="Вход" buttonText="Войти" onSubmit={(e) => handleLogin(e)}>
+    <Form title="Вход" buttonText="Войти" onSubmit={handleLogin}>
       <MyInput
         type="email"
         placeholder={"E-mail"}
