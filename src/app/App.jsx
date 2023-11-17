@@ -11,8 +11,10 @@ import {
   ProfilePage,
   RegistrationPage,
   ResetPasswordPage,
+  FeedPage
 } from "../pages";
 import {
+  FEED_PATH,
   FORGOT_PASSWORD,
   HOME,
   INGREDIENT_INFO_PATH,
@@ -96,6 +98,14 @@ export const App = () => {
           element={
             <PrivateRoute>
               <OrdersPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={FEED_PATH}
+          element={
+            <PrivateRoute>
+              <FeedPage />
             </PrivateRoute>
           }
         />
