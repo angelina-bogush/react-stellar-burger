@@ -4,82 +4,117 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerItems from "./burger-items/burger-items";
 import Modal from "../modal/modal";
 import OrderDetails from "../modal/order-details/order-details";
-import { useState, useContext, useReducer, useMemo, useEffect } from "react";
-import { ConstructorContext } from "../../services/ingredientsContext";
-import { createOrderApi } from "../../utils/api";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { createOrder } from "../../services/actions/order-number";
+import { setOrderNumberSuccess } from "../../services/actions/order-number";
+import { useDrop } from "react-dnd";
+import {
+  addIngredients,
+  addBun,
+} from "../../services/actions/burger-constructor";
+import { ingredient } from "../../utils/data";
+import { isUserAuth } from "../../utils/func";
+import { useNavigate } from "react-router-dom";
+import { LOGIN_PATH } from "../../app/router/config/routes";
 
 const BurgerConstructor = () => {
-  const { constructorIngred, setConstructorIngred } = useContext(ConstructorContext);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const orderNumber = useSelector((state) => state.orderReducer.order);
+  const constructorIngredients = useSelector(
+    (state) => state.burgerConstructorReducer.ingredients
+  );
+  const constructorBun = useSelector(
+    (state) => state.burgerConstructorReducer.bun
+  );
   const [clickedModal, setClickedModal] = useState(false);
-  const [orderNumber, setOrderNumber] = useState('')
-
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case "add":
-        return state + action.payload;
-      case "remove":
-        return state - action.payload;
-      default:
-        return state;
-    }
-  };
-
-  const [priceState, dispatch] = useReducer(reducer, 0);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    if (constructorIngred.bun !== null) {
-      dispatch({ type: "add", payload: constructorIngred.bun.price * 2 });
+    let price = 0;
+    if (constructorBun !== null) {
+      price += constructorBun.price * 2;
     }
-    if (constructorIngred.ingredients.length !== 0) {
-      dispatch({
-        type: "add",
-        payload: constructorIngred.ingredients.reduce(
-          (acc, curr) => acc + curr.price,
-          0
-        ),
-      });
+    if (constructorIngredients.length !== 0) {
+      price += constructorIngredients.reduce(
+        (acc, curr) => acc + curr.ingredient.price,
+        0
+      );
     }
-  }, [constructorIngred]);
+    setTotalPrice(price);
+  }, [constructorBun, constructorIngredients]);
 
-  const handleOpenModal = () => {
-    const ingredId = constructorIngred.ingredients.map(item => item._id);
-    const bunId = constructorIngred.bun._id
-    const ingredientsId = [bunId, ...ingredId, bunId];
-    //запрос на получение номера заказа
-    createOrderApi(ingredientsId)
-    .then(data => setOrderNumber(data.order.number))
-    .catch(err => console.log(err))
+  const [{ isHover, isCanD }, dropRef] = useDrop({
+    accept: "ingredient",
+    drop(item) {
+      item.type === ingredient.bun
+        ? dispatch(addBun(item))
+        : dispatch(addIngredients(item));
+    },
+    collect: (monitor) => ({
+      isHover: monitor.isOver(),
+      isCanD: monitor.canDrop(),
+    }),
+  });
+  const borderStyle = isHover
+    ? styles.borderIn
+    : isCanD
+    ? styles.borderOut
+    : styles.borderNone;
 
+  const getIngredientsId = () => {
+    const ingredId = constructorIngredients.map((item) => item.ingredient._id);
+    const bunId = constructorBun._id;
+    return [bunId, ...ingredId, bunId];
+  };
+  const handleCreateOrder = () => {
+    if (!isUserAuth()) {
+      navigate(LOGIN_PATH);
+    }
+    const ingredId = getIngredientsId();
+    dispatch(createOrder(ingredId));
     setClickedModal(true);
   };
   const handleCloseModal = (value) => {
     setClickedModal(value);
+    dispatch(setOrderNumberSuccess(null));
   };
 
   return (
     <div className={`${styles.container} pl-4 pr-4`}>
-      {(constructorIngred.bun !== null ||
-        constructorIngred.ingredients !== []) && <BurgerItems />}
-      <div className={styles.totalContainer}>
-        <div className={styles.total}>
-          <p className="text text_type_digits-medium pr-2">{priceState}</p>
-          <CurrencyIcon />
-        </div>
+      <div
+        ref={dropRef}
+        className={`pt-5 pb-5 ${styles.dropContainer} ${borderStyle}`}
+      >
+        {(constructorBun !== null || constructorIngredients.length !== 0) && (
+          <BurgerItems
+            constructorIngredients={constructorIngredients}
+            constructorBun={constructorBun}
+          />
+        )}
+        <div className={styles.totalContainer}>
+          <div className={styles.total}>
+            <p className="text text_type_digits-medium pr-2">{totalPrice}</p>
+            <CurrencyIcon />
+          </div>
 
-        <Button
-          htmlType="button"
-          type="primary"
-          size="medium"
-          onClick={handleOpenModal}
-        >
-          Нажми на меня
-        </Button>
+          <Button
+            htmlType="button"
+            type="primary"
+            size="medium"
+            onClick={handleCreateOrder}
+            disabled={constructorBun === null}
+          >
+            Нажми на меня
+          </Button>
+        </div>
+        {clickedModal && (
+          <Modal onClose={handleCloseModal}>
+            <OrderDetails orderNumber={orderNumber} />
+          </Modal>
+        )}
       </div>
-      {clickedModal && (
-        <Modal onClose={handleCloseModal}>
-          <OrderDetails orderNumber={orderNumber}/>
-        </Modal>
-      )}
     </div>
   );
 };

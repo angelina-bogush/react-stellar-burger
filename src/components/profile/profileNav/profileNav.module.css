@@ -1,0 +1,22 @@
+.navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 40px
+}
+
+.link {
+    cursor: pointer;
+    text-decoration: none;
+    color: #8585AD
+}
+
+.linkActive {
+    color: #F2F2F3
+}
+
+.description {
+    color: #8585AD;
+    padding-top: 80px;
+    max-width: 320px;
+    opacity: .4;
+}
