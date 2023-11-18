@@ -5,15 +5,7 @@
     width: 1240px;
     gap: 20px
 }
-.cardContainer{
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    height: calc(100vh - 208px)
-
-}
 .content{
     display: flex;
+    gap: 60px
 }

@@ -1,0 +1,19 @@
+.container{
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-height: 200px;
+}
+.list{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0;
+    margin: 0;
+    overflow-y: scroll;
+}
+.number{
+    color: #00CCCC
+}
