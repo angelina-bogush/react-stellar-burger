@@ -1,0 +1,14 @@
+.ingredient{
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.price{
+    display: flex;
+    max-width: 192px;
+    min-width: 130px;
+    overflow-x: scroll;
+    align-items: center;
+}

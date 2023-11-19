@@ -27,5 +27,9 @@
     display: flex;
     gap: 60px
 }
+.link{
+    text-decoration: none;
+    color: #F2F2F3
+}
 
   

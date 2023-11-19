@@ -7,5 +7,6 @@ import { ResetPasswordPage } from "./reset-password/ResetPasswordPage";
 import { IngredientDetailsPage } from "./ingredient-details/IngredientDetailsPage";
 import { OrdersPage } from "./orders/OrdersPage";
 import { FeedPage } from "./feed/FeedPage";
+import { OrderInfoPage } from "./order-info/OrderInfoPage";
 
-export { RegistrationPage, LoginPage, BurgerConstructorPage,  ForgotPasswordPage, ProfilePage, ResetPasswordPage, IngredientDetailsPage, OrdersPage, FeedPage }
+export { RegistrationPage, LoginPage, BurgerConstructorPage,  ForgotPasswordPage, ProfilePage, ResetPasswordPage, IngredientDetailsPage, OrdersPage, FeedPage, OrderInfoPage }

@@ -17,6 +17,7 @@ import { ingredient } from "../../utils/data";
 import { isUserAuth } from "../../utils/func";
 import { useNavigate } from "react-router-dom";
 import { LOGIN_PATH } from "../../app/router/config/routes";
+import { TotalCount } from "./totalCount/TotalCount";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
@@ -94,11 +95,7 @@ const BurgerConstructor = () => {
           />
         )}
         <div className={styles.totalContainer}>
-          <div className={styles.total}>
-            <p className="text text_type_digits-medium pr-2">{totalPrice}</p>
-            <CurrencyIcon />
-          </div>
-
+          <TotalCount totalPrice={totalPrice} type='medium'/>
           <Button
             htmlType="button"
             type="primary"
