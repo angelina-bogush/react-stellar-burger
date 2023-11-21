@@ -31,5 +31,9 @@
     text-decoration: none;
     color: #F2F2F3
 }
+.description{
+    display: flex;
+    flex-direction: column;
+}
 
   

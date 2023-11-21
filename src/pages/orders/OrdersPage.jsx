@@ -5,7 +5,7 @@ export const OrdersPage = () => {
   return (
     <div className={styles.pageContainer}>
       <ProfileNav />
-      <FeedCards/>
+      <FeedCards type="orders" />
     </div>
   );
 };

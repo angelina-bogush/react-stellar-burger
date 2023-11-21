@@ -24,7 +24,8 @@ import {
   PROFILE,
   REGISTRATION_PATH,
   RESET_PASSWORD,
-  FEED_ID_PATH
+  FEED_ID_PATH,
+  ORDERS_ID_PATH
 } from "./router/config/routes";
 import { PrivateRoute } from "./router/providers/PrivateRoute";
 import AppHeader from "../components/app-header/app-header";
@@ -35,8 +36,17 @@ import { useDispatch } from "react-redux";
 import { getIngredients } from "../services/actions/ingredients";
 import { useEffect } from "react";
 import { OrderInfo } from "../components/modal/order-info/OrderInfo";
+import { ws } from "../utils/api/api";
 
 export const App = () => {
+  ws.onopen = (event) => {
+    console.log(event)
+  }
+  ws.onmessage = (event) => {
+    const data = JSON.parse(event.data)
+    console.log(data)
+  }
+  console.log(ws.readyState)
   const dispatch = useDispatch();
   const location = useLocation();
   const background = location.state?.background;
@@ -107,13 +117,17 @@ export const App = () => {
         <Route
           path={FEED_PATH}
           element={
-            <PrivateRoute>
               <FeedPage />
-            </PrivateRoute>
           }
         />
          <Route
           path={FEED_ID_PATH}
+          element={
+              <OrderInfoPage />
+          }
+        />
+         <Route
+          path={ORDERS_ID_PATH}
           element={
             <PrivateRoute>
               <OrderInfoPage />
@@ -134,6 +148,14 @@ export const App = () => {
           />
           <Route
             path={FEED_ID_PATH}
+            element={
+              <Modal onClose={handleCloseModal}>
+                <OrderInfo modal/>
+              </Modal>
+            }
+          />
+          <Route
+            path={ORDERS_ID_PATH}
             element={
               <Modal onClose={handleCloseModal}>
                 <OrderInfo modal/>

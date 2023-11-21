@@ -1,7 +1,11 @@
 import axios from "axios";
 import { getCookie, setCookie } from "../cookie";
 import { LOGIN_PATH } from "../../app/router/config/routes";
+
 export const url = "https://norma.nomoreparties.space/api";
+export const allOrdersUrl = 'wss://norma.nomoreparties.space/orders/all';
+export const userOrdersUrl = 'wss://norma.nomoreparties.space/orders'
+export const ws = new WebSocket(allOrdersUrl)
 
 export const api = axios.create({
   baseURL: url,
