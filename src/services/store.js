@@ -1,6 +1,9 @@
 import { legacy_createStore as createStore, compose, applyMiddleware } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { configureStore } from '@reduxjs/toolkit';
+import { socketMiddleware } from './middleware/socketMiddleware';
 import { rootReducer } from './reducers/rootReducer';
+import { feedMiddleware } from './reducers/feed-reducer';
+import { profileFeedMiddleware } from './reducers/profile-feed-reducer';
 import thunk from "redux-thunk";
 
 const composeEnhancers =
@@ -10,7 +13,9 @@ const composeEnhancers =
     
 const enhancer = composeEnhancers(applyMiddleware(thunk))
 // export const store = createStore(rootReducer, enhancer)
-export const store = createStore(
-  rootReducer,
-composeWithDevTools(applyMiddleware(socketMiddleware('wss://echo.websocket.org')))
-);
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware().concat(feedMiddleware,profileFeedMiddleware);
+  },
+});

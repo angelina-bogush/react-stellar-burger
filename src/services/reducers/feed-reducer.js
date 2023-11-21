@@ -1,5 +1,5 @@
-
-import { FEED_DISCONNECT, FEED_CONNECTION_CLOSED, FEED_CONNECTION_ERROR, FEED_GET_FEED, FEED_CONNECTION_SUCCESS } from "../actions/feed";
+import { socketMiddleware } from "../middleware/socketMiddleware";
+import { FEED_DISCONNECT, FEED_CONNECTION_CLOSED, FEED_CONNECTION_ERROR, FEED_GET_FEED, FEED_CONNECTION_SUCCESS, FEED_CONNECTING, FEED_CONNECT } from "../actions/feed";
 const initialState = {
     orders: [],
     total: null,
@@ -10,7 +10,7 @@ const initialState = {
 }
 export const feedReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FEED_WS_CONNECTING:
+        case FEED_CONNECTING:
             return {
                 ...state,
                 isLoading: true,
@@ -46,4 +46,14 @@ export const feedReducer = (state = initialState, action) => {
             return state;
     };
 };
+
+export const feedMiddleware = socketMiddleware({
+    wsConnect: FEED_CONNECT,
+    wsDisconnect: FEED_DISCONNECT,
+    wsConnecting: FEED_CONNECTING,
+    onOpen: FEED_CONNECTION_SUCCESS,
+    onClose: FEED_CONNECTION_CLOSED,
+    onError: FEED_CONNECTION_ERROR,
+    onMessage: FEED_GET_FEED,
+  });
 

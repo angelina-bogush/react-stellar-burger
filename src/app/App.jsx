@@ -39,14 +39,14 @@ import { OrderInfo } from "../components/modal/order-info/OrderInfo";
 import { ws } from "../utils/api/api";
 
 export const App = () => {
-  ws.onopen = (event) => {
-    console.log(event)
-  }
-  ws.onmessage = (event) => {
-    const data = JSON.parse(event.data)
-    console.log(data)
-  }
-  console.log(ws.readyState)
+  // ws.onopen = (event) => {
+  //   console.log(event)
+  // }
+  // ws.onmessage = (event) => {
+  //   const data = JSON.parse(event.data)
+  //   console.log(data)
+  // }
+  // console.log(ws.readyState)
   const dispatch = useDispatch();
   const location = useLocation();
   const background = location.state?.background;
