@@ -1,18 +1,12 @@
 import styles from './FeedCards.module.css'
 import { FeedCard } from '../feedCard/FeedCard'
 
-export const FeedCards = ({type}) => {
+export const FeedCards = ({type, orders}) => {
     return(
         <section className={`${styles.cardContainer} custom-scroll`}>
-        <FeedCard type={type}/>
-        <FeedCard />
-        <FeedCard />
-        <FeedCard />
-        <FeedCard />
-        <FeedCard />
-        <FeedCard />
-        <FeedCard />
-        <FeedCard />
+          {orders.map((order) => (
+        <FeedCard type={type} order={order}/>
+          ))}
       </section>
     )
 }

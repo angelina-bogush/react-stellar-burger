@@ -6,11 +6,11 @@ export const PROFILE_FEED_CLOSE = 'PROFILEFEED_ORDERS_WS_CLOSE';
 export const PROFILE_FEED_GET_FEED = 'PROFILEFEED_ORDERS_WS_MESSAGE';
 export const PROFILE_FEED_DISCONNECT = 'PROFILEFEED_ORDERS_DISCONNECT';
 
-export const connect = (url) => ({
+export const connectProfile = (url) => ({
     type: PROFILE_FEED_CONNECT,
     payload: url
 });
 
-export const disconnect = () => ({
+export const disconnectProfile = () => ({
     type: PROFILE_FEED_DISCONNECT
 });

@@ -5,6 +5,7 @@ import { orderReducer } from "./order-reducer";
 import { modalReducer } from "./current-item-reduser";
 import { loginReducer } from "./login-reducer";
 import { feedReducer } from "./feed-reducer";
+import { profileFeedReducer } from "./profile-feed-reducer";
 export const rootReducer = combineReducers({
  allIngredientsReducer,
  modalReducer,
@@ -12,4 +13,5 @@ export const rootReducer = combineReducers({
  burgerConstructorReducer,
  loginReducer,
  feedReducer,
+ profileFeedReducer
 })

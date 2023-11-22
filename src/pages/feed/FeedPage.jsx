@@ -5,26 +5,29 @@ import { allOrdersUrl } from "../../utils/api/api";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Connect, Disconnect } from "../../services/actions/feed";
+import { orders, total, totalToday } from "../../services/selectors/ingredientsSelectors";
 
 export const FeedPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(Connect(allOrdersUrl));
-  console.log(orders)
     return () => {
       dispatch(Disconnect(allOrdersUrl));
     };
   }, [dispatch]);
 
-  const { orders, error } = useSelector((store) => store.feedReducer.orders)
-  console.log(error)
+  const ordersFeed =  useSelector(orders)
+  const totalFeed = useSelector(total)
+  const totalTodayFeed = useSelector(totalToday)
+  console.log(ordersFeed[0])
+
 
   return (
     <div className={styles.pageContainer}>
       <p className="text text_type_main-large">Лента заказов</p>
       <div className={styles.content}>
-            <FeedCards/>
+           {ordersFeed !== null &&  <FeedCards orders={ordersFeed}/> }
             <FeedOrders/>
       </div>
     </div>
