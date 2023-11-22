@@ -6,15 +6,18 @@ import { profileOrders } from "../../services/selectors/ingredientsSelectors";
 import { getCookie } from "../../utils/cookie";
 import { userOrdersUrl } from "../../utils/api/api";
 import { useEffect } from "react";
-import { connectProfile, disconnectProfile } from "../../services/actions/feed-profile";
+import {
+  connectProfile,
+  disconnectProfile,
+} from "../../services/actions/feed-profile";
 
 export const OrdersPage = () => {
   const dispatch = useDispatch();
-  // const location = useLocation();
-  const orders = useSelector(profileOrders)
-  const accessToken = getCookie('accessToken')
-  const token = accessToken.split('Bearer ')[1]
-  const url = userOrdersUrl(token)
+
+  const orders = useSelector(profileOrders);
+  const accessToken = getCookie("accessToken");
+  const token = accessToken.split("Bearer ")[1];
+  const url = userOrdersUrl(token);
 
   useEffect(() => {
     dispatch(connectProfile(url));
@@ -25,7 +28,7 @@ export const OrdersPage = () => {
   return (
     <div className={styles.pageContainer}>
       <ProfileNav />
-      <FeedCards type="orders" orders={orders}/>
+      <FeedCards type="orders" orders={orders} />
     </div>
   );
 };

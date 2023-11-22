@@ -20,15 +20,13 @@ export const FeedPage = () => {
   const ordersFeed =  useSelector(orders)
   const totalFeed = useSelector(total)
   const totalTodayFeed = useSelector(totalToday)
-  console.log(ordersFeed[0])
-
 
   return (
     <div className={styles.pageContainer}>
       <p className="text text_type_main-large">Лента заказов</p>
       <div className={styles.content}>
            {ordersFeed !== null &&  <FeedCards orders={ordersFeed}/> }
-            <FeedOrders/>
+            <FeedOrders total={totalFeed} totalToday={totalTodayFeed} orders={ordersFeed}/>
       </div>
     </div>
   );

@@ -21,13 +21,11 @@ export const FeedCard = ({ type, order }) => {
     }
     return [];
   }, [order?.ingredients, ingredients]);
-
-  const orderPart = orderIngredients?.slice(6).length;
-
   const orderPrice = () => {
     return orderIngredients?.reduce((acc, i) => acc + i.price, 0);
   };
 
+  const orderPart = orderIngredients?.slice(6).length;
   const orderStatuses = {
     done: "Выполнен",
     created: "Создан",
@@ -37,13 +35,13 @@ export const FeedCard = ({ type, order }) => {
   return (
     <Link
       className={styles.link}
-      //   key={ingredientId}
-      to={`:id`}
+      key={order.number}
+      to={`${order.number}`}
       state={{ background: location }}
     >
       <div className={styles.card}>
         <span className={styles.header}>
-          <p className="text text_type_digits-default">{order.number}</p>
+          <p className="text text_type_digits-default">{`#${order.number}`}</p>
           <p className="text text_type_main-default text_color_inactive">
             <FormattedDate date={new Date(order.createdAt)} />
           </p>
@@ -52,35 +50,39 @@ export const FeedCard = ({ type, order }) => {
           <p className="text text_type_main-medium">{order.name}</p>
           {type === "orders" &&
             (order.status === "done" ? (
-              <p className="text text_type_main-default pt-2">
-                {orderStatuses[order.status]}
-              </p>
-            ) : (
               <p
                 className={`text text_type_main-default ${styles.status} pt-2`}
               >
+                {orderStatuses[order.status]}
+              </p>
+            ) : (
+              <p className={"text text_type_main-default pt-2"}>
                 {orderStatuses[order.status]}
               </p>
             ))}
         </div>
         <div className={styles.footer}>
           <div className={styles.iconsWrapper}>
-            {/* <IngredIcon />
-            <IngredIcon />
-            <IngredIcon /> */}
             {orderIngredients.map((ingred, index) => {
-              if(index < 6){
-                  return(
-                    <div className={styles.imageWrapper} key={index}>
-                      <img alt={ingred.name} src={ingred.image} className={styles.icon}/>
-                    </div>
-                  )
+              if (index < 6) {
+                return (
+                  <div className={styles.imageWrapper} key={index}>
+                    <img
+                      alt={ingred.name}
+                      src={ingred.image}
+                      className={styles.icon}
+                    />
+                    {index === 5 && orderPart !== 0 && (
+                      <div className={styles.counter}>
+                        <p className="text text_type_digits-default">{`+${orderPart}`}</p>
+                      </div>
+                    )}
+                  </div>
+                );
               }
-
-            })
-            }
+            })}
           </div>
-          <TotalCount totalPrice={"420"} type="default" />
+          <TotalCount totalPrice={orderPrice()} type="default" />
         </div>
       </div>
     </Link>

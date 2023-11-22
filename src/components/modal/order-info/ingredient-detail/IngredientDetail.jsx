@@ -1,14 +1,15 @@
 import styles from "./IngredientDetail.module.css";
-import { IngredIcon } from "../../../feed/ingredIcon/IngredIcon";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
-export const IngredientDetail = () => {
+export const IngredientDetail = ({ingred}) => {
   return (
     <li className={styles.ingredient}>
-      <IngredIcon />
-      <p className="text text_type_main-default">Флюоресцентная булка R2-D3</p>
+       <div className={styles.imageWrapper}>
+      <img alt={ingred?.name} src={ingred?.image} className={styles.icon}/>
+      </div>
+      <p className="text text_type_main-default">{ingred?.name}</p>
       <div className={styles.price}>
-        <p className="text text_type_digits-default pr-2">2 x 20</p>
+        <p className="text text_type_digits-default pr-2">{`2 x ${ingred?.price}`}</p>
         <CurrencyIcon />
       </div>
     </li>
