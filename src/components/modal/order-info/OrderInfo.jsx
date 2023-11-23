@@ -7,7 +7,7 @@ import {
   allIngredients,
   profileOrders,
 } from "../../../services/selectors/ingredientsSelectors";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { orders } from "../../../services/selectors/ingredientsSelectors";
 import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -24,7 +24,7 @@ export const OrderInfo = ({ modal }) => {
   } else if (location.pathname.includes("/feed")) {
     currentOrder = ordersFeed?.find((order) => order.number == number);
   }
-
+  
   const currentOrderIngredients = useMemo(() => {
     if (currentOrder?.ingredients) {
       return currentOrder.ingredients.map((ingredientId) => {
@@ -36,9 +36,16 @@ export const OrderInfo = ({ modal }) => {
     return [];
   }, [currentOrder?.ingredients, ingredients]);
 
+  const numberOfIngredients = (ingredient) => {
+    return currentOrderIngredients?.filter((item) => item._id === ingredient._id).length;
+  }
+
   const orderPrice = () => {
     return currentOrderIngredients?.reduce((acc, i) => acc + i.price, 0);
   };
+
+    const uniqueIngredients = Array.from(new Set(currentOrderIngredients));
+
   const orderStatuses = {
     done: "Выполнен",
     created: "Создан",
@@ -59,8 +66,8 @@ export const OrderInfo = ({ modal }) => {
       <div className={styles.components}>
         <p className="text text_type_main-medium">Состав:</p>
         <ul className={`${styles.list} custom-scroll`}>
-          {currentOrderIngredients?.map((ingred) => (
-            <IngredientDetail ingred={ingred} key={ingred?._id} />
+          {uniqueIngredients?.map((ingred, index) => (
+            <IngredientDetail ingred={ingred} key={index} quantity={numberOfIngredients(ingred)}/>
           ))}
         </ul>
       </div>

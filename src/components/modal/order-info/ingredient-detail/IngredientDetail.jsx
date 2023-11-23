@@ -1,7 +1,9 @@
 import styles from "./IngredientDetail.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
-export const IngredientDetail = ({ingred}) => {
+export const IngredientDetail = ({ingred, quantity}) => {
+
+
   return (
     <li className={styles.ingredient}>
        <div className={styles.imageWrapper}>
@@ -9,7 +11,7 @@ export const IngredientDetail = ({ingred}) => {
       </div>
       <p className="text text_type_main-default">{ingred?.name}</p>
       <div className={styles.price}>
-        <p className="text text_type_digits-default pr-2">{`2 x ${ingred?.price}`}</p>
+        <p className="text text_type_digits-default pr-2">{`${quantity} x ${ingred?.price}`}</p>
         <CurrencyIcon />
       </div>
     </li>

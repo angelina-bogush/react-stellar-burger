@@ -6,11 +6,11 @@ export const FEED_GET_FEED = "FEED_GET_FEED";
 export const FEED_DISCONNECT = "FEED_DISCONNECT";
 export const FEED_CONNECT = "FEED_CONNECT";
 
-export const Connect = (url) => ({
+export const connectFeed = (url) => ({
   type: FEED_CONNECT,
   payload: url,
 });
 
-export const Disconnect = () => ({
+export const disconnectFeed = () => ({
   type: FEED_DISCONNECT,
 });

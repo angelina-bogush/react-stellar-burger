@@ -1,5 +1,4 @@
 import styles from "./FeedCard.module.css";
-import { IngredIcon } from "../ingredIcon/IngredIcon";
 import { useLocation, Link } from "react-router-dom";
 import { TotalCount } from "../../burger-constructor/totalCount/TotalCount";
 import { useSelector } from "react-redux";

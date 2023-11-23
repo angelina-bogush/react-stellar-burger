@@ -12,7 +12,7 @@ import {
   RegistrationPage,
   ResetPasswordPage,
   FeedPage,
-  OrderInfoPage
+  OrderInfoPage,
 } from "../pages";
 import {
   FEED_PATH,
@@ -25,7 +25,7 @@ import {
   REGISTRATION_PATH,
   RESET_PASSWORD,
   FEED_ID_PATH,
-  ORDERS_ID_PATH
+  ORDERS_ID_PATH,
 } from "./router/config/routes";
 import { PrivateRoute } from "./router/providers/PrivateRoute";
 import AppHeader from "../components/app-header/app-header";
@@ -36,17 +36,9 @@ import { useDispatch } from "react-redux";
 import { getIngredients } from "../services/actions/ingredients";
 import { useEffect } from "react";
 import { OrderInfo } from "../components/modal/order-info/OrderInfo";
-import { ws } from "../utils/api/api";
+
 
 export const App = () => {
-  // ws.onopen = (event) => {
-  //   console.log(event)
-  // }
-  // ws.onmessage = (event) => {
-  //   const data = JSON.parse(event.data)
-  //   console.log(data)
-  // }
-  // console.log(ws.readyState)
   const dispatch = useDispatch();
   const location = useLocation();
   const background = location.state?.background;
@@ -57,6 +49,7 @@ export const App = () => {
   useEffect(() => {
     dispatch(getIngredients());
   }, []);
+
   return (
     <div className={styles.container}>
       <AppHeader />
@@ -114,19 +107,9 @@ export const App = () => {
             </PrivateRoute>
           }
         />
+        <Route path={FEED_PATH} element={<FeedPage />} />
+        <Route path={FEED_ID_PATH} element={<OrderInfoPage />} />
         <Route
-          path={FEED_PATH}
-          element={
-              <FeedPage />
-          }
-        />
-         <Route
-          path={FEED_ID_PATH}
-          element={
-              <OrderInfoPage />
-          }
-        />
-         <Route
           path={ORDERS_ID_PATH}
           element={
             <PrivateRoute>
@@ -150,7 +133,7 @@ export const App = () => {
             path={FEED_ID_PATH}
             element={
               <Modal onClose={handleCloseModal}>
-                <OrderInfo modal/>
+                <OrderInfo modal />
               </Modal>
             }
           />
@@ -158,7 +141,7 @@ export const App = () => {
             path={ORDERS_ID_PATH}
             element={
               <Modal onClose={handleCloseModal}>
-                <OrderInfo modal/>
+                <OrderInfo modal />
               </Modal>
             }
           />

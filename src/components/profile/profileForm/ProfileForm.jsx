@@ -19,7 +19,6 @@ export const ProfileForm = () => {
   const [valueName, setValueName] = useState("");
   const [originalEmail, setOriginalEmail] = useState("");
   const [originalName, setOriginalName] = useState("");
-  console.log(valueName);
 
   useEffect(() => {
     const setValues = async () => {

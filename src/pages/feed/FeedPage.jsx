@@ -4,16 +4,16 @@ import { FeedOrders } from "../../components/feed/feedOrders/FeedOrders";
 import { allOrdersUrl } from "../../utils/api/api";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Connect, Disconnect } from "../../services/actions/feed";
+import { connectFeed, disconnectFeed } from "../../services/actions/feed";
 import { orders, total, totalToday } from "../../services/selectors/ingredientsSelectors";
 
 export const FeedPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(Connect(allOrdersUrl));
+    dispatch(connectFeed(allOrdersUrl));
     return () => {
-      dispatch(Disconnect(allOrdersUrl));
+      dispatch(disconnectFeed(allOrdersUrl));
     };
   }, [dispatch]);
 
