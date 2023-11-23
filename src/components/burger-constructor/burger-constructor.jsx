@@ -72,10 +72,11 @@ const BurgerConstructor = () => {
   const handleCreateOrder = () => {
     if (!isUserAuth()) {
       navigate(LOGIN_PATH);
-    }
+    } else {
     const ingredId = getIngredientsId();
     dispatch(createOrder(ingredId));
     setClickedModal(true);
+    }
   };
   const handleCloseModal = (value) => {
     setClickedModal(value);
