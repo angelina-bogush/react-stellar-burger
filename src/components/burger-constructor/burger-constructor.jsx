@@ -18,6 +18,7 @@ import { isUserAuth } from "../../utils/func";
 import { useNavigate } from "react-router-dom";
 import { LOGIN_PATH } from "../../app/router/config/routes";
 import { TotalCount } from "./totalCount/TotalCount";
+import { Loader } from "../loader/Loader";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,8 @@ const BurgerConstructor = () => {
   const constructorBun = useSelector(
     (state) => state.burgerConstructorReducer.bun
   );
+  const isLoading = useSelector((state) => state.orderReducer.isLoading)
+  console.log(isLoading)
   const [clickedModal, setClickedModal] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -110,6 +113,7 @@ const BurgerConstructor = () => {
         {clickedModal && (
           <Modal onClose={handleCloseModal}>
             <OrderDetails orderNumber={orderNumber} />
+            {isLoading && <Loader/>}
           </Modal>
         )}
       </div>

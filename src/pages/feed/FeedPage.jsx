@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { connectFeed, disconnectFeed } from "../../services/actions/feed";
 import { orders, total, totalToday } from "../../services/selectors/ingredientsSelectors";
+import { Loader } from "../../components/loader/Loader";
 
 export const FeedPage = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export const FeedPage = () => {
   const ordersFeed =  useSelector(orders)
   const totalFeed = useSelector(total)
   const totalTodayFeed = useSelector(totalToday)
+  const isLoading = useSelector(store => store.feedReducer.isLoading)
 
   return (
     <div className={styles.pageContainer}>
@@ -28,6 +30,7 @@ export const FeedPage = () => {
            {ordersFeed !== null &&  <FeedCards orders={ordersFeed}/> }
             <FeedOrders total={totalFeed} totalToday={totalTodayFeed} orders={ordersFeed}/>
       </div>
+      {isLoading && <Loader/>}
     </div>
   );
 };

@@ -32,16 +32,18 @@ import AppHeader from "../components/app-header/app-header";
 import { PublicRoute } from "./router/providers/PublicRoute";
 import IngredientDetails from "../components/modal/ingredient-details/ingredient-details";
 import Modal from "../components/modal/modal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getIngredients } from "../services/actions/ingredients";
 import { useEffect } from "react";
 import { OrderInfo } from "../components/modal/order-info/OrderInfo";
+import { Loader } from "../components/loader/Loader";
 
 
 export const App = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const background = location.state?.background;
+  const isLoading = useSelector((state) => state.orderReducer.isLoading)
   const navigate = useNavigate();
   const handleCloseModal = () => {
     navigate(-1);
