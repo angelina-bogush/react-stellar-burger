@@ -110,7 +110,7 @@ export const App = () => {
           }
         />
         <Route path={FEED_PATH} element={<FeedPage />} />
-        <Route path={FEED_ID_PATH} element={<OrderInfoPage />} />
+        <Route path={FEED_ID_PATH} element={<OrderInfoPage isFeed/>} />
         <Route
           path={ORDERS_ID_PATH}
           element={
