@@ -17,6 +17,8 @@ import { ingredient } from "../../utils/data";
 import { isUserAuth } from "../../utils/func";
 import { useNavigate } from "react-router-dom";
 import { LOGIN_PATH } from "../../app/router/config/routes";
+import { TotalCount } from "./totalCount/TotalCount";
+import { Loader } from "../loader/Loader";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
@@ -28,6 +30,8 @@ const BurgerConstructor = () => {
   const constructorBun = useSelector(
     (state) => state.burgerConstructorReducer.bun
   );
+  const isLoading = useSelector((state) => state.orderReducer.isLoading)
+  console.log(isLoading)
   const [clickedModal, setClickedModal] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -71,10 +75,11 @@ const BurgerConstructor = () => {
   const handleCreateOrder = () => {
     if (!isUserAuth()) {
       navigate(LOGIN_PATH);
-    }
+    } else {
     const ingredId = getIngredientsId();
     dispatch(createOrder(ingredId));
     setClickedModal(true);
+    }
   };
   const handleCloseModal = (value) => {
     setClickedModal(value);
@@ -94,11 +99,7 @@ const BurgerConstructor = () => {
           />
         )}
         <div className={styles.totalContainer}>
-          <div className={styles.total}>
-            <p className="text text_type_digits-medium pr-2">{totalPrice}</p>
-            <CurrencyIcon />
-          </div>
-
+          <TotalCount totalPrice={totalPrice} type='medium'/>
           <Button
             htmlType="button"
             type="primary"
@@ -112,6 +113,7 @@ const BurgerConstructor = () => {
         {clickedModal && (
           <Modal onClose={handleCloseModal}>
             <OrderDetails orderNumber={orderNumber} />
+            {isLoading && <Loader/>}
           </Modal>
         )}
       </div>

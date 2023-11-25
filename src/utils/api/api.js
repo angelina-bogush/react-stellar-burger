@@ -1,7 +1,11 @@
 import axios from "axios";
 import { getCookie, setCookie } from "../cookie";
 import { LOGIN_PATH } from "../../app/router/config/routes";
+
 export const url = "https://norma.nomoreparties.space/api";
+export const allOrdersUrl = 'wss://norma.nomoreparties.space/orders/all';
+export const userOrdersUrl = (token) => `wss://norma.nomoreparties.space/orders?token=${token}`;
+export const ws = new WebSocket(allOrdersUrl)
 
 export const api = axios.create({
   baseURL: url,
@@ -20,7 +24,7 @@ api.interceptors.response.use(
     return response;
   },
   async (error) => {
-    if (error.response.status === 403 || error.response.status === 403) {
+    if (error.response.status === 403) {
       try {
         return refreshToken().then(() => {
           const updatedToken = getCookie("accessToken");
