@@ -9,6 +9,7 @@ import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-component
 export const FeedCard = ({ type, order }) => {
   const location = useLocation();
   const ingredients = useSelector(allIngredients);
+  console.log(order)
 
   const orderIngredients = useMemo(() => {
     if (order?.ingredients) {
@@ -20,8 +21,9 @@ export const FeedCard = ({ type, order }) => {
     }
     return [];
   }, [order?.ingredients, ingredients]);
+  console.log(orderIngredients)
   const orderPrice = () => {
-    return orderIngredients?.reduce((acc, i) => acc + i.price, 0);
+    return orderIngredients?.reduce((acc, i) => acc + i?.price, 0);
   };
 
   const orderPart = orderIngredients?.slice(6).length;
@@ -67,8 +69,8 @@ export const FeedCard = ({ type, order }) => {
                 return (
                   <div className={styles.imageWrapper} key={index}>
                     <img
-                      alt={ingred.name}
-                      src={ingred.image}
+                      alt={ingred?.name}
+                      src={ingred?.image}
                       className={styles.icon}
                     />
                     {index === 5 && orderPart !== 0 && (
