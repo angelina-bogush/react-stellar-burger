@@ -6,8 +6,9 @@ import { useDrag } from "react-dnd";
 import { ingredientTypes } from "../../../utils/proptypes";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { IBurgerCardProps } from "../../../services/types/ingredients";
 
-const BurgerCard = ({ description, price, img, count, item }) => {
+const BurgerCard = ({ description, price, img, count, item }: IBurgerCardProps) => {
   const [, dragRef] = useDrag({
     type: "ingredient",
     item: item,
@@ -17,6 +18,7 @@ const BurgerCard = ({ description, price, img, count, item }) => {
   });
   const location = useLocation();
   const ingredientId = item._id;
+  console.log(item)
 
   return (
     <Link
@@ -29,7 +31,7 @@ const BurgerCard = ({ description, price, img, count, item }) => {
         <img src={img} alt={description} className="pr-4 pl-4"></img>
         <div className={`${styles.price} pb-2 pt-1`}>
           <p className="text text_type_digits-medium pr-2">{price}</p>
-          <CurrencyIcon></CurrencyIcon>
+          <CurrencyIcon type="primary"></CurrencyIcon>
         </div>
         <p className={`text text_type_main-default ${styles.description}`}>
           {description}
