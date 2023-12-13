@@ -1,6 +1,11 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-tab.module.css";
-const BurgerTab = ({ activeTab, setActiveTab }) => {
+
+interface IBurgerTabProps{
+  activeTab: string
+  setActiveTab: (activeTab: string) => void
+}
+const BurgerTab = ({ activeTab, setActiveTab }: IBurgerTabProps) => {
   return (
     <div className={styles.container}>
       <Tab

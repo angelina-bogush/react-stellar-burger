@@ -5,33 +5,40 @@ import { useSelector } from "react-redux";
 import { useMemo } from "react";
 import { allIngredients } from "../../../services/selectors/ingredientsSelectors";
 import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
+import { IFeedOrder } from "../../../services/types/feed";
+import { IIngredient } from "../../../services/types/ingredients";
 
-export const FeedCard = ({ type, order }) => {
+interface IFeedCardProps{
+  type: 'orders'
+  order: IFeedOrder
+}
+
+export const FeedCard = ({ type, order }:IFeedCardProps) => {
   const location = useLocation();
   const ingredients = useSelector(allIngredients);
-  console.log(order)
+  console.log(ingredients)
 
   const orderIngredients = useMemo(() => {
     if (order?.ingredients) {
       return order.ingredients.map((ingredientId) => {
         return ingredients.find(
-          (ingredient) => ingredientId === ingredient._id
+          (ingredient: IIngredient) => ingredientId === ingredient._id
         );
       });
     }
     return [];
   }, [order?.ingredients, ingredients]);
-  console.log(orderIngredients)
   const orderPrice = () => {
     return orderIngredients?.reduce((acc, i) => acc + i?.price, 0);
   };
 
   const orderPart = orderIngredients?.slice(6).length;
-  const orderStatuses = {
+  const orderStatuses: Record<string, string> = {
     done: "Выполнен",
     created: "Создан",
     pending: "Готовится",
-  };
+  }
+  ;  
 
   return (
     <Link

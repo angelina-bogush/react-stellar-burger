@@ -1,7 +1,13 @@
 import styles from "./FeedCards.module.css";
 import { FeedCard } from "../feedCard/FeedCard";
+import { IFeedOrder } from "../../../services/types/feed";
 
-export const FeedCards = ({ type, orders }) => {
+interface IFeedCardsProps{
+  type: 'orders'
+  orders: IFeedOrder[]
+}
+
+export const FeedCards = ({ type, orders }: IFeedCardsProps) => {
   return (
     <section className={`${styles.cardContainer} custom-scroll`}>
       {orders.map((order) => (

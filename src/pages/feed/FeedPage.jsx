@@ -19,6 +19,7 @@ export const FeedPage = () => {
   }, [dispatch]);
 
   const ordersFeed =  useSelector(orders)
+  console.log(ordersFeed)
   const totalFeed = useSelector(total)
   const totalTodayFeed = useSelector(totalToday)
   const isLoading = useSelector(store => store.feedReducer.isLoading)

@@ -1,7 +1,10 @@
 import styles from "./burger-section.module.css";
-import PropTypes from "prop-types";
-import { forwardRef } from "react";
-const BurgerSection = forwardRef(({ title, children }, ref) => {
+import { forwardRef, ReactNode, LegacyRef } from "react";
+interface IBurgerSectionProps{
+  title: string
+  children: ReactNode
+}
+const BurgerSection = forwardRef(({ title, children }: IBurgerSectionProps, ref: LegacyRef<HTMLHeadingElement>) => {
   return (
     <div className={styles.container}>
       <h2 className="text text_type_main-medium" ref={ref}>
@@ -11,8 +14,5 @@ const BurgerSection = forwardRef(({ title, children }, ref) => {
     </div>
   );
 });
-BurgerSection.propTypes = {
-  title: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-};
+
 export default BurgerSection;

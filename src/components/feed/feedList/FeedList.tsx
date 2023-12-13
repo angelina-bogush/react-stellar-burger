@@ -1,7 +1,14 @@
 import styles from './FeedList.module.css'
 import clsx from 'clsx'
 
-export const FeedList = ({title, numbers, done, twoColumns}) => {
+interface IFeedListProps{
+    title: string
+    done: boolean
+    twoColumns: boolean
+    numbers: Array<number>
+}
+
+export const FeedList = ({title, numbers, done, twoColumns}: IFeedListProps) => {
 
     const stylesList = clsx(styles.list,{
         [styles.twoColumns]: twoColumns

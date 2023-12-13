@@ -1,9 +1,7 @@
 import styles from "./burger-card.module.css";
-import PropTypes from "prop-types";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag } from "react-dnd";
-import { ingredientTypes } from "../../../utils/proptypes";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { IBurgerCardProps } from "../../../services/types/ingredients";
@@ -42,12 +40,5 @@ const BurgerCard = ({ description, price, img, count, item }: IBurgerCardProps) 
       </div>
     </Link>
   );
-};
-BurgerCard.propTypes = {
-  img: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  description: PropTypes.string.isRequired,
-  count: PropTypes.number,
-  item: ingredientTypes,
 };
 export default BurgerCard;

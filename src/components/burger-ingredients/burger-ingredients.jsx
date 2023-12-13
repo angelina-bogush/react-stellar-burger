@@ -3,7 +3,7 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerSection from "./burger-section/burger-section";
 import BurgerCard from "./burger-card/burger-card";
 import { useState, useMemo, useRef, useCallback, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { ingredient } from "../../utils/data";
 
 function BurgerIngredients() {
