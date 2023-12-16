@@ -1,6 +1,10 @@
 import styles from "./info-item.module.css";
-import PropTypes from "prop-types";
-function InfoItem({ text, info }) {
+
+interface IInfoItemProps{
+  text: string
+  info: number
+}
+function InfoItem({ text, info }: IInfoItemProps) {
   return (
     <div className={styles.container}>
       <p className="text text_type_main-default text_color_inactive">{text}</p>
@@ -8,8 +12,5 @@ function InfoItem({ text, info }) {
     </div>
   );
 }
-InfoItem.propTypes = {
-  text: PropTypes.string.isRequired,
-  info: PropTypes.number.isRequired,
-};
+
 export default InfoItem;

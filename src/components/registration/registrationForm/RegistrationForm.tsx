@@ -1,6 +1,6 @@
 import { MyInput } from "../../form/input/MyInput";
 import { Form } from "../../form/Form";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { registerUser } from "../../../services/actions/register";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ export const RegistrationForm = () => {
   const [nameValue, setNameValue] = useState("");
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
-  const handleRegister = async (e) => {
+  const handleRegister = async (e: FormEvent) => {
     e.preventDefault();
     dispatch(registerUser(emailValue, passwordValue, nameValue));
     navigate(LOGIN_PATH);
@@ -26,20 +26,22 @@ export const RegistrationForm = () => {
     >
       <MyInput
         type="text"
+        input='text'
         placeholder={"Имя"}
         value={nameValue}
         setValue={setNameValue}
       />
       <MyInput
         type="email"
+        input="email"
         placeholder={"E-mail"}
         value={emailValue}
         setValue={setEmailValue}
       />
       <MyInput
         type="password"
+        input="password"
         placeholder={"Пароль"}
-        icon={"ProfileIcon"}
         value={passwordValue}
         setValue={setPasswordValue}
       />

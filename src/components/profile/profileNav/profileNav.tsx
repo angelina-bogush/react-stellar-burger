@@ -3,7 +3,6 @@ import { logoutAction } from "../../../services/actions/logout";
 import { LOGIN_PATH, PROFILE } from "../../../app/router/config/routes";
 import { useNavigate, useMatch } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import clsx from "clsx";
 import { Link } from "react-router-dom";
 
 export const ProfileNav = () => {
@@ -39,9 +38,9 @@ export const ProfileNav = () => {
       >
         История заказов
       </Link>
-      <Link className={styles.link} onClick={handleLogout}>
+      <a className={styles.link} onClick={handleLogout}>
         <p className="text text_type_main-medium">Выход</p>
-      </Link>
+      </a>
       <p className={`${styles.description} text text_type_main-small`}>
         В этом разделе вы можете изменить свои персональные данные
       </p>

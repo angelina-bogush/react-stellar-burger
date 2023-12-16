@@ -1,7 +1,11 @@
 import styles from "./order-details.module.css";
 import doneImgPath from "../../../images/icons/done.svg";
 import PropTypes from "prop-types";
-function OrderDetails({ orderNumber }) {
+
+type TOrderDetails = {
+  orderNumber: number
+}
+function OrderDetails({ orderNumber }: TOrderDetails) {
   return (
     <div className={styles.container}>
       <p className="text text_type_digits-large pb-4">{orderNumber}</p>
@@ -18,7 +22,5 @@ function OrderDetails({ orderNumber }) {
     </div>
   );
 }
-OrderDetails.propTypes = {
-  orderNumber: PropTypes.number,
-};
+
 export default OrderDetails;

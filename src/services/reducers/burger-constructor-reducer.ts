@@ -1,3 +1,4 @@
+import { IBurgerConstructorActions } from './../types/actions/burger-constructor';
 import {
   SET_CONSTRUCTOR_BUN,
   SET_CONSTRUCTOR_INGREDIENTS,
@@ -5,13 +6,24 @@ import {
   MOVE_PRODUCT,
   CLEAR_BURGER_CONSTRUCTOR
 } from "../actions/burger-constructor";
+import { IIngredient } from "../types/ingredients";
 
-const initialState = {
+interface IBurgerConstructorIngredient{
+  ingredient: IIngredient
+  key: string
+}
+
+interface IBurgerConstructorState{
+  bun: IIngredient | null
+  ingredients: IBurgerConstructorIngredient[]
+}
+
+const initialState: IBurgerConstructorState = {
   bun: null,
   ingredients: [],
 };
 
-export const burgerConstructorReducer = (state = initialState, action) => {
+export const burgerConstructorReducer = (state = initialState, action: IBurgerConstructorActions ) => {
   switch (action.type) {
     case SET_CONSTRUCTOR_INGREDIENTS:
       return {

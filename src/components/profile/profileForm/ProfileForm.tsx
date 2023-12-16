@@ -3,7 +3,6 @@ import { MyInput } from "../../form/input/MyInput";
 import { LOGIN_PATH } from "../../../app/router/config/routes";
 import { getUserInfo } from "../../../utils/api/userInfo";
 import { changeUserInfoAction } from "../../../services/actions/login";
-import { getUserInfoAction } from "../../../services/actions/login";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,9 +29,7 @@ export const ProfileForm = () => {
         setOriginalEmail(data.user.email);
         setOriginalName(data.user.name);
       } catch (error) {
-        if (error.response.status === 401) {
           navigate(LOGIN_PATH);
-        }
       }
     };
     setValues();
@@ -45,7 +42,7 @@ export const ProfileForm = () => {
     };
     dispatch(changeUserInfoAction(form));
   };
-  const cancelUpdate = async (e) => {
+  const cancelUpdate = async (e: MouseEvent) => {
     e.preventDefault();
     setValueEmail(originalEmail);
     setValueName(originalName);
@@ -71,7 +68,6 @@ export const ProfileForm = () => {
         type="password"
         placeholder={"Пароль"}
         input="password"
-        icon="EditIcon"
         value={valuePassword}
         setValue={setValuePassword}
       />
@@ -80,7 +76,7 @@ export const ProfileForm = () => {
           type="secondary"
           htmlType="button"
           size="medium"
-          onClick={cancelUpdate}
+          onClick={() => cancelUpdate}
         >
           Отмена
         </Button>
