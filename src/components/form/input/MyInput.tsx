@@ -3,14 +3,23 @@ import { EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState, useRef } from "react";
 
+
+interface IInputProps{
+value: string
+setValue: (value: string) => void
+// icon: keyof TICons;
+placeholder: string
+type: "text" | "email" | "password" | undefined
+input: "text" | "email" | "password" | undefined
+}
+
 export const MyInput = ({
   value,
   setValue,
-  icon,
   placeholder,
   type,
   input,
-}) => {
+}: IInputProps) => {
   switch (input) {
     case "email":
       return (
@@ -21,19 +30,17 @@ export const MyInput = ({
           placeholder={placeholder}
           isIcon={true}
           extraClass="mb-2"
-          error={false}
         />
       );
     case "password":
       return (
         <PasswordInput
           placeholder={placeholder}
-          error={false}
           onChange={(e) => setValue(e.target.value)}
           value={value}
           name={"name"}
           size={"default"}
-          icon={icon}
+          // icon={icon}
           extraClass="ml-1"
         />
       );
@@ -43,7 +50,7 @@ export const MyInput = ({
           type={type}
           placeholder={placeholder}
           onChange={(e) => setValue(e.target.value)}
-          icon={icon}
+          icon='ShowIcon'
           value={value}
           name={"name"}
           error={false}

@@ -10,33 +10,38 @@ import {
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { orders } from "../../../services/selectors/ingredientsSelectors";
 import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
+import { IFeedOrder } from "../../../services/types/feed";
+import { IIngredient } from "../../../services/types/ingredients";
+type TOrderInfoProps = {
+  modal: boolean
+}
 
-export const OrderInfo = ({ modal }) => {
+export const OrderInfo = ({ modal }: TOrderInfoProps) => {
   const location = useLocation();
   const { number } = useParams();
   const ingredients = useSelector(allIngredients);
   const ordersFeed = useSelector(orders);
   const profileOrder = useSelector(profileOrders);
-  let currentOrder;
+  let currentOrder: IFeedOrder | null = null;
 
   if (location.pathname.includes("/profile/orders")) {
-    currentOrder = profileOrder?.find((order) => order.number == number);
+    currentOrder = profileOrder?.find((order: IFeedOrder) => order.number === Number(number));
   } else if (location.pathname.includes("/feed")) {
-    currentOrder = ordersFeed?.find((order) => order.number == number);
+    currentOrder = ordersFeed?.find((order: IFeedOrder) => order.number === Number(number));
   }
   
   const currentOrderIngredients = useMemo(() => {
     if (currentOrder?.ingredients) {
       return currentOrder.ingredients.map((ingredientId) => {
         return ingredients.find(
-          (ingredient) => ingredientId === ingredient._id
+          (ingredient: IIngredient) => ingredientId === ingredient._id
         );
       });
     }
     return [];
   }, [currentOrder?.ingredients, ingredients]);
 
-  const numberOfIngredients = (ingredient) => {
+  const numberOfIngredients = (ingredient: IIngredient) => {
     return currentOrderIngredients?.filter((item) => item._id === ingredient._id).length;
   }
 
@@ -46,7 +51,7 @@ export const OrderInfo = ({ modal }) => {
 
     const uniqueIngredients = Array.from(new Set(currentOrderIngredients));
 
-  const orderStatuses = {
+  const orderStatuses: Record<string, string> = {
     done: "Выполнен",
     created: "Создан",
     pending: "Готовится",
@@ -61,7 +66,7 @@ export const OrderInfo = ({ modal }) => {
       >{`#${currentOrder?.number}`}</p>
       <p className="text text_type_main-medium pb-2">{currentOrder?.name}</p>
       <p className={`text text_type_main-default ${styles.blue}`}>
-        {orderStatuses[currentOrder?.status]}
+        {currentOrder && orderStatuses[currentOrder.status]}
       </p>
       <div className={styles.components}>
         <p className="text text_type_main-medium">Состав:</p>
@@ -73,7 +78,7 @@ export const OrderInfo = ({ modal }) => {
       </div>
       <div className={styles.info}>
         <p className="text text_type_main-default text_color_inactive">
-          <FormattedDate date={new Date(currentOrder?.createdAt)} />
+          {currentOrder && <FormattedDate date={new Date(currentOrder?.createdAt)} />}
         </p>
         <TotalCount totalPrice={orderPrice()} type="default" />
       </div>

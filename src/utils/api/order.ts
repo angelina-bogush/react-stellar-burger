@@ -1,10 +1,11 @@
 import { request } from "../func";
 import { getCookie } from "../cookie";
+import { IIngredient } from "../../services/types/ingredients";
 
-export const getData = () => {
+export function getData() {
   return request({}, "ingredients").then((data) => data.data);
 };
-export const createOrderApi = (ingredients) => {
+export const createOrderApi = (ingredients: IIngredient[]) => {
   return request(
     {
       method: "POST",

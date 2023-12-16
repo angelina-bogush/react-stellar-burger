@@ -3,24 +3,31 @@ import ReactDOM from "react-dom";
 import ModalOverlay from "./modal-overlay/modal-overlay";
 import PropTypes from "prop-types";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, ReactNode, KeyboardEvent } from "react";
 
-const modal = document.getElementById("modal");
+const modal = document.getElementById("modal") as HTMLElement;
 
-function Modal({ onClose, title, children, orderNumber }) {
+interface IModalProps{
+onClose: () => void
+title: string
+children: ReactNode
+}
+
+function Modal({ onClose, title, children }: IModalProps) {
   const handleCloseModal = useCallback(() => {
     onClose();
   }, [onClose]);
-
   useEffect(() => {
-    const handleEscape = (event) => {
-      if (event.key === "Escape") {
+    const handleEscape = (ev: KeyboardEvent) => {
+      if (ev.key === "Escape") {
         handleCloseModal();
       }
     };
-    window.addEventListener("keydown", handleEscape);
+
+    window.addEventListener("keydown", () => handleEscape);
+
     return () => {
-      window.removeEventListener("keydown", handleEscape);
+      window.removeEventListener("keydown", () => handleEscape);
     };
   }, [handleCloseModal]);
 
@@ -31,7 +38,7 @@ function Modal({ onClose, title, children, orderNumber }) {
           {title}
         </h2>
         <div onClick={handleCloseModal} className={styles.closeIcon}>
-          <CloseIcon type="primary" className={styles.closeIcon} />
+          <CloseIcon type="primary" />
         </div>
         {children}
       </div>

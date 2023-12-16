@@ -3,8 +3,8 @@ import clsx from 'clsx'
 
 interface IFeedListProps{
     title: string
-    done: boolean
-    twoColumns: boolean
+    done?: boolean
+    twoColumns?: boolean
     numbers: Array<number>
 }
 

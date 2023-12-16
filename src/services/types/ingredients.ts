@@ -1,3 +1,6 @@
+import { getData } from "../../utils/api/order";
+
+type IGetData = ReturnType<typeof getData>
 export interface IIngredient {
     calories?: number,
 carbohydrates?: number,

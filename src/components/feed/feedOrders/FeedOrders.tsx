@@ -1,7 +1,14 @@
 import styles from "./FeedOrders.module.css";
 import { FeedList } from "../feedList/FeedList";
+import { IFeedOrder } from "../../../services/types/feed";
 
-export const FeedOrders = ({ total, totalToday, orders }) => {
+interface IFeedOrdersProps{
+  orders: IFeedOrder[]
+  total: number
+  totalToday: number
+}
+
+export const FeedOrders = ({ total, totalToday, orders }: IFeedOrdersProps) => {
   const doneOrdersNumbers = orders
     .filter((order) => order.status === "done")
     .map((order) => order.number);
@@ -22,7 +29,7 @@ export const FeedOrders = ({ total, totalToday, orders }) => {
         ) : (
           <FeedList title="Готовы:" numbers={doneOrdersNumbers} done />
         )}
-        {ordersInWorkNumbers > 10 ? (
+        {ordersInWorkNumbers.length > 10 ? (
           <FeedList
             title="В работе:"
             numbers={ordersInWorkNumbers}
