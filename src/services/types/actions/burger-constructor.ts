@@ -6,6 +6,7 @@ import {
   DELETE_INGREDIENT,
   MOVE_PRODUCT,
 } from "../../actions/burger-constructor";
+import { SET_CURRENT_ITEM } from "../../actions/current-item";
 
 interface IDeleteIngredient {
   type: typeof DELETE_INGREDIENT;
@@ -35,3 +36,8 @@ export type IBurgerConstructorActions =
   | IAddBun
   | IDeleteIngredient
   | IMoveProduct;
+
+  export interface ISetCurrentItem{
+    type: typeof SET_CURRENT_ITEM
+    item: IIngredient
+  }
