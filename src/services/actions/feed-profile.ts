@@ -1,3 +1,4 @@
+import { TProfileFeedActionTypes } from './../types/actions/feed-profile.types';
 export const PROFILE_FEED_CONNECT = "PROFILEFEED_ORDERS_CONNECT";
 export const PROFILE_FEED_CONNECTING = "PROFILEFEED_ORDERS_WS_CONNECTING";
 export const PROFILE_FEED_ERROR = "PROFILEFEED_ORDERS_WS_ERROR";
@@ -6,11 +7,11 @@ export const PROFILE_FEED_CLOSE = "PROFILEFEED_ORDERS_WS_CLOSE";
 export const PROFILE_FEED_GET_FEED = "PROFILEFEED_ORDERS_WS_MESSAGE";
 export const PROFILE_FEED_DISCONNECT = "PROFILEFEED_ORDERS_DISCONNECT";
 
-export const connectProfile = (url) => ({
+export const connectProfile = (url: string): TProfileFeedActionTypes => ({
   type: PROFILE_FEED_CONNECT,
   payload: url,
 });
 
-export const disconnectProfile = () => ({
+export const disconnectProfile = ():TProfileFeedActionTypes => ({
   type: PROFILE_FEED_DISCONNECT,
 });

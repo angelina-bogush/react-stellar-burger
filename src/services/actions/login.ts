@@ -1,3 +1,5 @@
+import { Dispatch } from 'redux';
+import { ILoginActions, IForm } from './../types/actions/login.types';
 import { authUser } from "../../utils/api/api";
 import { setCookie } from "../../utils/cookie";
 import { getCookie } from "../../utils/cookie";
@@ -16,8 +18,8 @@ export const CHANGE_PROFILE_SUCCESS = "СHANGE_PROFILE_SUCCESS";
 export const CHANGE_PROFILE_REQUEST = "СHANGE_PROFILE_REQUEST";
 export const CHANGE_PROFILE_FAILED = "СHANGE_PROFILE_FAILED";
 
-export const loginUserAction = (email, password, navigate) => {
-  return async (dispatch) => {
+export const loginUserAction = (email: string, password: string, navigate:(HOME: string) => void) => {
+  return async (dispatch: Dispatch<ILoginActions>) => {
     dispatch({ type: LOGIN_REQUEST });
     authUser(email, password)
       .then((data) => {
@@ -26,25 +28,25 @@ export const loginUserAction = (email, password, navigate) => {
         localStorage.setItem("refresh", data.refreshToken);
         navigate(HOME);
       })
-      .catch((err) => dispatch({ type: LOGIN_FAILED, err }));
+      .catch((error) => dispatch({ type: LOGIN_FAILED, error }));
   };
 };
 export const getUserInfoAction = () => {
-  return async (dispatch) => {
+  return async (dispatch: Dispatch<ILoginActions>) => {
     dispatch({ type: PROFILE_REQUEST });
     const token = getCookie("accessToken");
     getUserInfo(token)
       .then((data) => dispatch({ type: PROFILE_SUCCESS, payload: data }))
-      .catch((err) => dispatch({ type: PROFILE_FAILED, err }));
+      .catch((error) => dispatch({ type: PROFILE_FAILED, error }));
   };
 };
 
-export const changeUserInfoAction = (form) => {
-  return async (dispatch) => {
+export const changeUserInfoAction = (form: IForm) => {
+  return async (dispatch: Dispatch<ILoginActions>) => {
     dispatch({ type: CHANGE_PROFILE_REQUEST });
     const token = getCookie("accessToken");
     changeUserInfo(token, form)
       .then((data) => dispatch({ type: CHANGE_PROFILE_SUCCESS, payload: data }))
-      .catch((err) => dispatch({ type: CHANGE_PROFILE_FAILED, err }));
+      .catch((error) => dispatch({ type: CHANGE_PROFILE_FAILED, error }));
   };
 };

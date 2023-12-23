@@ -1,3 +1,4 @@
+import { TLogoutActions } from './../types/actions/logout.types';
 import {
   LOGIN_SUCCESS,
   LOGIN_REQUEST,
@@ -9,6 +10,7 @@ import {
   CHANGE_PROFILE_REQUEST,
   CHANGE_PROFILE_SUCCESS,
 } from "../actions/login";
+import { ILoginActions } from "../types/actions/login.types";
 import {
   LOGOUT_FAILED,
   LOGOUT_REQUEST,
@@ -21,7 +23,7 @@ const initialState = {
   isLoading: false,
   error: null,
 };
-export const loginReducer = (state = initialState, action) => {
+export const loginReducer = (state = initialState, action: ILoginActions | TLogoutActions) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return {

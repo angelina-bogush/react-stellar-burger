@@ -1,4 +1,6 @@
+import { TFeedActionTypes } from "./../types/actions/feed.types";
 import { socketMiddleware } from "../middleware/socketMiddleware";
+import { IFeedOrder } from "../types/feed";
 import {
   FEED_DISCONNECT,
   FEED_CONNECTION_CLOSED,
@@ -8,7 +10,16 @@ import {
   FEED_CONNECTING,
   FEED_CONNECT,
 } from "../actions/feed";
-const initialState = {
+
+interface IFeedState {
+  orders: IFeedOrder[];
+  total: null | number;
+  totalToday: null | number;
+  isLoading: boolean;
+  wsConnected: boolean;
+  error: null | Error;
+}
+const initialState: IFeedState = {
   orders: [],
   total: null,
   totalToday: null,
@@ -16,7 +27,7 @@ const initialState = {
   wsConnected: false,
   error: null,
 };
-export const feedReducer = (state = initialState, action) => {
+export const feedReducer = (state = initialState, action: TFeedActionTypes) => {
   switch (action.type) {
     case FEED_CONNECTING:
       return {

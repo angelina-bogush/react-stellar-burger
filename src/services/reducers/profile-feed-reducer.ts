@@ -1,3 +1,5 @@
+import { IFeedOrder } from './../types/feed';
+import { TProfileFeedActionTypes } from './../types/actions/feed-profile.types';
 import {
   PROFILE_FEED_OPEN,
   PROFILE_FEED_CLOSE,
@@ -8,7 +10,15 @@ import {
   PROFILE_FEED_CONNECT,
 } from "../actions/feed-profile";
 import { socketMiddleware } from "../middleware/socketMiddleware";
-const initialProfileFeedState = {
+interface IProfileFeedState{
+  orders: IFeedOrder[],
+  total: null | number,
+  totalToday: null | number,
+  isLoading: boolean,
+  feedConnected: boolean,
+  error: null | Error,
+}
+const initialProfileFeedState: IProfileFeedState = {
   orders: [],
   total: null,
   totalToday: null,
@@ -17,7 +27,7 @@ const initialProfileFeedState = {
   error: null,
 };
 
-export const profileFeedReducer = (state = initialProfileFeedState, action) => {
+export const profileFeedReducer = (state = initialProfileFeedState, action: TProfileFeedActionTypes) => {
   switch (action.type) {
     case PROFILE_FEED_CONNECTING:
       return {
