@@ -3,13 +3,20 @@ import {
   SET_ORDER_NUMBER_REQUEST,
   SET_ORDER_NUMBER_FAILED,
 } from "../actions/order-number";
+import { TOrderActions } from "../types/actions/order.types";
 
-const initialState = {
+interface IOrderState{
+  order: number | null
+  isLoading: boolean | null
+  error: null | Error
+}
+
+const initialState: IOrderState = {
   order: null,
   isLoading: false,
   error: null,
 };
-export const orderReducer = (state = initialState, action) => {
+export const orderReducer = (state = initialState, action: TOrderActions) => {
   switch (action.type) {
     case SET_ORDER_NUMBER_SUCCESS: {
       return {

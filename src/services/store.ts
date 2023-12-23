@@ -22,3 +22,4 @@ export const store = configureStore({
     return getDefaultMiddleware().concat(feedMiddleware, profileFeedMiddleware);
   },
 });
+export type RootState = ReturnType<typeof store.getState>; 

@@ -13,12 +13,14 @@ export const ForgotPasswordPage = () => {
   const navigate = useNavigate();
   const [emailValue, setEmailValue] = useState("");
 
-  const forgotPasswordClick = async (e) => {
+  const forgotPasswordClick = async (e: React.FormEvent<Element>) => {
     e.preventDefault();
     const res = await forgotPassword(emailValue);
     if (res?.status === 200) {
       navigate(RESET_PASSWORD);
-      localStorage.setItem("forgotPasswordVisited", true);
+      localStorage.setItem("forgotPasswordVisited", 'true');
+
+      // здесь может быть ошибка типизации!!!!!!!
     }
   };
 
@@ -31,6 +33,7 @@ export const ForgotPasswordPage = () => {
       >
         <MyInput
           type="email"
+          input="email"
           placeholder={"Укажите e-mail"}
           value={emailValue}
           setValue={setEmailValue}

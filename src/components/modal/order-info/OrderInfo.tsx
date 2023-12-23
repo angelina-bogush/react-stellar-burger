@@ -13,7 +13,7 @@ import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-component
 import { IFeedOrder } from "../../../services/types/feed";
 import { IIngredient } from "../../../services/types/ingredients";
 type TOrderInfoProps = {
-  modal: boolean
+  modal?: boolean
 }
 
 export const OrderInfo = ({ modal }: TOrderInfoProps) => {

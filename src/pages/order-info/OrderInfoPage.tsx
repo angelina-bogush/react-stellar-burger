@@ -7,8 +7,10 @@ import { connectFeed, disconnectFeed } from "../../services/actions/feed";
 import { getCookie } from "../../utils/cookie";
 import { connectProfile, disconnectProfile } from "../../services/actions/feed-profile";
 
-
-export const OrderInfoPage = ({isFeed}) => {
+type TOrderInfoProps = {
+  isFeed?: boolean
+}
+export const OrderInfoPage = ({isFeed}:TOrderInfoProps) => {
 const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,13 +18,13 @@ const dispatch = useDispatch();
       dispatch(connectFeed(allOrdersUrl));
     } else {
       const accessToken = getCookie("accessToken");
-      const token = accessToken.split("Bearer ")[1];
+      const token = accessToken?.split("Bearer ")[1];
       const url = userOrdersUrl(token);
       dispatch(connectProfile(url));
     }
     return () => {
       isFeed
-        ? dispatch(disconnectFeed(allOrdersUrl))
+        ? dispatch(disconnectFeed())
         : dispatch(disconnectProfile());
     };
   }, [dispatch]);

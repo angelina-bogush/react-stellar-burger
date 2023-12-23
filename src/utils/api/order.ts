@@ -5,7 +5,7 @@ import { IIngredient } from "../../services/types/ingredients";
 export function getData() {
   return request({}, "ingredients").then((data) => data.data);
 };
-export const createOrderApi = (ingredients: IIngredient[]) => {
+export const createOrderApi = (ingredients: string[]) => {
   return request(
     {
       method: "POST",
