@@ -5,8 +5,15 @@ import {
 } from "../actions/ingredients";
 import { IngredientsActionTypes } from "../types/actions/ingredients.types";
 import { Dispatch } from "redux";
+import { IIngredient } from "../types/ingredients";
 
-const initialState = {
+interface IIngredientsState{
+  allIngredients: IIngredient[],
+  isLoading: boolean,
+  error: null | Error,
+}
+
+const initialState: IIngredientsState = {
   allIngredients: [],
   isLoading: false,
   error: null,

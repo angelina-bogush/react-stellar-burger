@@ -16,7 +16,14 @@ import {
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
 } from "../actions/logout";
-const initialState = {
+interface ILoginState{
+  email:string
+  name: string,
+  isAuthChecked: boolean,
+  isLoading: boolean,
+  error: null | Error,
+}
+const initialState: ILoginState = {
   email: "",
   name: "",
   isAuthChecked: false,
