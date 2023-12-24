@@ -1,4 +1,5 @@
-
+import { Dispatch } from 'redux';
+import { RootState } from "../store/store.types";
 export const socketMiddleware = (wsActions) => {
   return (store) => {
     let socket = null;

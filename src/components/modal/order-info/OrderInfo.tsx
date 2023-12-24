@@ -22,10 +22,10 @@ export const OrderInfo = ({ modal }: TOrderInfoProps) => {
   const ingredients = useSelector(allIngredients);
   const ordersFeed = useSelector(orders);
   const profileOrder = useSelector(profileOrders);
-  let currentOrder: IFeedOrder | null = null;
+  let currentOrder: IFeedOrder | null | undefined = null;
 
   if (location.pathname.includes("/profile/orders")) {
-    currentOrder = profileOrder?.find((order: IFeedOrder) => order.number === Number(number));
+    currentOrder = profileOrder?.find((order: IFeedOrder) => order.number === Number(number))  ;
   } else if (location.pathname.includes("/feed")) {
     currentOrder = ordersFeed?.find((order: IFeedOrder) => order.number === Number(number));
   }
@@ -41,12 +41,13 @@ export const OrderInfo = ({ modal }: TOrderInfoProps) => {
     return [];
   }, [currentOrder?.ingredients, ingredients]);
 
-  const numberOfIngredients = (ingredient: IIngredient) => {
-    return currentOrderIngredients?.filter((item) => item._id === ingredient._id).length;
+  const numberOfIngredients = (ingredient: IIngredient | undefined) => {
+    if(!ingredient) return
+    return currentOrderIngredients?.filter((item) => item?._id === ingredient._id).length;
   }
 
   const orderPrice = () => {
-    return currentOrderIngredients?.reduce((acc, i) => acc + i.price, 0);
+    return currentOrderIngredients?.reduce((acc, i) => acc + Number(i?.price), 0);
   };
 
     const uniqueIngredients = Array.from(new Set(currentOrderIngredients));
@@ -70,11 +71,11 @@ export const OrderInfo = ({ modal }: TOrderInfoProps) => {
       </p>
       <div className={styles.components}>
         <p className="text text_type_main-medium">Состав:</p>
-        <ul className={`${styles.list} custom-scroll`}>
+      {uniqueIngredients && <ul className={`${styles.list} custom-scroll`}>
           {uniqueIngredients?.map((ingred, index) => (
-            <IngredientDetail ingred={ingred} key={index} quantity={numberOfIngredients(ingred)}/>
+           <IngredientDetail ingred={ingred} key={index} quantity={numberOfIngredients(ingred)}/>
           ))}
-        </ul>
+        </ul> }
       </div>
       <div className={styles.info}>
         <p className="text text_type_main-default text_color_inactive">

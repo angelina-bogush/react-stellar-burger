@@ -12,7 +12,7 @@ export const ResetPasswordPage = () => {
   const [passwordValue, setPasswordValue] = useState("");
   const [codeValue, setCodeValue] = useState("");
 
-  const resetPasswordClick = async (e) => {
+  const resetPasswordClick = async (e: React.FormEvent) => {
     e.preventDefault();
     const res = await resetPassword(passwordValue, codeValue);
     if (res?.status === 200) {
@@ -37,16 +37,18 @@ export const ResetPasswordPage = () => {
         onSubmit={(e) => resetPasswordClick(e)}
       >
         <MyInput
+        type="password"
           input="password"
           placeholder={"Введите новый пароль"}
           value={passwordValue}
           setValue={setPasswordValue}
         />
         <MyInput
-          type="text"
           placeholder={"Введите код из письма"}
           value={codeValue}
           setValue={setCodeValue}
+          input='text'
+          type='text'
         />
       </Form>
       <TextWithLink

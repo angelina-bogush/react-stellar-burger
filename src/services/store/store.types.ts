@@ -1,5 +1,5 @@
 import { rootReducer } from "../reducers/rootReducer";
-import { configureStore, ThunkAction } from "@reduxjs/toolkit";
+import { ThunkAction } from "@reduxjs/toolkit";
 import { AppActions } from "../types/actions/app-actions";
 import {
     TypedUseSelectorHook,

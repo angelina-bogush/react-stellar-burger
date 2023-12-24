@@ -3,8 +3,8 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { IIngredient } from "../../../../services/types/ingredients";
 
 interface IIngredientDetailProps{
-  ingred: IIngredient
-  quantity: number
+  ingred: IIngredient | undefined
+  quantity: number | undefined
 }
 
 export const IngredientDetail = ({ingred, quantity}: IIngredientDetailProps) => {

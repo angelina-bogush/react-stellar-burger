@@ -29,7 +29,7 @@ export const FeedCard = ({ type, order }:IFeedCardProps) => {
     return [];
   }, [order?.ingredients, ingredients]);
   const orderPrice = () => {
-    return orderIngredients?.reduce((acc, i) => acc + i?.price, 0);
+    return orderIngredients?.reduce((acc, i) => acc + Number(i?.price), 0);
   };
 
   const orderPart = orderIngredients?.slice(6).length;

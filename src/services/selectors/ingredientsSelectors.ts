@@ -1,7 +1,7 @@
 import { RootState } from "../store/store.types";
 export const allIngredients = (store: RootState) =>
   store.allIngredientsReducer.allIngredients;
-export const selectIngredientById = (id: string) => (store: RootState) =>
+export const selectIngredientById = (id: string | undefined) => (store: RootState) =>
   store.allIngredientsReducer.allIngredients.find(
     (ingredients) => ingredients._id === id
   );

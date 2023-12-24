@@ -1,8 +1,9 @@
 import { MyInput } from "../../form/input/MyInput";
 import { Form } from "../../form/Form";
 import { FormEvent, useState } from "react";
-import { registerUser } from "../../../services/actions/register";
+// import { registerUser } from "../../../services/actions/register";
 import { useSelector, useDispatch } from "react-redux";
+import { createUser } from "../../../utils/api/api";
 import { useNavigate } from "react-router-dom";
 import { LOGIN_PATH } from "../../../app/router/config/routes";
 
@@ -14,7 +15,8 @@ export const RegistrationForm = () => {
   const [passwordValue, setPasswordValue] = useState("");
   const handleRegister = async (e: FormEvent) => {
     e.preventDefault();
-    dispatch(registerUser(emailValue, passwordValue, nameValue));
+    const data = await createUser(emailValue, passwordValue,  nameValue);
+    // dispatch(registerUser(emailValue, passwordValue, nameValue));
     navigate(LOGIN_PATH);
   };
 
