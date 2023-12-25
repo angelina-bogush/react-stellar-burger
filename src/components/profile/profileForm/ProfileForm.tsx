@@ -23,7 +23,7 @@ export const ProfileForm = () => {
     const setValues = async () => {
       try {
         const token = getCookie("accessToken");
-        const data = await getUserInfo(token);
+        const data = await getUserInfo(String(token));
         setValueEmail(data.user.email);
         setValueName(data.user.name);
         setOriginalEmail(data.user.email);

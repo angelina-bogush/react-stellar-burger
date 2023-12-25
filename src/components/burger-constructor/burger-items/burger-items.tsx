@@ -5,16 +5,18 @@ import { moveProduct } from "../../../services/actions/burger-constructor";
 import { useCallback } from "react";
 import update from "immutability-helper";
 import { BurgerItem } from "../burger-item/burger-item";
-import {
-  selectedIngredientsTypes,
-  ingredientTypes,
-} from "../../../utils/proptypes";
+import { IIngredient } from "../../../services/types/ingredients";
+import { IBurgerConstructorIngredient } from "../../../services/reducers/burger-constructor-reducer";
 
-const BurgerItems = ({ constructorIngredients, constructorBun }) => {
+interface IBurgerItemsProps{
+  constructorIngredients: IBurgerConstructorIngredient[]
+  constructorBun: IIngredient
+}
+
+const BurgerItems = ({ constructorIngredients, constructorBun }: IBurgerItemsProps) => {
   const dispatch = useDispatch();
   const bun = constructorBun;
   const elseProducts = constructorIngredients;
-  console.log(bun);
 
   const moveItem = useCallback(
     (dragIndex, hoverIndex, elseProducts) => {
@@ -32,7 +34,7 @@ const BurgerItems = ({ constructorIngredients, constructorBun }) => {
   return (
     <div className={styles.container}>
       <div className={styles.elementContainer}>
-        {bun !== null && (
+        {bun && bun.image_mobile  && (
           <ConstructorElement
             type={"top"}
             isLocked
@@ -43,21 +45,21 @@ const BurgerItems = ({ constructorIngredients, constructorBun }) => {
         )}
       </div>
 
-      <div className={`${styles.scroll} custom-scroll`}>
-        {elseProducts.map((ingred, index) => (
+     {elseProducts && <div className={`${styles.scroll} custom-scroll`}>
+        {elseProducts.map((ingred: IBurgerConstructorIngredient, index: number) => (
           <BurgerItem
             moveItem={moveItem}
             index={index}
             key={ingred.key}
-            id={ingred.ingredient._id}
+            id={String(ingred.ingredient._id)}
             item={ingred.ingredient}
             elseProducts={elseProducts}
           />
         ))}
-      </div>
+      </div> }
 
       <div className={styles.elementContainer}>
-        {bun !== null && (
+        {bun && bun.image_mobile && (
           <ConstructorElement
             type={"bottom"}
             isLocked
@@ -70,8 +72,5 @@ const BurgerItems = ({ constructorIngredients, constructorBun }) => {
     </div>
   );
 };
-BurgerItems.propTypes = {
-  constructorBun: ingredientTypes,
-  constructorIngredients: selectedIngredientsTypes,
-};
+
 export default BurgerItems;

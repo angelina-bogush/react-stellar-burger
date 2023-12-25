@@ -2,9 +2,9 @@ import styles from "./Burger-constructor.module.css";
 import BurgerIngredients from "../../components/burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../../components/burger-constructor/burger-constructor";
 import {  useMemo } from "react";
-import { useSelector } from "react-redux";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { useSelector } from "../../services/store/store.types";
 
 export function BurgerConstructorPage() {
   const ingredients = useSelector(

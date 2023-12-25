@@ -9,7 +9,7 @@ import { IFeedOrder } from "../../../services/types/feed";
 import { IIngredient } from "../../../services/types/ingredients";
 
 interface IFeedCardProps{
-  type: 'orders'
+  type: 'orders' | 'feed'
   order: IFeedOrder
 }
 

@@ -8,7 +8,7 @@ import {
 } from "../actions/burger-constructor";
 import { IIngredient } from "../types/ingredients";
 
-interface IBurgerConstructorIngredient{
+export interface IBurgerConstructorIngredient{
   ingredient: IIngredient
   key: string
 }

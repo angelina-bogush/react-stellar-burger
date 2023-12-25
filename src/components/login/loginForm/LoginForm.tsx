@@ -31,7 +31,6 @@ export const LoginForm = () => {
         type="password"
         input="password"
         placeholder={"Пароль"}
-        // icon={"ProfileIcon"}
         value={passwordValue}
         setValue={setPasswordValue}
       />

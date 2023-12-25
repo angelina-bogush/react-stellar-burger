@@ -13,6 +13,7 @@ export const ProfileNav = () => {
   const refresh = localStorage.getItem("refresh");
   const handleLogout = async () => {
     try {
+      if(!refresh) return
       await dispatch(logoutAction(refresh));
       navigate(LOGIN_PATH);
     } catch (error) {

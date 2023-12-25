@@ -2,9 +2,9 @@ import styles from "./FeedCards.module.css";
 import { FeedCard } from "../feedCard/FeedCard";
 import { IFeedOrder } from "../../../services/types/feed";
 
-interface IFeedCardsProps{
-  type: 'orders'
-  orders: IFeedOrder[]
+interface IFeedCardsProps {
+  type: "orders" | "feed";
+  orders: IFeedOrder[];
 }
 
 export const FeedCards = ({ type, orders }: IFeedCardsProps) => {

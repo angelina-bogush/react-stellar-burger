@@ -1,3 +1,4 @@
+import { IBurgerConstructorIngredient } from './../reducers/burger-constructor-reducer';
 import { IBurgerConstructorActions } from './../types/actions/burger-constructor';
 import { IIngredient } from './../types/ingredients';
 import { v4 as uuid } from "uuid";
@@ -31,10 +32,10 @@ export function addIngredients(item: IIngredient):IBurgerConstructorActions {
   };
 }
 
-export function moveProduct(item: IIngredient):IBurgerConstructorActions {
+export function moveProduct(item: IBurgerConstructorIngredient):IBurgerConstructorActions {
   return {
     type: MOVE_PRODUCT,
-    payload: item,
+    payload: item.ingredient,
   };
 }
 export function clearProducts():IBurgerConstructorActions {

@@ -3,7 +3,7 @@ import { getCookie } from "../cookie";
 import { IIngredient } from "../../services/types/ingredients";
 
 export function getData() {
-  return request({}, "ingredients").then((data) => data.data);
+  return request({}, "ingredients").then((data: Response) => data.data);
 };
 export const createOrderApi = (ingredients: string[]) => {
   return request(

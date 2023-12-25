@@ -35,7 +35,7 @@ export const getUserInfoAction = () => {
   return async (dispatch: Dispatch<ILoginActions>) => {
     dispatch({ type: PROFILE_REQUEST });
     const token = getCookie("accessToken");
-    getUserInfo(token)
+    getUserInfo(String(token))
       .then((data) => dispatch({ type: PROFILE_SUCCESS, payload: data }))
       .catch((error) => dispatch({ type: PROFILE_FAILED, error }));
   };
@@ -45,7 +45,7 @@ export const changeUserInfoAction = (form: IForm) => {
   return async (dispatch: Dispatch<ILoginActions>) => {
     dispatch({ type: CHANGE_PROFILE_REQUEST });
     const token = getCookie("accessToken");
-    changeUserInfo(token, form)
+    changeUserInfo(String(token), form)
       .then((data) => dispatch({ type: CHANGE_PROFILE_SUCCESS, payload: data }))
       .catch((error) => dispatch({ type: CHANGE_PROFILE_FAILED, error }));
   };

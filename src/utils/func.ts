@@ -6,7 +6,7 @@ export const isUserAuth = () => {
   return auth ? true : false;
 };
 
-export const checkResponse = (res) => {
+export const checkResponse = <T>(res: Response): Promise<T> => {
   if (res.ok) {
     return res.json();
   } else {
@@ -14,6 +14,6 @@ export const checkResponse = (res) => {
   }
 };
 
-export const request = (options, endpoint) => {
+export const request = (options: {}, endpoint: string) => {
   return fetch(`${url}/${endpoint}`, options).then(checkResponse);
 };

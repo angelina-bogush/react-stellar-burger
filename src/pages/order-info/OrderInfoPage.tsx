@@ -19,7 +19,7 @@ const dispatch = useDispatch();
     } else {
       const accessToken = getCookie("accessToken");
       const token = accessToken?.split("Bearer ")[1];
-      const url = userOrdersUrl(token);
+      const url = userOrdersUrl(token ?? '');
       dispatch(connectProfile(url));
     }
     return () => {

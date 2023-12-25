@@ -3,10 +3,14 @@ import { FeedCards } from "../../components/feed/feedCards/FeedCards";
 import { FeedOrders } from "../../components/feed/feedOrders/FeedOrders";
 import { allOrdersUrl } from "../../utils/api/api";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { connectFeed, disconnectFeed } from "../../services/actions/feed";
-import { orders, total, totalToday } from "../../services/selectors/ingredientsSelectors";
+import {
+  orders,
+  total,
+  totalToday,
+} from "../../services/selectors/ingredientsSelectors";
 import { Loader } from "../../components/loader/Loader";
+import { useSelector, useDispatch } from "../../services/store/store.types";
 
 export const FeedPage = () => {
   const dispatch = useDispatch();
@@ -14,24 +18,29 @@ export const FeedPage = () => {
   useEffect(() => {
     dispatch(connectFeed(allOrdersUrl));
     return () => {
-      dispatch(disconnectFeed(allOrdersUrl));
+      dispatch(disconnectFeed());
     };
   }, [dispatch]);
 
-  const ordersFeed =  useSelector(orders)
-  console.log(ordersFeed)
-  const totalFeed = useSelector(total)
-  const totalTodayFeed = useSelector(totalToday)
-  const isLoading = useSelector(store => store.feedReducer.isLoading)
+  const ordersFeed = useSelector(orders);
+  const totalFeed = useSelector(total);
+  const totalTodayFeed = useSelector(totalToday);
+  const isLoading = useSelector((store) => store.feedReducer.isLoading);
 
   return (
     <div className={styles.pageContainer}>
       <p className="text text_type_main-large">Лента заказов</p>
       <div className={styles.content}>
-           {ordersFeed !== null &&  <FeedCards orders={ordersFeed}/> }
-            <FeedOrders total={totalFeed} totalToday={totalTodayFeed} orders={ordersFeed}/>
+        {ordersFeed !== null && <FeedCards orders={ordersFeed} type="feed" />}
+        {totalFeed && totalTodayFeed && (
+          <FeedOrders
+            total={totalFeed}
+            totalToday={totalTodayFeed}
+            orders={ordersFeed}
+          />
+        )}
       </div>
-      {isLoading && <Loader/>}
+      {isLoading && <Loader />}
     </div>
   );
 };

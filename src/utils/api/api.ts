@@ -4,7 +4,7 @@ import { LOGIN_PATH } from "../../app/router/config/routes";
 
 export const url = "https://norma.nomoreparties.space/api";
 export const allOrdersUrl = 'wss://norma.nomoreparties.space/orders/all';
-export const userOrdersUrl = (token) => `wss://norma.nomoreparties.space/orders?token=${token}`;
+export const userOrdersUrl = (token: string) => `wss://norma.nomoreparties.space/orders?token=${token}`;
 export const ws = new WebSocket(allOrdersUrl)
 
 export const api = axios.create({
@@ -43,7 +43,7 @@ api.interceptors.response.use(
   }
 );
 
-export const createUser = async (email, password, name) => {
+export const createUser = async (email: string, password: string, name: string) => {
   const { data } = await axios.post(`${url}/auth/register`, {
     email,
     password,
@@ -52,12 +52,12 @@ export const createUser = async (email, password, name) => {
   return data;
 };
 
-export const forgotPassword = async (email) => {
+export const forgotPassword = async (email: string) => {
   const res = await axios.post(`${url}/password-reset`, { email });
   return res;
 };
 
-export const resetPassword = async (password, token) => {
+export const resetPassword = async (password: string, token: string) => {
   const res = await axios.post(`${url}/password-reset/reset`, {
     password,
     token,
@@ -65,12 +65,12 @@ export const resetPassword = async (password, token) => {
   return res;
 };
 
-export const authUser = async (email, password) => {
+export const authUser = async (email: string, password: string) => {
   const { data } = await api.post(`${url}/auth/login`, { email, password });
   return data;
 };
 
-export const logout = async (token) => {
+export const logout = async (token: string) => {
   const { data } = await api.post(`${url}/auth/logout`, { token });
   return data;
 };

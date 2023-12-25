@@ -5,15 +5,24 @@ import { useDispatch } from "react-redux";
 import { useRef } from "react";
 import { deleteIngredient } from "../../../services/actions/burger-constructor";
 import { useDrag, useDrop } from "react-dnd";
-import {
-  selectedIngredientsTypes,
-  ingredientTypes,
-} from "../../../utils/proptypes";
-import PropTypes from "prop-types";
+import { IIngredient } from "../../../services/types/ingredients";
+import { IBurgerConstructorIngredient } from "../../../services/reducers/burger-constructor-reducer";
 
-export const BurgerItem = ({ moveItem, id, item, index, elseProducts }) => {
+interface IBurgerItemProps{
+  moveItem:(dragIndex: number, hoverIndex: number, elseProducts: IBurgerConstructorIngredient[]) => void
+  id: string
+  item: IIngredient
+  index: number
+  elseProducts: IBurgerConstructorIngredient[]
+}
+
+interface IItem extends IIngredient {
+  index: number
+}
+
+export const BurgerItem = ({ moveItem, id, item, index, elseProducts }: IBurgerItemProps) => {
   const dispatch = useDispatch();
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [{ handlerId }, drop] = useDrop({
     accept: "moveItem",
     collect(monitor) {
@@ -21,7 +30,7 @@ export const BurgerItem = ({ moveItem, id, item, index, elseProducts }) => {
         handlerId: monitor.getHandlerId(),
       };
     },
-    hover(item, monitor) {
+    hover(item: IItem, monitor) {
       if (!ref.current) {
         return;
       }
@@ -34,6 +43,7 @@ export const BurgerItem = ({ moveItem, id, item, index, elseProducts }) => {
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       const clientOffset = monitor.getClientOffset();
+      if(!clientOffset) return
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return;
@@ -69,18 +79,11 @@ export const BurgerItem = ({ moveItem, id, item, index, elseProducts }) => {
       <ConstructorElement
         text={item.name}
         price={item.price}
-        thumbnail={item.image_mobile}
+        thumbnail={String(item.image_mobile)}
         handleClose={() => {
-          dispatch(deleteIngredient(item._id));
+          dispatch(deleteIngredient(String(item._id)));
         }}
       />
     </div>
   );
-};
-BurgerItem.propTypes = {
-  moveItem: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
-  item: ingredientTypes,
-  index: PropTypes.number,
-  elseProducts: selectedIngredientsTypes,
 };
