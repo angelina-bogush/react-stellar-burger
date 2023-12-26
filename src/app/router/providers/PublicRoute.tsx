@@ -1,7 +1,8 @@
-import { useNavigate, Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { isUserAuth } from "../../../utils/func";
+import { FC } from "react";
 
-export const PublicRoute = ({ children }) => {
+export const PublicRoute:FC = ({ children }) => {
   const location = useLocation();
   const from = location.state?.from || "/";
   if (isUserAuth()) {

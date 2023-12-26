@@ -1,8 +1,26 @@
-import { Dispatch } from 'redux';
-import { RootState } from "../store/store.types";
-export const socketMiddleware = (wsActions) => {
-  return (store) => {
-    let socket = null;
+
+import { Middleware, MiddlewareAPI } from "redux";
+
+type WebSocketActions = {
+  wsConnect: string;
+  wsSendMessage?: string;
+  onOpen: string;
+  onClose: string;
+  onError: string;
+  onMessage: string;
+  wsConnecting: string;
+  wsDisconnect: string;
+};
+type WebSocketPayload = string;
+
+type WebSocketAction = {
+  type: keyof WebSocketActions;
+  payload?: WebSocketPayload;
+};
+
+export const socketMiddleware = (wsActions:WebSocketActions): Middleware => {
+  return (store: MiddlewareAPI) => {
+    let socket: WebSocket | null = null;
     let isConnected = false;
     let reconnectTimer = 0;
 
@@ -70,5 +88,5 @@ export const socketMiddleware = (wsActions) => {
       next(action);
     };
   };
-};
+}
  

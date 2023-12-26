@@ -56,7 +56,7 @@ export const profileFeedReducer = (state = initialProfileFeedState, action: TPro
     case PROFILE_FEED_CLOSE:
       return {
         ...state,
-        feedCConnected: false,
+        feedConnected: false,
       };
     default:
       return state;

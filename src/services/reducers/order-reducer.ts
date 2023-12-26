@@ -8,7 +8,7 @@ import { TOrderActions } from "../types/actions/order.types";
 interface IOrderState{
   order: number | null
   isLoading: boolean | null
-  error: null | Error
+  error: null | string
 }
 
 const initialState: IOrderState = {

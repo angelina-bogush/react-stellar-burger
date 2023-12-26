@@ -5,7 +5,6 @@ import BurgerItems from "./burger-items/burger-items";
 import Modal from "../modal/modal";
 import OrderDetails from "../modal/order-details/order-details";
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { createOrder } from "../../services/actions/order-number";
 import { setOrderNumberSuccess } from "../../services/actions/order-number";
 import { useDrop } from "react-dnd";
@@ -19,6 +18,9 @@ import { useNavigate } from "react-router-dom";
 import { LOGIN_PATH } from "../../app/router/config/routes";
 import { TotalCount } from "./totalCount/TotalCount";
 import { Loader } from "../loader/Loader";
+import { useSelector, useDispatch } from "../../services/store/store.types";
+import { IIngredient } from "../../services/types/ingredients";
+import { IBurgerConstructorIngredient } from "../../services/reducers/burger-constructor-reducer";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
@@ -31,7 +33,7 @@ const BurgerConstructor = () => {
     (state) => state.burgerConstructorReducer.bun
   );
   const isLoading = useSelector((state) => state.orderReducer.isLoading)
-  console.log(isLoading)
+
   const [clickedModal, setClickedModal] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -51,7 +53,7 @@ const BurgerConstructor = () => {
 
   const [{ isHover, isCanD }, dropRef] = useDrop({
     accept: "ingredient",
-    drop(item) {
+    drop(item: IIngredient) {
       item.type === ingredient.bun
         ? dispatch(addBun(item))
         : dispatch(addIngredients(item));
@@ -67,9 +69,9 @@ const BurgerConstructor = () => {
     ? styles.borderOut
     : styles.borderNone;
 
-  const getIngredientsId = () => {
-    const ingredId = constructorIngredients.map((item) => item.ingredient._id);
-    const bunId = constructorBun._id;
+  const getIngredientsId = ():string[] => {
+    const ingredId = constructorIngredients.map((item) => String(item.ingredient._id));
+    const bunId = String(constructorBun?._id);
     return [bunId, ...ingredId, bunId];
   };
   const handleCreateOrder = () => {
@@ -81,8 +83,8 @@ const BurgerConstructor = () => {
     setClickedModal(true);
     }
   };
-  const handleCloseModal = (value) => {
-    setClickedModal(value);
+  const handleCloseModal = () => {
+    setClickedModal(false);
     dispatch(setOrderNumberSuccess(null));
   };
 
@@ -92,7 +94,7 @@ const BurgerConstructor = () => {
         ref={dropRef}
         className={`pt-5 pb-5 ${styles.dropContainer} ${borderStyle}`}
       >
-        {(constructorBun !== null || constructorIngredients.length !== 0) && (
+        {(constructorBun !== null && constructorIngredients.length !== 0) && (
           <BurgerItems
             constructorIngredients={constructorIngredients}
             constructorBun={constructorBun}
@@ -112,7 +114,7 @@ const BurgerConstructor = () => {
         </div>
         {clickedModal && (
           <Modal onClose={handleCloseModal}>
-            <OrderDetails orderNumber={orderNumber} />
+            {orderNumber && <OrderDetails orderNumber={orderNumber} />}
             {isLoading && <Loader/>}
           </Modal>
         )}

@@ -8,12 +8,12 @@ export const isUserAuth = () => {
 
 export const checkResponse = <T>(res: Response): Promise<T> => {
   if (res.ok) {
-    return res.json();
+    return res.json() as Promise<T>;
   } else {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 };
 
-export const request = (options: {}, endpoint: string) => {
-  return fetch(`${url}/${endpoint}`, options).then(checkResponse);
+export const request = <T>(options: {}, endpoint: string): Promise<T> => {
+  return fetch(`${url}/${endpoint}`, options).then(checkResponse<T>);
 };

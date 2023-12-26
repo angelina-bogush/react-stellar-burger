@@ -8,7 +8,7 @@ export const SET_ORDER_NUMBER_REQUEST = "SET_ORDER_NUMBER";
 export const SET_ORDER_NUMBER_SUCCESS = "SET_ORDER_NUMBER_SUCCESS";
 export const SET_ORDER_NUMBER_FAILED = "SET_ORDER_NUMBER_FAILED";
 
-export function setOrderNumberSuccess(orderNumber: number): TOrderActions {
+export function setOrderNumberSuccess(orderNumber: number | null): TOrderActions {
   return {
     type: SET_ORDER_NUMBER_SUCCESS,
     orderNumber: orderNumber,
@@ -27,7 +27,7 @@ export const createOrder = (ingredId: string[]) => {
     dispatch(setOrderNumberRequest());
     createOrderApi(ingredId)
       .then((data) => {
-        dispatch(setOrderNumberSuccess(data.order.number))
+        // dispatch(setOrderNumberSuccess(data.order.number))
         dispatch(clearProducts())
       })
       .catch((error) => dispatch(setOrderNumberFailed(error)));

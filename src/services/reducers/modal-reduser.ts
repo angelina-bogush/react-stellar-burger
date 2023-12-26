@@ -1,8 +1,8 @@
 import { SET_CURRENT_ITEM } from "../actions/current-item";
 import { ISetCurrentItem } from "../types/actions/burger-constructor";
-import { IIngredient } from "../types/ingredients";
+import { IBurgerConstructorIngredient } from "./burger-constructor-reducer";
 type TInitialStore = {
-  currentIngredient: null | IIngredient
+  currentIngredient: null | IBurgerConstructorIngredient
 }
 const initialState: TInitialStore = {
   currentIngredient: null,

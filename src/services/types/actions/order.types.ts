@@ -1,7 +1,7 @@
 import { SET_ORDER_NUMBER_FAILED, SET_ORDER_NUMBER_SUCCESS, SET_ORDER_NUMBER_REQUEST } from "../../actions/order-number";
 interface IOrderSuccess {
     type: typeof SET_ORDER_NUMBER_SUCCESS
-    orderNumber: number,
+    orderNumber: number | null,
 }
 interface IOrderRequest {
     type: typeof SET_ORDER_NUMBER_REQUEST

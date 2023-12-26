@@ -32,10 +32,10 @@ export function addIngredients(item: IIngredient):IBurgerConstructorActions {
   };
 }
 
-export function moveProduct(item: IBurgerConstructorIngredient):IBurgerConstructorActions {
+export function moveProduct(item: IBurgerConstructorIngredient[]):IBurgerConstructorActions {
   return {
     type: MOVE_PRODUCT,
-    payload: item.ingredient,
+    payload: item,
   };
 }
 export function clearProducts():IBurgerConstructorActions {

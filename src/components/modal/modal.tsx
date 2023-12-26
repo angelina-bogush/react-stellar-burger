@@ -9,7 +9,7 @@ const modal = document.getElementById("modal") as HTMLElement;
 
 interface IModalProps{
 onClose: () => void
-title: string
+title?: string
 children: ReactNode
 }
 
