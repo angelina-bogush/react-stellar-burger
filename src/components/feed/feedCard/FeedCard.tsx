@@ -1,7 +1,7 @@
 import styles from "./FeedCard.module.css";
 import { useLocation, Link } from "react-router-dom";
 import { TotalCount } from "../../burger-constructor/totalCount/TotalCount";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../../services/store/store.types";
 import { useMemo } from "react";
 import { allIngredients } from "../../../services/selectors/ingredientsSelectors";
 import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";

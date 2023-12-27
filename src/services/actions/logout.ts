@@ -1,14 +1,13 @@
 import { logout } from "../../utils/api/api";
 import { deleteCookie } from "../../utils/cookie";
-import { TLogoutActions } from "../types/actions/logout.types";
-import { Dispatch } from "react";
+import { AppThunk } from "../store/store.types";
 
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
 export const LOGOUT_FAILED = "LOGOUT_FAILED";
 
-export const logoutAction = (token: string ) => {
-  return async (dispatch: Dispatch<TLogoutActions>) => {
+export const logoutAction = (token: string ):AppThunk => {
+  return async (dispatch) => {
     dispatch({ type: LOGOUT_REQUEST });
     logout(token)
       .then(() => {

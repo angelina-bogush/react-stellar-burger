@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import ModalOverlay from "./modal-overlay/modal-overlay";
 import PropTypes from "prop-types";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useEffect, useCallback, ReactNode, KeyboardEvent } from "react";
+import { useEffect, useCallback, ReactNode } from "react";
 
 const modal = document.getElementById("modal") as HTMLElement;
 
@@ -24,10 +24,10 @@ function Modal({ onClose, title, children }: IModalProps) {
       }
     };
 
-    window.addEventListener("keydown", () => handleEscape);
+    window.addEventListener("keydown", handleEscape);
 
     return () => {
-      window.removeEventListener("keydown", () => handleEscape);
+      window.removeEventListener("keydown", handleEscape);
     };
   }, [handleCloseModal]);
 

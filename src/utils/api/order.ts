@@ -1,6 +1,7 @@
 import { request } from "../func";
 import { getCookie } from "../cookie";
 import { IIngredient } from "../../services/types/ingredients";
+import { IOrder } from "../../services/types/feed";
 
 interface IGetData{
   success: boolean
@@ -12,7 +13,7 @@ export const getData = () => {
 };
 export const createOrderApi = (ingredients: string[]) => {
 
-  return request(
+  return request<IOrder>(
     {
       method: "POST",
       headers: {

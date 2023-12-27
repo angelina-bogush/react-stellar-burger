@@ -2,7 +2,7 @@ import { MyInput } from "../../form/input/MyInput";
 import { Form } from "../../form/Form";
 import { FormEvent, useState } from "react";
 // import { registerUser } from "../../../services/actions/register";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "../../../services/store/store.types";
 import { createUser } from "../../../utils/api/api";
 import { useNavigate } from "react-router-dom";
 import { LOGIN_PATH } from "../../../app/router/config/routes";

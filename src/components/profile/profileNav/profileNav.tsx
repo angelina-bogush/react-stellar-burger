@@ -2,7 +2,7 @@ import styles from "./profileNav.module.css";
 import { logoutAction } from "../../../services/actions/logout";
 import { LOGIN_PATH, PROFILE } from "../../../app/router/config/routes";
 import { useNavigate, useMatch } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../../services/store/store.types";
 import { Link } from "react-router-dom";
 
 export const ProfileNav = () => {

@@ -1,10 +1,9 @@
 import styles from "./order-details.module.css";
 import doneImgPath from "../../../images/icons/done.svg";
-import PropTypes from "prop-types";
 
 type TOrderDetails = {
-  orderNumber: number
-}
+  orderNumber: number;
+};
 function OrderDetails({ orderNumber }: TOrderDetails) {
   return (
     <div className={styles.container}>

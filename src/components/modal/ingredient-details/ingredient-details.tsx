@@ -1,6 +1,6 @@
 import styles from "./ingredient-details.module.css";
 import InfoItem from "./info-item/info-item";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../../services/store/store.types";
 import { useParams } from "react-router-dom";
 import { selectIngredientById } from "../../../services/selectors/ingredientsSelectors";
 

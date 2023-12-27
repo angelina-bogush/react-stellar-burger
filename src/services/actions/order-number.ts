@@ -3,6 +3,7 @@ import { createOrderApi } from "../../utils/api/order";
 import { clearProducts } from "./burger-constructor";
 import { Dispatch } from 'react';
 import { IBurgerConstructorActions } from '../types/actions/burger-constructor';
+import { AppThunk } from '../store/store.types';
 
 export const SET_ORDER_NUMBER_REQUEST = "SET_ORDER_NUMBER";
 export const SET_ORDER_NUMBER_SUCCESS = "SET_ORDER_NUMBER_SUCCESS";
@@ -22,12 +23,12 @@ export const setOrderNumberFailed = (error: Error):TOrderActions => ({
   payload: error,
 });
 
-export const createOrder = (ingredId: string[]) => {
-  return async (dispatch: Dispatch<IBurgerConstructorActions | TOrderActions>) => {
+export const createOrder = (ingredId: string[]):AppThunk => {
+  return async (dispatch) => {
     dispatch(setOrderNumberRequest());
     createOrderApi(ingredId)
       .then((data) => {
-        // dispatch(setOrderNumberSuccess(data.order.number))
+        dispatch(setOrderNumberSuccess(data.order.number))
         dispatch(clearProducts())
       })
       .catch((error) => dispatch(setOrderNumberFailed(error)));

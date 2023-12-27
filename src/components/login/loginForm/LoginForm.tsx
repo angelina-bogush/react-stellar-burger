@@ -1,6 +1,6 @@
 import { Form } from "../../form/Form";
 import { MyInput } from "../../form/input/MyInput";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../../services/store/store.types";
 import { FormEvent, useState } from "react";
 import { loginUserAction } from "../../../services/actions/login";
 import { useNavigate } from "react-router-dom";

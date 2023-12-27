@@ -13,3 +13,6 @@ export interface IOrdersTotal {
   success: boolean;
   totalToday: number;
 }
+export interface IOrder{
+  order: IFeedOrder
+}

@@ -5,7 +5,7 @@ import { getUserInfo } from "../../../utils/api/userInfo";
 import { changeUserInfoAction } from "../../../services/actions/login";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "../../../services/store/store.types";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { getCookie } from "../../../utils/cookie";

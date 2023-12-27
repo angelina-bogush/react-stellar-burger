@@ -1,6 +1,6 @@
 import styles from "./burger-items.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../../services/store/store.types";
 import { moveProduct } from "../../../services/actions/burger-constructor";
 import { useCallback } from "react";
 import update from "immutability-helper";
@@ -10,7 +10,7 @@ import { IBurgerConstructorIngredient } from "../../../services/reducers/burger-
 
 interface IBurgerItemsProps{
   constructorIngredients: IBurgerConstructorIngredient[]
-  constructorBun: IIngredient
+  constructorBun: IIngredient | null
 }
 
 const BurgerItems = ({ constructorIngredients, constructorBun }: IBurgerItemsProps) => {

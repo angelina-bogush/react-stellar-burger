@@ -94,7 +94,7 @@ const BurgerConstructor = () => {
         ref={dropRef}
         className={`pt-5 pb-5 ${styles.dropContainer} ${borderStyle}`}
       >
-        {(constructorBun !== null && constructorIngredients.length !== 0) && (
+        {(constructorBun !== null || constructorIngredients.length !== 0) && (
           <BurgerItems
             constructorIngredients={constructorIngredients}
             constructorBun={constructorBun}
@@ -113,6 +113,7 @@ const BurgerConstructor = () => {
           </Button>
         </div>
         {clickedModal && (
+           
           <Modal onClose={handleCloseModal}>
             {orderNumber && <OrderDetails orderNumber={orderNumber} />}
             {isLoading && <Loader/>}

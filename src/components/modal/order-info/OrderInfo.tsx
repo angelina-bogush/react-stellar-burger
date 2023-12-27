@@ -1,7 +1,7 @@
 import { TotalCount } from "../../burger-constructor/totalCount/TotalCount";
 import styles from "./OrderInfo.module.css";
 import { IngredientDetail } from "./ingredient-detail/IngredientDetail";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../../services/store/store.types";
 import { useMemo } from "react";
 import {
   allIngredients,
